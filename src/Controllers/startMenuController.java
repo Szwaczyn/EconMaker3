@@ -1,89 +1,51 @@
 package Controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 public class startMenuController
 {
 
     private MainController mainControllerVar;
 
-    Image button = new Image("/resources/images/button.png");
-    Image buttonUnderCursor = new Image("/resources/images/buttonUnderCursor.png");
 
     @FXML
-    ImageView position_1 = new ImageView();
-    @FXML
-    ImageView position_2 = new ImageView();
-    @FXML
-    ImageView position_3 = new ImageView();
-    @FXML
-    ImageView position_4 = new ImageView();
-    @FXML
-    ImageView position_5 = new ImageView();
-
+    ImageView menuBackground = new ImageView();
 
     @FXML
-    public void chooisePositionMenu()
-    {
-        if(position_1.getImage() == buttonUnderCursor)
-        {
-            System.out.println("Pozycja 1");
-        }
-        else if(position_2.getImage() == buttonUnderCursor)
-        {
-            System.out.println("Pozycja 2");
-        }
-        else if(position_3.getImage() == buttonUnderCursor)
-        {
-            System.out.println("Pozycja 3");
-        }
-        else if(position_4.getImage() == buttonUnderCursor)
-        {
-            System.out.println("Pozycja 4");
-        }
-        else if(position_5.getImage() == buttonUnderCursor)
-        {
-            System.out.println("Pozycja 5");
-        }
-    }
+    Button position_1 = new Button();
+    @FXML
+    Button position_2 = new Button();
+    @FXML
+    Button position_3 = new Button();
+    @FXML
+    Button position_4 = new Button();
+    @FXML
+    Button position_5 = new Button();
 
     @FXML
-    public void drawChooseMenu_position_1()
-    {
-        position_1.setImage(buttonUnderCursor);
-    }
-    @FXML
-    public void drawChooseMenu_position_2()
-    {
-        position_2.setImage(buttonUnderCursor);
-    }
-    @FXML
-    public void drawChooseMenu_position_3()
-    {
-        position_3.setImage(buttonUnderCursor);
-    }
-    @FXML
-    public void drawChooseMenu_position_4()
-    {
-        position_4.setImage(buttonUnderCursor);
-    }
-    @FXML
-    public void drawChooseMenu_position_5()
-    {
-        position_5.setImage(buttonUnderCursor);
-    }
+    VBox menuBox = new VBox();
 
     @FXML
-    public void leaveCoursorButton()
+    public void showMenu()
     {
-        position_1.setImage(button);
-        position_2.setImage(button);
-        position_3.setImage(button);
-        position_4.setImage(button);
-        position_5.setImage(button);
+        if(position_5.isVisible() == true)
+        {
+            position_1.setText("Schowaj menu");
+            menuBox.setLayoutX(0);
+            position_2.setText("Zaloguj");
+            position_3.setText("Załóż konto");
+            position_4.setText("Wyjście");
+            position_5.setVisible(false);
+        }
+        else
+        {
+            menuBox.setLayoutX(-200);
+            position_1.setText("=");
+            position_5.setVisible(true);
+        }
     }
 
     public void setMainController(MainController msc)

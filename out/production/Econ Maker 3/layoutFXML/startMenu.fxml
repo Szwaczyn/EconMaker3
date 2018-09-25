@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-
 
 <Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.startMenuController">
    <children>
@@ -14,48 +14,42 @@
             <Image url="@../resources/images/Background.png" />
          </image>
       </ImageView>
-      <VBox layoutY="80.0" prefHeight="258.0" prefWidth="200.0">
+      <ImageView fx:id="menuBackground" fitHeight="631.0" fitWidth="200.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/images/Menu.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="80.0" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <ImageView id="Position_One" fx:id="position_1" fitHeight="50.0" fitWidth="200.0" onMouseClicked="#chooisePositionMenu" onMouseEntered="#drawChooseMenu_position_1" onMouseExited="#leaveCoursorButton" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/images/button.png" />
-               </image>
+            <Button fx:id="position_1" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView id="Position_One" fx:id="position_2" fitHeight="50.0" fitWidth="200.0" onMouseClicked="#chooisePositionMenu" onMouseEntered="#drawChooseMenu_position_2" onMouseExited="#leaveCoursorButton" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/images/button.png" />
-               </image>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="menuBox" layoutX="-200.0" layoutY="130.0" prefHeight="351.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="position_2" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView id="Position_One" fx:id="position_3" fitHeight="50.0" fitWidth="200.0" onMouseClicked="#chooisePositionMenu" onMouseEntered="#drawChooseMenu_position_3" onMouseExited="#leaveCoursorButton" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/images/button.png" />
-               </image>
+            </Button>
+            <Button fx:id="position_3" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView id="Position_One" fx:id="position_4" fitHeight="50.0" fitWidth="200.0" onMouseClicked="#chooisePositionMenu" onMouseEntered="#drawChooseMenu_position_4" onMouseExited="#leaveCoursorButton" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/images/button.png" />
-               </image>
+            </Button>
+            <Button fx:id="position_4" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <ImageView id="Position_One" fx:id="position_5" fitHeight="50.0" fitWidth="200.0" onMouseClicked="#chooisePositionMenu" onMouseEntered="#drawChooseMenu_position_5" onMouseExited="#leaveCoursorButton" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/images/button.png" />
-               </image>
+            </Button>
+            <Button fx:id="position_5" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
+            </Button>
          </children>
       </VBox>
    </children>
