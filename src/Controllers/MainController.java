@@ -29,4 +29,14 @@ public class MainController
             System.out.println(e);
         }
     }
+
+    public void setScreen(Pane pane)
+    {
+        mainStackPane.getChildren().clear();
+        mainStackPane.getChildren().add(pane);
+    }
+    public void clearScreen()
+    {
+        mainStackPane.getChildren().clear();
+    }
 }

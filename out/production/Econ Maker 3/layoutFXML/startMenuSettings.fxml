@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.startMenuSettingsController">
+   <children>
+      <ImageView fx:id="button_1" fitHeight="80.0" fitWidth="1241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/images/Background.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="menuBackground" fitHeight="631.0" fitWidth="200.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/images/Menu.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="80.0" prefHeight="443.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="position_1" mnemonicParsing="false" onAction="#returnToStartMenu" prefHeight="50.0" prefWidth="200.0" text="Powrót">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="position_2" mnemonicParsing="false" onAction="#chooseSettings" prefHeight="50.0" prefWidth="200.0" text="Język">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="position_3" mnemonicParsing="false" onAction="#returnToStartMenu" prefHeight="50.0" prefWidth="200.0" text="Baza danych">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</Pane>

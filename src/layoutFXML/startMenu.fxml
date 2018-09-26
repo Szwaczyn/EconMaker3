@@ -30,22 +30,27 @@
       </VBox>
       <VBox fx:id="menuBox" layoutX="-200.0" layoutY="130.0" prefHeight="351.0" prefWidth="200.0">
          <children>
-            <Button fx:id="position_2" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
+            <Button fx:id="position_2" mnemonicParsing="false" onAction="#chooseOfMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="position_3" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
+            <Button fx:id="position_3" mnemonicParsing="false" onAction="#chooseOfMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="position_4" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
+            <Button fx:id="position_4" mnemonicParsing="false" onAction="#chooseOfMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="position_5" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
+            <Button fx:id="position_5" mnemonicParsing="false" onAction="#chooseOfMenu" prefHeight="50.0" prefWidth="200.0" text="=">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="position_6" mnemonicParsing="false" onAction="#showMenu" prefHeight="50.0" prefWidth="200.0" text="=">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
