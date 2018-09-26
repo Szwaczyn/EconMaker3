@@ -31,10 +31,12 @@ public class startMenuSettingsController
                     languageController target = loader.getController();
                     mainControllerVar.clearScreen();
                     target.setMainController(mainControllerVar);
-                    System.out.println("ok");
                     mainControllerVar.setScreen(pane);
                 } catch (Exception e) {
-                    System.out.println(e);
+                    /**
+                     * Do zrobienia system obsługi błędów
+                     */
+                    System.out.println("Nie można załadadować okna language.fxml");
                 }
             }break;
 

@@ -2,7 +2,9 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -29,9 +31,20 @@
             </Button>
          </children>
       </VBox>
-      <RadioButton layoutX="370.0" layoutY="158.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" text="Polski" />
-      <RadioButton layoutX="370.0" layoutY="204.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" text="English" />
-      <Button layoutX="986.0" layoutY="684.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Button" />
+      <RadioButton fx:id="radioPol" layoutX="370.0" layoutY="158.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" text="Polski">
+         <toggleGroup>
+            <ToggleGroup fx:id="languageGroup" />
+         </toggleGroup>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </RadioButton>
+      <RadioButton fx:id="radioEng" layoutX="370.0" layoutY="204.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" text="English" toggleGroup="$languageGroup">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </RadioButton>
+      <Button layoutX="986.0" layoutY="684.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Zapisz" />
       <ImageView fitHeight="34.0" fitWidth="62.0" layoutX="306.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/icons/brit.png" />
@@ -42,5 +55,6 @@
             <Image url="@../../resources/icons/pol.png" />
          </image>
       </ImageView>
+      <Label layoutX="215.0" layoutY="701.0" prefHeight="28.0" prefWidth="671.0" />
    </children>
 </Pane>
