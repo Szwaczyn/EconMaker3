@@ -2,11 +2,15 @@ package Controllers.startMenuSettingsControllers;
 
 import Controllers.MainController;
 import Controllers.startMenuSettingsController;
+import hoodStuff.LanguageEngine;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 
+import javax.swing.*;
 import java.io.*;
 
 /**
@@ -16,22 +20,48 @@ public class languageController
 {
     private MainController mainControllerVar;
 
+    LanguageEngine translation = new LanguageEngine();
+
+    @FXML
+    Button position_1 = new Button();
+    @FXML
+    Button position_2 = new Button();
+
     @FXML
     RadioButton radioPol = new RadioButton();
     @FXML
     RadioButton radioEng = new RadioButton();
+
+    @FXML
+    public void changeLanguage(ActionEvent eventKey)
+    {
+        RadioButton sourceRadioButton = (RadioButton) eventKey.getSource();
+
+        switch(sourceRadioButton.getId())
+        {
+            case "radioPol":{
+                translation.changeLanguagePack("Polski");
+            }break;
+
+            case "radioEng":{
+                translation.changeLanguagePack("English");
+            }break;
+        }
+    }
 
     public void initialize()
     {
         String line = "";
         FileInputStream fin = null;
 
+        /**
+         * Ustawienie języka
+         */
+        position_1.setText(translation.setUpLanguage(6));
+        position_2.setText(translation.setUpLanguage(9));
+
         try {
-            /**
-             * !! WAŻNE !!
-             * Zmienić ścieżke do pliku na adres względny
-             */
-            fin = new FileInputStream("C:/Users/mszwaczy/Dropbox/Projects JAVA/Econ Maker 3/src/settings/settings.dll");
+            fin = new FileInputStream("src/settings/settings.dll");
         } catch (FileNotFoundException e) {
             System.out.println("Nie odnaleźono pliku settings.dll");
         }

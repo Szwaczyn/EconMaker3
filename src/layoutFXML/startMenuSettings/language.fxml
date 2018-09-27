@@ -31,7 +31,7 @@
             </Button>
          </children>
       </VBox>
-      <RadioButton fx:id="radioPol" layoutX="370.0" layoutY="158.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" text="Polski">
+      <RadioButton fx:id="radioPol" layoutX="370.0" layoutY="158.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="34.0" prefWidth="168.0" text="Polski">
          <toggleGroup>
             <ToggleGroup fx:id="languageGroup" />
          </toggleGroup>
@@ -39,12 +39,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </RadioButton>
-      <RadioButton fx:id="radioEng" layoutX="370.0" layoutY="204.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="168.0" text="English" toggleGroup="$languageGroup">
+      <RadioButton fx:id="radioEng" layoutX="370.0" layoutY="204.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="34.0" prefWidth="168.0" text="English" toggleGroup="$languageGroup">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </RadioButton>
-      <Button layoutX="986.0" layoutY="684.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Zapisz" />
+      <Button fx:id="position_2" layoutX="986.0" layoutY="684.0" mnemonicParsing="false" onAction="#initialize" prefHeight="50.0" prefWidth="200.0" text="Zapisz">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <ImageView fitHeight="34.0" fitWidth="62.0" layoutX="306.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/icons/brit.png" />

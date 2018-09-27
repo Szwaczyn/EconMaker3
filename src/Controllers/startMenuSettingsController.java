@@ -1,6 +1,7 @@
 package Controllers;
 
 import Controllers.startMenuSettingsControllers.languageController;
+import hoodStuff.LanguageEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,10 @@ public class startMenuSettingsController
 
     @FXML
     Button position_1 = new Button();
+    @FXML
+    Button position_2 = new Button();
+    @FXML
+    Button position_3 = new Button();
 
     @FXML
     public void chooseSettings(ActionEvent event)
@@ -57,5 +62,13 @@ public class startMenuSettingsController
     public void setMainController(MainController msc)
     {
         this.mainControllerVar = msc;
+    }
+
+    public void initialize()
+    {
+        LanguageEngine translation = new LanguageEngine();
+        position_1.setText(translation.setUpLanguage(6));
+        position_2.setText(translation.setUpLanguage(7));
+        position_3.setText(translation.setUpLanguage(8));
     }
 }
