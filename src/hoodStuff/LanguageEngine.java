@@ -103,7 +103,7 @@ public class LanguageEngine
         }
     }
 
-    private String[] readSettingsFile()
+    public String[] readSettingsFile()
     {
         String line = "";
         String[] lineSettings = new String[10];

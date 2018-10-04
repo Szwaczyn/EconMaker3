@@ -31,7 +31,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="position_3" mnemonicParsing="false" onAction="#returnToStartMenu" prefHeight="50.0" prefWidth="200.0" text="Baza danych">
+            <Button fx:id="position_3" mnemonicParsing="false" onAction="#chooseSettings" prefHeight="50.0" prefWidth="200.0" text="Baza danych">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

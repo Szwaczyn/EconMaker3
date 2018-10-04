@@ -1,9 +1,9 @@
-null
+Settings
 LANGUAGE=PolLanguagePack.txt
-null
-null
-null
-null
-null
+DATABASE=SQL
+ADDRESOFDATABASE=/src/out
+NAMEOFDATABASE=LOCAL.txt
+LOGINTODATABASE=null
+PASSWORDTODATABASE=null
 null
 null

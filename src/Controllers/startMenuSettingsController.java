@@ -1,5 +1,6 @@
 package Controllers;
 
+import Controllers.startMenuSettingsControllers.databaseController;
 import Controllers.startMenuSettingsControllers.languageController;
 import hoodStuff.LanguageEngine;
 import javafx.event.ActionEvent;
@@ -46,9 +47,19 @@ public class startMenuSettingsController
             }break;
 
             case "position_3":{
-                /**
-                 * Do zrobienia ustawienia bazy danych
-                 */
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenuSettings/database.fxml"));
+                try {
+                    Pane pane = loader.load();
+                    databaseController target = loader.getController();
+                    mainControllerVar.clearScreen();
+                    target.setMainController(mainControllerVar);
+                    mainControllerVar.setScreen(pane);
+                } catch (Exception e) {
+                    /**
+                     * Do zrobienia system obsługi błędów
+                     */
+                    System.out.println("Nie można załadadować okna language.fxml");
+                }
             }break;
         }
     }
