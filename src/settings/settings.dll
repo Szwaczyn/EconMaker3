@@ -1,9 +1,9 @@
 Settings
 LANGUAGE=PolLanguagePack.txt
-DATABASE=SQL
-ADDRESOFDATABASE=/src/out
-NAMEOFDATABASE=LOCAL.txt
-LOGINTODATABASE=null
-PASSWORDTODATABASE=null
+DATABASE=Local
+econmaker.user
+null
+null
+null
 null
 null

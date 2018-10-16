@@ -5,70 +5,30 @@ import java.io.*;
 /**
  * Created $(DATE)
  */
-public class LanguageEngine
+public class LanguageEngine extends fileConnection
 {
-
-    private FileInputStream chooseFileLanguage(int language)
-    {
-        FileInputStream fin = null;
-        try {
-            if(language == 0)
-            {
-                fin = new FileInputStream("src/settings/languagePack/PolLanguagePack.lg");
-            }
-            else if(language == 1)
-            {
-                fin = new FileInputStream("src/settings/languagePack/EngLanguagePack.lg");
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return fin;
-    }
 
     public String setUpLanguage(int numberOfLine)
     {
-        String line = "";
-        String returnLine = "Błąd tłumaczenia";
-        FileInputStream fin = null;
-        int acctualyLine = 1;
-
-        fin = chooseFileLanguage(checkTheLanguage());
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-
-        try {
-            while((line = reader.readLine()) != null)
-            {
-                if(acctualyLine == numberOfLine)
-                {
-                    returnLine = line;
-                    break;
-                }
-                acctualyLine += 1;
-            }
-        } catch (IOException e) {
-            System.out.println("Blad wejscia");
-        }
-
-        try {
-            reader.close();
-            fin.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return returnLine;
+        settingsConnector settings = new settingsConnector();
+        return settings.giveText(numberOfLine);
     }
 
     public void changeLanguagePack(String selectedLanguage)
     {
         String[] lineSettings = new String[10];
+        settingsConnector settings = new settingsConnector();
 
         /**
          * Wczytanie informacja z pliku settings.dll do buforu
          */
-        lineSettings = readSettingsFile();
+        lineSettings[0] = settings.read(1);
+        lineSettings[1] = settings.read(2);
+        lineSettings[2] = settings.read(3);
+        lineSettings[3] = settings.read(4);
+        lineSettings[4] = settings.read(5);
+        lineSettings[5] = settings.read(6);
+        lineSettings[6] = settings.read(7);
 
         switch (selectedLanguage)
         {
@@ -101,93 +61,5 @@ public class LanguageEngine
         } catch (Exception e) {
             System.out.println("Error Class LanguageEngine Method Change LanguagePack. Zapis do pliku");
         }
-    }
-
-    public String[] readSettingsFile()
-    {
-        String line = "";
-        String[] lineSettings = new String[10];
-        FileInputStream fin = null;
-
-        try {
-            fin = new FileInputStream("src/settings/settings.dll");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        int numberOfLines = 0;
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-
-        try {
-            while((line = reader.readLine()) != null)
-            {
-                lineSettings[numberOfLines]  = line;
-                numberOfLines++;
-            }
-        } catch (Exception e) {
-            System.out.println(e + "Error in Class LanguageEngine: method readSettingsFile");
-        }
-
-        try {
-            reader.close();
-            fin.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lineSettings;
-    }
-
-    /**
-     * Zwraca wartośc odpowiednią dla ustawionego języka w pliku settings.dll
-     *-1 - Błąd
-     * 0 - Polski
-     * 1 - Angielski
-     */
-    private int checkTheLanguage()
-    {
-        /**
-         * Language:
-         * -1 - Błąd
-         *  0 - Polski
-         *  1 - Angielski
-         */
-        int language = 0;
-
-        String line = "";
-        FileInputStream fin = null;
-
-        try {
-            fin = new FileInputStream("src/settings/settings.dll");
-        } catch (FileNotFoundException e) {
-            System.out.println("Nie odnaleźono pliku settings.dll");
-        }
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
-
-        try {
-            while((line = reader.readLine()) != null)
-            {
-                if(line.equals("LANGUAGE=PolLanguagePack.txt"))
-                {
-                    language = 0;
-                }
-                else if(line.equals("LANGUAGE=EngLanguagePack.txt"))
-                {
-                    language = 1;
-                }
-            }
-        } catch (IOException e) {
-            language = -1;
-        }
-
-        try {
-            reader.close();
-            fin.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return language;
     }
 }

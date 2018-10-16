@@ -39,9 +39,7 @@ public class startMenuSettingsController
                     target.setMainController(mainControllerVar);
                     mainControllerVar.setScreen(pane);
                 } catch (Exception e) {
-                    /**
-                     * Do zrobienia system obsługi błędów
-                     */
+                    // TODO System service error
                     System.out.println("Nie można załadadować okna language.fxml");
                 }
             }break;
@@ -55,10 +53,8 @@ public class startMenuSettingsController
                     target.setMainController(mainControllerVar);
                     mainControllerVar.setScreen(pane);
                 } catch (Exception e) {
-                    /**
-                     * Do zrobienia system obsługi błędów
-                     */
-                    System.out.println("Nie można załadadować okna language.fxml");
+                    // TODO System service error
+                    System.out.println("Nie można załadadować okna database.fxml");
                 }
             }break;
         }

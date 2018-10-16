@@ -51,6 +51,11 @@
             </RadioButton>
             <Label fx:id="labelLocalNameFile" text="Nazwa pliku:" />
             <TextField fx:id="fileAddress" />
+            <Button fx:id="testConnectionLocalFile" mnemonicParsing="false" onAction="#testOfConnectionLocalFile" prefHeight="50.0" prefWidth="200.0" text="Podłącz">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
          <padding>
             <Insets left="50.0" right="50.0" top="20.0" />
@@ -96,5 +101,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="notice" layoutX="237.0" layoutY="680.0" prefHeight="45.0" prefWidth="681.0" text="Issue">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

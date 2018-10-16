@@ -3,15 +3,14 @@ package Controllers.startMenuSettingsControllers;
 import Controllers.MainController;
 import Controllers.startMenuSettingsController;
 import hoodStuff.LanguageEngine;
+import hoodStuff.settingsConnector;
+import hoodStuff.sqlConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-
-import java.io.*;
-import java.sql.*;
-
+import jdk.jfr.SettingControl;
 
 /**
  * Created $(DATE)
@@ -26,10 +25,12 @@ public class databaseController
     // TODO make user with restricted permissions to connect to database (Now root)
     private String userSQL = "root";
     private String passwordSQL = "";
-    private String addressSQL = "";
-            //"jdbc:mysql://localhost:3306/econmaker";
+    private String addressSQL = "jdbc:mysql://127.1.1.1:3306/econmaker";
+
+    sqlConnection sqldb = null;
 
     LanguageEngine translation = new LanguageEngine();
+    settingsConnector set = new settingsConnector();
 
     @FXML
     Button position_1 = new Button();
@@ -39,7 +40,8 @@ public class databaseController
     Button connect = new Button();
     @FXML
     Button saveButton = new Button();
-
+    @FXML
+    Button testConnectionLocalFile = new Button();
 
     @FXML
     RadioButton local = new RadioButton();
@@ -63,11 +65,45 @@ public class databaseController
     Label labelSQLPassword = new Label();
     @FXML
     Label labelLocalNameFile = new Label();
+    @FXML
+    Label notice = new Label();
 
     @FXML
     public void saveSettings()
     {
+        settingsConnector test = new settingsConnector();
+        //TODO save to file chooice
+        if(sql.isSelected())
+        {
+            set.changeSettings(3,"DATABASE=SQL");
+        }
+        else
+        {
+            set.changeSettings(3,"DATABASE=Local");
+        }
+    }
 
+    @FXML
+    public void testOfConnectionLocalFile()
+    {
+        String fileName = "";
+        try{
+            fileName = this.fileAddress.getText();
+        } catch (Exception e) {
+            notice.setText(translation.setUpLanguage(20));
+            saveButton.setDisable(true);
+        }
+        if(fileName.equals(""))
+        {
+            notice.setText(translation.setUpLanguage(20));
+            saveButton.setDisable(true);
+        }
+        else
+        {
+            notice.setText(translation.setUpLanguage(21));
+            saveButton.setDisable(false);
+        }
+        notice.setVisible(true);
     }
 
     @FXML
@@ -77,12 +113,15 @@ public class databaseController
          * Zasada przycisuku podłacz ma się opierać na wykonaniu czynnosci dla przycisku testuj polaczenie a nastepnie zapisz
          */
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection(addressSQL,userSQL,passwordSQL);
-        } catch (Exception e) {
-            System.out.println(e + "Nie można połączyć się z bazą.");
+        if(sqldb.checkConnection())
+        {
+            notice.setText(translation.setUpLanguage(18));
         }
+        else
+        {
+            notice.setText(translation.setUpLanguage(19));
+        }
+        notice.setVisible(true);
     }
 
     @FXML
@@ -99,7 +138,7 @@ public class databaseController
                 setChooseSQL(false);
             }break;
         }
-
+        readSettingsOfDatabase();
     }
 
     @FXML
@@ -118,14 +157,15 @@ public class databaseController
 
     public void initialize()
     {
+        sqldb =  new sqlConnection();
         setUpLanguage();
-        // TODO module to read settings faile and set proper position
-        String[] settings = new String[10];
-        settings = translation.readSettingsFile();
-        isSettedLocal(settings[2]);
+        // Line read settings database
+        String databaseInSettings = set.read(3);
+        isSettedLocal(databaseInSettings);
         /**
          * Wyłączenie możliwości edycji pól w niewybranym oknie
          */
+        notice.setVisible(false);
         if(sql.isSelected())
         {
             setChooseSQL(true);
@@ -134,14 +174,35 @@ public class databaseController
         {
             setChooseSQL(false);
         }
+        readSettingsOfDatabase();
     }
 
     private void readSettingsOfDatabase()
     {
-        String[] lineSettings = new String[10];
-        lineSettings = translation.readSettingsFile();
+        if(sql.isSelected())
+        {
+            password.setText("scisletajne");
+            password.setDisable(true);
+            login.setText(userSQL);
+            login.setDisable(true);
 
+            /**
+             * Cleaning
+             */
 
+            fileAddress.setText("");
+        }
+        else
+        {
+            fileAddress.setText("econmaker.user");
+            fileAddress.setDisable(true);
+
+            /**
+             * Cleaning
+             */
+            password.setText("");
+            login.setText("");
+        }
     }
 
     private void isSettedLocal(String line)
@@ -172,6 +233,7 @@ public class databaseController
         connect.setText(translation.setUpLanguage(16));
         labelLocalNameFile.setText(translation.setUpLanguage(17));
         saveButton.setText(translation.setUpLanguage(9));
+        testConnectionLocalFile.setText(translation.setUpLanguage(15));
     }
 
     private void setChooseSQL(boolean sql)
@@ -185,6 +247,7 @@ public class databaseController
             connect.setDisable(false);
 
             fileAddress.setDisable(true);
+            testConnectionLocalFile.setDisable(true);
         }
         else if(!sql)
         {
@@ -195,6 +258,7 @@ public class databaseController
             connect.setDisable(true);
 
             fileAddress.setDisable(false);
+            testConnectionLocalFile.setDisable(false);
         }
     }
 

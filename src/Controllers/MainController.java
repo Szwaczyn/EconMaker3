@@ -1,5 +1,6 @@
 package Controllers;
 
+import hoodStuff.settingsConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
