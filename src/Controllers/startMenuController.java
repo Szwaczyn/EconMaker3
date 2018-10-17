@@ -1,5 +1,6 @@
 package Controllers;
 
+import Controllers.startCreateAccountUserControllers.CreateAccountUserController;
 import hoodStuff.LanguageEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,6 +59,28 @@ public class startMenuController
 
         switch (source.getId())
         {
+            /**
+             * Pozycja "Logowanie"
+             */
+            case "position_2":{
+
+            }break;
+            /**
+             *  Pozycja "Stwórz konto"
+             */
+            case "position_3":{
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startCreateAccountUser/CreateAccountUser.fxml"));
+                try{
+                    Pane pane = loader.load();
+                    CreateAccountUserController target = loader.getController();
+                    target.setMainController(mainControllerVar);
+                    mainControllerVar.setScreen(pane);
+                } catch(Exception e) {
+                    //TODO Make system error
+                    System.out.println(e + " Nie można załadować pliku FXML !!");
+                }
+            }break;
+
             /**
              * Pozycja "Ustawienia"
              */

@@ -83,6 +83,8 @@ public class databaseController
         }
     }
 
+    //TODO For tests method make separate thread
+
     @FXML
     public void testOfConnectionLocalFile()
     {
