@@ -56,4 +56,9 @@ public class BugTracker
         System.out.println("Aktualny stan obiektu to: " + x + "  // wystąpienie numer - " + iterator);
         iterator++;
     }
+
+    public void dot()
+    {
+        System.out.println("I am here");
+    }
 }

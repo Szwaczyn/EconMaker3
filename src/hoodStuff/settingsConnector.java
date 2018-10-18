@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Created $(DATE)
  */
-public class settingsConnector extends fileConnection
+public class settingsConnector extends FileConnection
 {
     public void changeSettings(int position, String Value)
     {

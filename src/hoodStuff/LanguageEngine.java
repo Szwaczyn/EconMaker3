@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Created $(DATE)
  */
-public class LanguageEngine extends fileConnection
+public class LanguageEngine extends FileConnection
 {
 
     public String setUpLanguage(int numberOfLine)

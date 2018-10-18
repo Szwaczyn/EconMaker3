@@ -1,9 +1,8 @@
 package Controllers.startCreateAccountUserControllers;
 
 import Controllers.MainController;
-import hoodStuff.BugTracker;
-import hoodStuff.LanguageEngine;
-import hoodStuff.sqlConnection;
+import com.mysql.jdbc.util.BaseBugReport;
+import hoodStuff.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,10 +12,10 @@ import javafx.scene.control.TextField;
 /**
  * Created $(DATE)
  */
-public class CreateAccountUserController
-{
+public class CreateAccountUserController {
     LanguageEngine translation = new LanguageEngine();
     sqlConnection sqlConnect = new sqlConnection();
+    settingsConnector settings = new settingsConnector();
 
     @FXML
     Button buttonCreate = new Button();
@@ -47,37 +46,50 @@ public class CreateAccountUserController
     PasswordField textPassword = new PasswordField();
 
     @FXML
-    public void createUser()
-    {
-        if(checkTheCorrectness(textLogin.getText(), textPassword.getText(), textQuestion.getText(), textAnswer.getText()))
-        {
-            procedureSendUserToDatabase();
-        }
-        else
-        {
+    public void createUser() {
+        if (checkTheCorrectness(textLogin.getText(), textPassword.getText(), textQuestion.getText(), textAnswer.getText())) {
+            //TODO Check settings file and next establish connection to sql or local file
+
+            switch (settings.read(3)) {
+                case "DATABASE=Local": {
+                    procedureSendUserToLocalDatabase();
+                }
+                break;
+
+                case "DATABASE=SQL": {
+                    procedureSendUserToSQL();
+                }
+                break;
+            }
+        } else {
             //TODO System error
             System.out.println("Nie mozna dodać użytkownika");
         }
 
     }
 
-    private void procedureSendUserToDatabase()
+    private void procedureSendUserToLocalDatabase()
     {
-        System.out.println("Dodawanie użytkownika");
+        FileConnection file = new FileConnection();
+
+        System.out.println(file.readFile(1, "settings"));
+    }
+
+    private void procedureSendUserToSQL()
+    {
+        //TODO make body of this method
     }
 
     private boolean checkTheCorrectness(String login, String password, String question, String answer)
     {
-        boolean correctnss = false;
-        BugTracker bug = new BugTracker(correctnss);
+        boolean correctness = false;
 
-        if(login.equals("lo"))
+        if(!login.equals("") && !password.equals("") && !question.equals("") && !answer.equals("") && !question.equals(answer))
         {
-            correctnss = true;
-            bug.show();
+            correctness = true;
         }
-        bug.show();
-        return correctnss;
+
+        return correctness;
     }
 
     @FXML
@@ -99,8 +111,6 @@ public class CreateAccountUserController
         labelQuestion.setText(translation.setUpLanguage(24));
         labelAnswer.setText(translation.setUpLanguage(25));
         labelTitle.setText(translation.setUpLanguage(28));
-
-        textLogin.setText("");
     }
 
     private MainController mainControllerVar;
