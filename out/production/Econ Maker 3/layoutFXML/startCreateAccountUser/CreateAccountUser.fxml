@@ -46,8 +46,8 @@
             <Label prefHeight="40.0" prefWidth="400.0" />
             <HBox prefHeight="40.0" prefWidth="400.0">
                <children>
-                  <Button fx:id="buttonCreate" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Stwórz" />
-                  <Button fx:id="buttonClear" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Wyczyść" />
+                  <Button fx:id="buttonCreate" mnemonicParsing="false" onAction="#createUser" prefHeight="40.0" prefWidth="200.0" text="Stwórz" />
+                  <Button fx:id="buttonClear" mnemonicParsing="false" onAction="#clearTextField" prefHeight="40.0" prefWidth="200.0" text="Wyczyść" />
                </children>
             </HBox>
          </children>
