@@ -63,5 +63,10 @@
             <Font size="26.0" />
          </font>
       </Label>
+      <Label fx:id="labelAlert" layoutX="513.0" layoutY="698.0" prefHeight="36.0" prefWidth="500.0" text="Label" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

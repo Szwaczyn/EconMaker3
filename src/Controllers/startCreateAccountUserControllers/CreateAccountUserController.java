@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 /**
  * Created $(DATE)
  */
-public class CreateAccountUserController {
+public class CreateAccountUserController
+{
+
     LanguageEngine translation = new LanguageEngine();
     sqlConnection sqlConnect = new sqlConnection();
     settingsConnector settings = new settingsConnector();
@@ -34,6 +36,8 @@ public class CreateAccountUserController {
     Label labelAnswer = new Label();
     @FXML
     Label labelTitle = new Label();
+    @FXML
+    Label labelAlert = new Label();
 
     @FXML
     TextField textLogin = new TextField();
@@ -47,6 +51,7 @@ public class CreateAccountUserController {
 
     @FXML
     public void createUser() {
+        labelAlert.setVisible(false);
         if (checkTheCorrectness(textLogin.getText(), textPassword.getText(), textQuestion.getText(), textAnswer.getText())) {
             //TODO Check settings file and next establish connection to sql or local file
 
@@ -62,8 +67,8 @@ public class CreateAccountUserController {
                 break;
             }
         } else {
-            //TODO System error
-            System.out.println("Nie mozna dodać użytkownika");
+            labelAlert.setText(translation.setUpLanguage(29));
+            labelAlert.setVisible(true);
         }
 
     }
@@ -99,6 +104,8 @@ public class CreateAccountUserController {
         textPassword.setText("");
         textQuestion.setText("");
         textAnswer.setText("");
+        labelAlert.setText("");
+        labelAlert.setVisible(false);
     }
 
     public void initialize()
@@ -111,6 +118,7 @@ public class CreateAccountUserController {
         labelQuestion.setText(translation.setUpLanguage(24));
         labelAnswer.setText(translation.setUpLanguage(25));
         labelTitle.setText(translation.setUpLanguage(28));
+        labelAlert.setVisible(false);
     }
 
     private MainController mainControllerVar;

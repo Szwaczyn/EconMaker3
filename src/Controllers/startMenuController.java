@@ -1,6 +1,7 @@
 package Controllers;
 
 import Controllers.startCreateAccountUserControllers.CreateAccountUserController;
+import Controllers.startLoginUserController.LoginUserController;
 import hoodStuff.LanguageEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,7 +64,16 @@ public class startMenuController
              * Pozycja "Logowanie"
              */
             case "position_2":{
-
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startLoginUser/loginUser.fxml"));
+                try {
+                    Pane pane = loader.load();
+                    LoginUserController target = loader.getController();
+                    target.setMainController(mainControllerVar);
+                    mainControllerVar.setScreen(pane);
+                } catch(Exception e) {
+                    //TODO Make System Error
+                    System.out.println("Nie można załadować okna loginUser.fxml - " + e);
+                }
             }break;
             /**
              *  Pozycja "Stwórz konto"

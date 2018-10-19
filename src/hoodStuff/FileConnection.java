@@ -6,6 +6,7 @@ import java.nio.Buffer;
 /**
  * Created $(DATE)
  */
+//TODO Extend this class to thread
 public class FileConnection
 {
     private String fileName;
@@ -44,6 +45,11 @@ public class FileConnection
             e.printStackTrace();
         }
         return lineSettings[lineInSettings-1];
+    }
+
+    public void setFileName(String fileName)
+    {
+        this.fileName = setFileStreaming(fileName);
     }
 
     /**

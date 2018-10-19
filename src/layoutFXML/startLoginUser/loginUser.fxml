@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.startLoginUserController.LoginUserController">
+   <children>
+      <ImageView fx:id="button_1" fitHeight="80.0" fitWidth="1241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/Background.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="menuBackground" fitHeight="631.0" fitWidth="200.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/Menu.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="80.0" prefHeight="443.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="position_1" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="50.0" prefWidth="200.0" text="Powrót">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="239.0" layoutY="102.0" prefHeight="600.0" prefWidth="400.0">
+         <children>
+            <Label fx:id="labelLoginToSystem" prefHeight="50.0" prefWidth="282.0" text="Logowanie do systemu" />
+            <Label fx:id="labelLogin" text="Login" />
+            <TextField fx:id="textLogin" />
+            <Label fx:id="labelPassword" text="Hasło" />
+            <PasswordField fx:id="textPassword" />
+            <Label />
+            <Button fx:id="buttonLogin" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Zaloguj">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="747.0" layoutY="102.0" prefHeight="600.0" prefWidth="400.0">
+         <children>
+            <Label fx:id="labelRescuePassword" prefHeight="50.0" prefWidth="282.0" text="Odzyskiwanie hasła z pomocą pytania pomocniczego" />
+            <Label fx:id="labelRescueLogin" text="Login" />
+            <TextField fx:id="textRescueLogin" />
+            <Label />
+            <Button fx:id="buttonRescuePassword" mnemonicParsing="false" onAction="#rescuePassword" prefHeight="50.0" prefWidth="200.0" text="Odzyskaj hasło">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label />
+            <Label fx:id="labelHelpQuestion" text="Pytanie pomocnicze" />
+            <Label />
+            <Label fx:id="labelAnswerQuestion" text="Odpowiedź na pytanie" />
+            <TextField fx:id="textRescueAnswer" />
+            <Label />
+            <Button fx:id="buttonRescueSendAnswer" mnemonicParsing="false" onAction="#sendRescueAnswer" prefHeight="50.0" prefWidth="200.0" text="Wyśłij">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="labelSetRescuePassword" prefHeight="50.0" prefWidth="282.0" text="Ustaw hasło" />
+            <PasswordField fx:id="textRescuePassword" />
+            <Label fx:id="labelRepeatRescuePassword" prefHeight="50.0" prefWidth="282.0" text="Powtórz hasło" />
+            <PasswordField fx:id="textRepeatRescuePassword" />
+            <Label />
+            <Button fx:id="buttonSetNewPassword" mnemonicParsing="false" onAction="#setNewPassword" prefHeight="50.0" prefWidth="200.0" text="Ustaw">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <Label fx:id="labelAlert" layoutX="521.0" layoutY="694.0" prefHeight="36.0" prefWidth="497.0" text="Label" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
