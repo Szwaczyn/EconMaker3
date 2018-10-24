@@ -1,7 +1,7 @@
 Settings
-LANGUAGE=EngLanguagePack.txt
-DATABASE=Local
-econmaker.user
+LANGUAGE=PolLanguagePack.txt
+DATABASE=SQL
+127.0.0.12
 null
 null
 null

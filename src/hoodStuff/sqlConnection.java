@@ -15,7 +15,6 @@ public class sqlConnection
     private String addressSQL = "jdbc:mysql://localhost:3306/econmaker";
     Connection connectionToSQL = null;
 
-
     public boolean checkConnection()
     {
         try {
@@ -26,6 +25,11 @@ public class sqlConnection
             return false;
         }
         return true;
+    }
+
+    public void setAddressSQL(String url)
+    {
+        this.addressSQL = "jdbc:mysql://" + url + ":3306/econmaker";
     }
 
 }

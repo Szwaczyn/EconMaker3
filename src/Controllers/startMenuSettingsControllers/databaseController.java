@@ -24,8 +24,6 @@ public class databaseController
      */
     // TODO make user with restricted permissions to connect to database (Now root)
     private String userSQL = "root";
-    private String passwordSQL = "";
-    private String addressSQL = "jdbc:mysql://127.1.1.1:3306/econmaker";
 
     sqlConnection sqldb = null;
 
@@ -67,6 +65,12 @@ public class databaseController
     Label labelLocalNameFile = new Label();
     @FXML
     Label notice = new Label();
+
+    @FXML
+    ProgressBar progressBar = new ProgressBar();
+
+    @FXML
+    Label test = new Label();
 
     @FXML
     public void saveSettings()
@@ -115,15 +119,38 @@ public class databaseController
          * Zasada przycisuku podłacz ma się opierać na wykonaniu czynnosci dla przycisku testuj polaczenie a nastepnie zapisz
          */
 
+        //TODO Make thread work for test connection to sql
+        sqldb.setAddressSQL(serverAdress.getText());
+        setNotification();
+    }
+
+    @FXML
+    public void connect()
+    {
+        if(setNotification())
+        {
+            String url = serverAdress.getText();
+
+            set.changeSettings(3, "DATABASE=SQL");
+            set.changeSettings(4, url);
+        }
+    }
+
+    private boolean setNotification()
+    {
+        boolean bufor = false;
         if(sqldb.checkConnection())
         {
             notice.setText(translation.setUpLanguage(18));
+            bufor = true;
         }
         else
         {
             notice.setText(translation.setUpLanguage(19));
         }
         notice.setVisible(true);
+
+        return bufor;
     }
 
     @FXML
@@ -167,6 +194,7 @@ public class databaseController
         /**
          * Wyłączenie możliwości edycji pól w niewybranym oknie
          */
+        progressBar.setVisible(false);
         notice.setVisible(false);
         if(sql.isSelected())
         {
@@ -219,6 +247,10 @@ public class databaseController
             case "DATABASE=SQL":{
                 sql.setSelected(true);
                 local.setSelected(false);
+
+                String addresServer = set.read(4);
+                serverAdress.setText(addresServer);
+                sqldb.setAddressSQL(addresServer);
             }break;
         }
     }
