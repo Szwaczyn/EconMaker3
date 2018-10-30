@@ -108,6 +108,5 @@
          </font>
       </Label>
       <ProgressBar fx:id="progressBar" layoutX="589.0" layoutY="716.0" prefHeight="18.0" prefWidth="223.0" progress="0.0" />
-      <Label fx:id="test" layoutX="687.0" layoutY="694.0" text="Label" />
    </children>
 </Pane>

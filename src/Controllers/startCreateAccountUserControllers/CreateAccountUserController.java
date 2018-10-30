@@ -76,8 +76,9 @@ public class CreateAccountUserController
     private void procedureSendUserToLocalDatabase()
     {
         FileConnection file = new FileConnection();
+        file.setFileName("src/settings/","econmaker.user");
 
-        System.out.println(file.readFile(1, "settings"));
+        file.writeDownThisFile("test?");
     }
 
     private void procedureSendUserToSQL()

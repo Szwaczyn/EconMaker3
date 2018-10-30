@@ -1,7 +1,7 @@
 Settings
 LANGUAGE=PolLanguagePack.txt
-DATABASE=SQL
-127.0.0.12
+DATABASE=Local
+127.2.3.1
 null
 null
 null

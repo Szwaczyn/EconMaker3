@@ -5,11 +5,29 @@ import java.nio.Buffer;
 
 /**
  * Created $(DATE)
+ *
+ *  setFileName
+ *      Set the name of file, have to give with extension
+ *
+ *  readFile(int line, String file)
+ *      Get the line which have number in variable line
+ *      The variable file get the path of file with method setFileStreaming(String)
+ *
+ *  setFileStreaming(String file)
+ *      Get the source of file path.
+ *          user - you get the econmaker.usr
+ *          settings - you get the path of settings file
+ *          default - return string "wrong password"
+ *
+ *  writeDownThisFile(String line)
+ *      write in file wich was set in this object
+ *      the line will be write at down of the file
  */
 //TODO Extend this class to thread
 public class FileConnection
 {
     private String fileName;
+    private String path;
 
     //TODO This function should be able to read each file now it is able to read only settings file
     public String read(int lineInSettings)
@@ -52,36 +70,41 @@ public class FileConnection
         this.fileName = setFileStreaming(fileName);
     }
 
-    /**
-     *
-     * @param line
-     * @param file
-     * @return
-     *
-     * Wybranie języka
-     * settings - zostanie wybrany plik settings.dll
-     * user     - Zostanie wybrany plik z użytkownikami econmaker.usr
-     */
-    public String readFile(int line, String file)
+    public void setFileName(String path, String fileName)
     {
-        String buforLine = "Empty";
-
-        file = setFileStreaming(file); // Method setFileStreaming change name to path of file
-
-        FileInputStream fin = null;
-
-        try {
-            fin = new FileInputStream(file);
-        } catch (Exception e) {
-            //TODO Make System Error
-            System.out.println(e + " FileConnection: Method readFile: Open stream");
-        }
-
-        BufferedReader readFile = new BufferedReader(new InputStreamReader(fin));
-
-        return readLine(line, readFile);
+        this.fileName = fileName;
+        this.path = path;
     }
 
+    public void writeDownThisFile(String line)
+    {
+        line += " \n";
+        try {
+            FileWriter filelocal = new FileWriter(this.path + this.fileName, true);
+            BufferedWriter writer = new BufferedWriter(filelocal);
+            writer.write(line);
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Have to be set the file name of this object
+    public String readThisFile(int line)
+    {
+        String bufor = "";
+        FileInputStream fin = null;
+        try {
+            fin = new FileInputStream(this.path + this.fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fin));
+            bufor = readLine(line, reader);
+        } catch (Exception e) {
+            //TODO Make error system
+            System.out.println("nie można wczytać modułu: Class FileConnection: Method read : " + e + this.fileName);
+        }
+
+        return bufor;
+    }
 
     /**
      *
@@ -125,7 +148,7 @@ public class FileConnection
 
             case "user":
             {
-                path = "src/settings/econmaker.usr";
+                path = "src/settings/econmaker.user";
             }break;
 
             default:

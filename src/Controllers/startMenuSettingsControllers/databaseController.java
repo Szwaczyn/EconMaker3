@@ -96,12 +96,13 @@ public class databaseController
         try{
             fileName = this.fileAddress.getText();
         } catch (Exception e) {
-            notice.setText(translation.setUpLanguage(20));
+            notice.setText(translation.setUpLanguage(20)); // Wyświetlenie błędu
             saveButton.setDisable(true);
         }
         if(fileName.equals(""))
         {
             notice.setText(translation.setUpLanguage(20));
+
             saveButton.setDisable(true);
         }
         else
