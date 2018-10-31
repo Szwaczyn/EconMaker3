@@ -75,10 +75,25 @@ public class CreateAccountUserController
 
     private void procedureSendUserToLocalDatabase()
     {
-        FileConnection file = new FileConnection();
-        file.setFileName("src/settings/","econmaker.user");
+        //TODO System check exist user
+        saveToFileNewUser(textLogin.getText(), textPassword.getText(), textQuestion.getText(), textAnswer.getText());
+        labelAlert.setVisible(true);
+    }
 
-        file.writeDownThisFile("test?");
+    private void saveToFileNewUser(String user, String password, String question, String answer)
+    {
+        try {
+            FileConnection file = new FileConnection();
+            file.setFileName("src/settings/","econmaker.user");
+            file.writeDownThisFile(user);
+            file.writeDownThisFile(password);
+            file.writeDownThisFile(question);
+            file.writeDownThisFile(answer);
+            labelAlert.setText(translation.setUpLanguage(37));
+        } catch (Exception e) {
+            System.out.println("Wystąpił błąd podczas zapisu. Kod błędu: " + e);
+            labelAlert.setText(translation.setUpLanguage(38));
+        }
     }
 
     private void procedureSendUserToSQL()
