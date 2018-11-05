@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import java.security.*;
 
 /**
  * Created $(DATE)
@@ -75,9 +76,31 @@ public class CreateAccountUserController
 
     private void procedureSendUserToLocalDatabase()
     {
-        //TODO System check exist user
-        saveToFileNewUser(textLogin.getText(), textPassword.getText(), textQuestion.getText(), textAnswer.getText());
+        if(!isThereLocalLogin(textLogin.getText()))
+        {
+            saveToFileNewUser(textLogin.getText().trim(), encryptText(textPassword.getText().trim()), textQuestion.getText().trim(),
+                    encryptText(textAnswer.getText().trim()));
+        }
+        else
+        {
+            labelAlert.setText("Taki użytkownik już istnieje.");
+        }
+
         labelAlert.setVisible(true);
+    }
+
+    private String encryptText(String password)
+    {
+        try {
+            MessageDigest sha = MessageDigest.getInstance("SHA-1");
+            sha.update(password.getBytes());
+            byte[] msgDiest = sha.digest();
+            password = msgDiest.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return password;
     }
 
     private void saveToFileNewUser(String user, String password, String question, String answer)
@@ -94,6 +117,26 @@ public class CreateAccountUserController
             System.out.println("Wystąpił błąd podczas zapisu. Kod błędu: " + e);
             labelAlert.setText(translation.setUpLanguage(38));
         }
+    }
+
+    private boolean isThereLocalLogin(String login)
+    {
+        FileConnection file = new FileConnection("econmaker.user","src/settings/");
+        int sizeOfUserFile = file.amountOfLineInThisFile();
+        int actualPosition = 1;
+
+        boolean exist = false;
+
+        do{
+
+            if(login.trim().equals(file.readThisFile(actualPosition).trim()))
+            {
+                exist = true;
+            };
+            actualPosition += 4;
+        } while(actualPosition <= sizeOfUserFile);
+
+        return exist;
     }
 
     private void procedureSendUserToSQL()

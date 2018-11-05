@@ -92,6 +92,7 @@ public class FileConnection
     //Have to be set the file name of this object
     public String readThisFile(int line)
     {
+        line--;
         String bufor = "";
         FileInputStream fin = null;
         try {
@@ -133,7 +134,44 @@ public class FileConnection
             System.out.println(e + " Main Class: FileConnection: readFile: Try read Line");
         }
 
+        try {
+            readFile.close();
+        } catch (IOException e) {
+            // TODO SYstem error
+            System.out.println("Class: FileConnection: Method: ReadFIle try close file wrong");
+        }
+
         return result;
+    }
+
+    public int amountOfLineInThisFile()
+    {
+        int counter = 0;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getThisFileInputStreamReader()));
+
+        try{
+            while(reader.readLine() != null )
+            {
+                counter += 1;
+            }
+        } catch(Exception e){
+            //TODO System error
+            System.out.println("Error in FileConnection: Method AmountOfLineInThisFile");
+        }
+
+        return counter;
+    }
+
+    private FileInputStream getThisFileInputStreamReader()
+    {
+        FileInputStream fin = null;
+        try {
+            fin = new FileInputStream(this.path + this.fileName);
+        } catch (Exception e) {
+            //TODO System error
+            System.out.println("Błąd podczas liczenia linijek");
+        }
+        return fin;
     }
 
     private String setFileStreaming(String file)
@@ -158,5 +196,18 @@ public class FileConnection
         }
 
         return path;
+    }
+
+    public FileConnection() {}
+
+    public FileConnection(String fileName)
+    {
+        this.fileName = fileName;
+    }
+
+    public FileConnection(String fileName, String path)
+    {
+        this.fileName = fileName;
+        this.path = path;
     }
 }
