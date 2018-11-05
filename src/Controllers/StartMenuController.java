@@ -11,13 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.io.*;
-
-public class startMenuController
+public class StartMenuController
 {
-
-    private MainController mainControllerVar;
-
     @FXML
     ImageView menuBackground = new ImageView();
 
@@ -36,6 +31,10 @@ public class startMenuController
 
     @FXML
     VBox menuBox = new VBox();
+
+    /**
+     * Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     @FXML
     public void showMenu()
@@ -79,7 +78,7 @@ public class startMenuController
              *  Pozycja "Stwórz konto"
              */
             case "position_3":{
-                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startCreateAccountUser/CreateAccountUser.fxml"));
+                FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startCreateAccountUser/createAccountUser.fxml"));
                 try{
                     Pane pane = loader.load();
                     CreateAccountUserController target = loader.getController();
@@ -98,7 +97,7 @@ public class startMenuController
                 FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenuSettings.fxml"));
                 try {
                     Pane pane = loader.load();
-                    startMenuSettingsController target = loader.getController();
+                    StartMenuSettingsController target = loader.getController();
                     target.setMainController(mainControllerVar);
                     mainControllerVar.setScreen(pane);
                 } catch (Exception e) {
@@ -112,16 +111,9 @@ public class startMenuController
         }
     }
 
-    private void econmakerShutDown(int code)
-    {
-        System.exit(code);
-    }
-
-    public void setMainController(MainController msc)
-    {
-        this.mainControllerVar = msc;
-    }
-
+    /**
+     * Other method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     public void initialize()
     {
@@ -131,6 +123,26 @@ public class startMenuController
         position_3.setText(translation.setUpLanguage(3));
         position_4.setText(translation.setUpLanguage(4));
         position_5.setText(translation.setUpLanguage(5));
+    }
+
+    /**
+     * Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private void econmakerShutDown(int code)
+    {
+        System.exit(code);
+    }
+
+    /**
+     * Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private MainController mainControllerVar;
+
+    public void setMainController(MainController msc)
+    {
+        this.mainControllerVar = msc;
     }
 
 }

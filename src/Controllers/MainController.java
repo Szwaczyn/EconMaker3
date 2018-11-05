@@ -1,6 +1,5 @@
 package Controllers;
 
-import hoodStuff.settingsConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -22,7 +21,7 @@ public class MainController
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenu.fxml"));
         try {
             Pane mainPaneMenu = loader.load();
-            startMenuController smc = loader.getController();
+            StartMenuController smc = loader.getController();
             smc.setMainController(this);
             mainStackPane.getChildren().clear();
             mainStackPane.getChildren().add(mainPaneMenu);
@@ -36,6 +35,7 @@ public class MainController
         mainStackPane.getChildren().clear();
         mainStackPane.getChildren().add(pane);
     }
+
     public void clearScreen()
     {
         mainStackPane.getChildren().clear();

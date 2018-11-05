@@ -8,6 +8,10 @@ public class BugTracker
     Object x;
     int iterator;
 
+    /**
+     *  Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     public BugTracker(int x)
     {
         this.x = x;
@@ -45,6 +49,10 @@ public class BugTracker
     }
 
     public BugTracker(){ this.x = 0; this.iterator = 1; }
+
+    /**
+     *  Other methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     public void showCondition(Object object, String nameOfObject)
     {

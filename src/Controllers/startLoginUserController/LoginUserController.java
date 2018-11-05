@@ -61,6 +61,10 @@ public class LoginUserController
     @FXML
     PasswordField textRepeatRescuePassword = new PasswordField();
 
+    /**
+     *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     @FXML
     public void rescuePassword()
     {
@@ -79,11 +83,19 @@ public class LoginUserController
         System.out.println("ok");
     }
 
+    /**
+     *  Other method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     public void initialize()
     {
         setLanguage();
         setUnvisibleRescuePassword(true);
     }
+
+    /**
+     *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     private void setLanguage()
     {
@@ -101,17 +113,6 @@ public class LoginUserController
         buttonRescuePassword.setText(translation.setUpLanguage(34));
         buttonRescueSendAnswer.setText(translation.setUpLanguage(35));
         buttonSetNewPassword.setText(translation.setUpLanguage(36));
-    }
-
-    public void setMainController(MainController msc)
-    {
-        this.mainControllerVar = msc;
-    }
-
-    @FXML
-    public void returnToMenu()
-    {
-        mainControllerVar.inicializujMenu();
     }
 
     private void setVisibleRescueQuestion(boolean visibleSection)
@@ -165,5 +166,20 @@ public class LoginUserController
         textRepeatRescuePassword.setVisible(!visible);
         textRescuePassword.setVisible(!visible);
         buttonSetNewPassword.setVisible(!visible);
+    }
+
+    /**
+     *  Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    @FXML
+    public void returnToMenu()
+    {
+        mainControllerVar.inicializujMenu();
+    }
+
+    public void setMainController(MainController msc)
+    {
+        this.mainControllerVar = msc;
     }
 }

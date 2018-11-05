@@ -1,21 +1,20 @@
 package Controllers.startMenuSettingsControllers;
 
 import Controllers.MainController;
-import Controllers.startMenuSettingsController;
+import Controllers.StartMenuSettingsController;
 import hoodStuff.LanguageEngine;
-import hoodStuff.settingsConnector;
-import hoodStuff.sqlConnection;
+import hoodStuff.SettingsConnector;
+import hoodStuff.SqlConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import jdk.jfr.SettingControl;
 
 /**
  * Created $(DATE)
  */
-public class databaseController
+public class DatabaseController
 {
     private MainController mainControllerVar;
 
@@ -25,10 +24,10 @@ public class databaseController
     // TODO make user with restricted permissions to connect to database (Now root)
     private String userSQL = "root";
 
-    sqlConnection sqldb = null;
+    SqlConnection sqldb = null;
 
     LanguageEngine translation = new LanguageEngine();
-    settingsConnector set = new settingsConnector();
+    SettingsConnector set = new SettingsConnector();
 
     @FXML
     Button position_1 = new Button();
@@ -72,10 +71,14 @@ public class databaseController
     @FXML
     Label test = new Label();
 
+    /**
+     *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     @FXML
     public void saveSettings()
     {
-        settingsConnector test = new settingsConnector();
+        SettingsConnector test = new SettingsConnector();
         //TODO save to file chooice
         if(sql.isSelected())
         {
@@ -137,23 +140,6 @@ public class databaseController
         }
     }
 
-    private boolean setNotification()
-    {
-        boolean bufor = false;
-        if(sqldb.checkConnection())
-        {
-            notice.setText(translation.setUpLanguage(18));
-            bufor = true;
-        }
-        else
-        {
-            notice.setText(translation.setUpLanguage(19));
-        }
-        notice.setVisible(true);
-
-        return bufor;
-    }
-
     @FXML
     public void setSQLConnection(ActionEvent eventKey)
     {
@@ -171,23 +157,13 @@ public class databaseController
         readSettingsOfDatabase();
     }
 
-    @FXML
-    public void returnToPreviousMenu()
-    {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenuSettings.fxml"));
-        try {
-            Pane pane = loader.load();
-            startMenuSettingsController target = loader.getController();
-            target.setMainController(mainControllerVar);
-            mainControllerVar.setScreen(pane);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+    /**
+     *  Other method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     public void initialize()
     {
-        sqldb =  new sqlConnection();
+        sqldb =  new SqlConnection();
         setUpLanguage();
         // Line read settings database
         String databaseInSettings = set.read(3);
@@ -206,6 +182,27 @@ public class databaseController
             setChooseSQL(false);
         }
         readSettingsOfDatabase();
+    }
+
+    /**
+     *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private boolean setNotification()
+    {
+        boolean bufor = false;
+        if(sqldb.checkConnection())
+        {
+            notice.setText(translation.setUpLanguage(18));
+            bufor = true;
+        }
+        else
+        {
+            notice.setText(translation.setUpLanguage(19));
+        }
+        notice.setVisible(true);
+
+        return bufor;
     }
 
     private void readSettingsOfDatabase()
@@ -294,6 +291,24 @@ public class databaseController
 
             fileAddress.setDisable(false);
             testConnectionLocalFile.setDisable(false);
+        }
+    }
+
+    /**
+     *  Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    @FXML
+    public void returnToPreviousMenu()
+    {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenuSettings.fxml"));
+        try {
+            Pane pane = loader.load();
+            StartMenuSettingsController target = loader.getController();
+            target.setMainController(mainControllerVar);
+            mainControllerVar.setScreen(pane);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

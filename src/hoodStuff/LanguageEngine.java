@@ -7,17 +7,20 @@ import java.io.*;
  */
 public class LanguageEngine extends FileConnection
 {
+    /**
+     *  Other methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     public String setUpLanguage(int numberOfLine)
     {
-        settingsConnector settings = new settingsConnector();
+        SettingsConnector settings = new SettingsConnector();
         return settings.giveText(numberOfLine);
     }
 
     public void changeLanguagePack(String selectedLanguage)
     {
         String[] lineSettings = new String[10];
-        settingsConnector settings = new settingsConnector();
+        SettingsConnector settings = new SettingsConnector();
 
         /**
          * Wczytanie informacja z pliku settings.dll do buforu

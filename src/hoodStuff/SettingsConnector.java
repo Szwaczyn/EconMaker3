@@ -5,8 +5,12 @@ import java.io.*;
 /**
  * Created $(DATE)
  */
-public class settingsConnector extends FileConnection
+public class SettingsConnector extends FileConnection
 {
+    /**
+     *  Other methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     public void changeSettings(int position, String Value)
     {
         String[] settingsContent = new String[10];
@@ -86,6 +90,10 @@ public class settingsConnector extends FileConnection
         return language;
     }
 
+    /**
+     *  Private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     private FileInputStream chooseFileLanguage(int language)
     {
         FileInputStream fin = null;
@@ -111,7 +119,7 @@ public class settingsConnector extends FileConnection
             fout = new FileOutputStream("src/settings/settings.dll");
         } catch (Exception e) {
             //TODO Make system error
-            System.out.println(e + "Error settingsConnector: Method saveSettings: Try open file");
+            System.out.println(e + "Error SettingsConnector: Method saveSettings: Try open file");
         }
 
         DataOutputStream write = new DataOutputStream(fout);
@@ -122,7 +130,7 @@ public class settingsConnector extends FileConnection
             }
         } catch (Exception e) {
             //TODO System error
-            System.out.println("Error settingsConnector: Method saveSettings: Try save file");
+            System.out.println("Error SettingsConnector: Method saveSettings: Try save file");
         }
     }
 }

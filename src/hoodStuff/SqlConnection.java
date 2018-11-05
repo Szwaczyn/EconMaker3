@@ -8,12 +8,16 @@ import java.sql.*;
  * Created $(DATE)
  */
 
-public class sqlConnection
+public class SqlConnection
 {
     private String account = "root";
     private String password = "";
     private String addressSQL = "jdbc:mysql://localhost:3306/econmaker";
     Connection connectionToSQL = null;
+
+    /**
+     *  Other methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     public boolean checkConnection()
     {

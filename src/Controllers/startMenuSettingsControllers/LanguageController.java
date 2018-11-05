@@ -1,7 +1,7 @@
 package Controllers.startMenuSettingsControllers;
 
 import Controllers.MainController;
-import Controllers.startMenuSettingsController;
+import Controllers.StartMenuSettingsController;
 import hoodStuff.LanguageEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,16 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 
-import javax.swing.*;
 import java.io.*;
 
 /**
  * Created $(DATE)
  */
-public class languageController
+public class LanguageController
 {
-    private MainController mainControllerVar;
-
     LanguageEngine translation = new LanguageEngine();
 
     @FXML
@@ -31,6 +28,10 @@ public class languageController
     RadioButton radioPol = new RadioButton();
     @FXML
     RadioButton radioEng = new RadioButton();
+
+    /**
+     *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     @FXML
     public void changeLanguage(ActionEvent eventKey)
@@ -48,6 +49,10 @@ public class languageController
             }break;
         }
     }
+
+    /**
+     *  Other method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     public void initialize()
     {
@@ -87,13 +92,19 @@ public class languageController
         }
     }
 
+    /**
+     *  Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private MainController mainControllerVar;
+
     @FXML
     public void returnToStartMenu()
     {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenuSettings.fxml"));
         try {
             Pane pane = loader.load();
-            startMenuSettingsController target = loader.getController();
+            StartMenuSettingsController target = loader.getController();
             target.setMainController(mainControllerVar);
             mainControllerVar.setScreen(pane);
         } catch (Exception e) {

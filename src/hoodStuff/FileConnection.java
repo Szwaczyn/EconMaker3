@@ -29,7 +29,10 @@ public class FileConnection
     private String fileName;
     private String path;
 
-    //TODO This function should be able to read each file now it is able to read only settings file
+    /**
+     *  Other methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     public String read(int lineInSettings)
     {
         String line = "";
@@ -65,17 +68,6 @@ public class FileConnection
         return lineSettings[lineInSettings-1];
     }
 
-    public void setFileName(String fileName)
-    {
-        this.fileName = setFileStreaming(fileName);
-    }
-
-    public void setFileName(String path, String fileName)
-    {
-        this.fileName = fileName;
-        this.path = path;
-    }
-
     public void writeDownThisFile(String line)
     {
         line += " \n";
@@ -105,6 +97,55 @@ public class FileConnection
         }
 
         return bufor;
+    }
+
+    public int amountOfLineInThisFile()
+    {
+        int counter = 0;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getThisFileInputStreamReader()));
+
+        try{
+            while(reader.readLine() != null )
+            {
+                counter += 1;
+            }
+        } catch(Exception e){
+            //TODO System error
+            System.out.println("Error in FileConnection: Method AmountOfLineInThisFile");
+        }
+
+        return counter;
+    }
+
+    /**
+     *  Seters Method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    public void setFileName(String fileName)
+    {
+        this.fileName = setFileStreaming(fileName);
+    }
+
+    public void setFileName(String path, String fileName)
+    {
+        this.fileName = fileName;
+        this.path = path;
+    }
+
+    /**
+     *  Private Method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private FileInputStream getThisFileInputStreamReader()
+    {
+        FileInputStream fin = null;
+        try {
+            fin = new FileInputStream(this.path + this.fileName);
+        } catch (Exception e) {
+            //TODO System error
+            System.out.println("Błąd podczas liczenia linijek");
+        }
+        return fin;
     }
 
     /**
@@ -144,36 +185,6 @@ public class FileConnection
         return result;
     }
 
-    public int amountOfLineInThisFile()
-    {
-        int counter = 0;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getThisFileInputStreamReader()));
-
-        try{
-            while(reader.readLine() != null )
-            {
-                counter += 1;
-            }
-        } catch(Exception e){
-            //TODO System error
-            System.out.println("Error in FileConnection: Method AmountOfLineInThisFile");
-        }
-
-        return counter;
-    }
-
-    private FileInputStream getThisFileInputStreamReader()
-    {
-        FileInputStream fin = null;
-        try {
-            fin = new FileInputStream(this.path + this.fileName);
-        } catch (Exception e) {
-            //TODO System error
-            System.out.println("Błąd podczas liczenia linijek");
-        }
-        return fin;
-    }
-
     private String setFileStreaming(String file)
     {
         String path;
@@ -197,6 +208,10 @@ public class FileConnection
 
         return path;
     }
+
+    /**
+     *  Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     public FileConnection() {}
 

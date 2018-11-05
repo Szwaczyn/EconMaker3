@@ -1,7 +1,7 @@
 package Controllers;
 
-import Controllers.startMenuSettingsControllers.databaseController;
-import Controllers.startMenuSettingsControllers.languageController;
+import Controllers.startMenuSettingsControllers.DatabaseController;
+import Controllers.startMenuSettingsControllers.LanguageController;
 import hoodStuff.LanguageEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 /**
  * Created $(DATE)
  */
-public class startMenuSettingsController
+public class StartMenuSettingsController
 {
     private MainController mainControllerVar;
 
@@ -22,6 +22,10 @@ public class startMenuSettingsController
     Button position_2 = new Button();
     @FXML
     Button position_3 = new Button();
+
+    /**
+     *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     @FXML
     public void chooseSettings(ActionEvent event)
@@ -34,7 +38,7 @@ public class startMenuSettingsController
                 FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenuSettings/language.fxml"));
                 try {
                     Pane pane = loader.load();
-                    languageController target = loader.getController();
+                    LanguageController target = loader.getController();
                     mainControllerVar.clearScreen();
                     target.setMainController(mainControllerVar);
                     mainControllerVar.setScreen(pane);
@@ -48,7 +52,7 @@ public class startMenuSettingsController
                 FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/startMenuSettings/database.fxml"));
                 try {
                     Pane pane = loader.load();
-                    databaseController target = loader.getController();
+                    DatabaseController target = loader.getController();
                     mainControllerVar.clearScreen();
                     target.setMainController(mainControllerVar);
                     mainControllerVar.setScreen(pane);
@@ -60,6 +64,22 @@ public class startMenuSettingsController
         }
     }
 
+    /**
+     *  Other methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    public void initialize()
+    {
+        LanguageEngine translation = new LanguageEngine();
+        position_1.setText(translation.setUpLanguage(6));
+        position_2.setText(translation.setUpLanguage(7));
+        position_3.setText(translation.setUpLanguage(8));
+    }
+
+    /**
+     *  Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     @FXML
     public void returnToStartMenu()
     {
@@ -69,13 +89,5 @@ public class startMenuSettingsController
     public void setMainController(MainController msc)
     {
         this.mainControllerVar = msc;
-    }
-
-    public void initialize()
-    {
-        LanguageEngine translation = new LanguageEngine();
-        position_1.setText(translation.setUpLanguage(6));
-        position_2.setText(translation.setUpLanguage(7));
-        position_3.setText(translation.setUpLanguage(8));
     }
 }

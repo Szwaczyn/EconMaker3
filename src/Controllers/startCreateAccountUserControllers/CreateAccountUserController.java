@@ -1,7 +1,6 @@
 package Controllers.startCreateAccountUserControllers;
 
 import Controllers.MainController;
-import com.mysql.jdbc.util.BaseBugReport;
 import hoodStuff.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,8 +16,8 @@ public class CreateAccountUserController
 {
 
     LanguageEngine translation = new LanguageEngine();
-    sqlConnection sqlConnect = new sqlConnection();
-    settingsConnector settings = new settingsConnector();
+    SqlConnection sqlConnect = new SqlConnection();
+    SettingsConnector settings = new SettingsConnector();
 
     @FXML
     Button buttonCreate = new Button();
@@ -50,6 +49,10 @@ public class CreateAccountUserController
     @FXML
     PasswordField textPassword = new PasswordField();
 
+    /**
+     *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     @FXML
     public void createUser() {
         labelAlert.setVisible(false);
@@ -72,6 +75,34 @@ public class CreateAccountUserController
             labelAlert.setVisible(true);
         }
 
+    }
+
+    @FXML
+    public void clearTextField()
+    {
+        textLogin.setText("");
+        textPassword.setText("");
+        textQuestion.setText("");
+        textAnswer.setText("");
+        labelAlert.setText("");
+        labelAlert.setVisible(false);
+    }
+
+    /**
+     *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    public void initialize()
+    {
+        buttonCreate.setText(translation.setUpLanguage(26));
+        buttonClear.setText(translation.setUpLanguage(27));
+        position_1.setText(translation.setUpLanguage(6));
+        labelLogin.setText(translation.setUpLanguage(22));
+        labelPassword.setText(translation.setUpLanguage(23));
+        labelQuestion.setText(translation.setUpLanguage(24));
+        labelAnswer.setText(translation.setUpLanguage(25));
+        labelTitle.setText(translation.setUpLanguage(28));
+        labelAlert.setVisible(false);
     }
 
     private void procedureSendUserToLocalDatabase()
@@ -156,40 +187,16 @@ public class CreateAccountUserController
         return correctness;
     }
 
-    @FXML
-    public void clearTextField()
-    {
-        textLogin.setText("");
-        textPassword.setText("");
-        textQuestion.setText("");
-        textAnswer.setText("");
-        labelAlert.setText("");
-        labelAlert.setVisible(false);
-    }
-
-    public void initialize()
-    {
-        buttonCreate.setText(translation.setUpLanguage(26));
-        buttonClear.setText(translation.setUpLanguage(27));
-        position_1.setText(translation.setUpLanguage(6));
-        labelLogin.setText(translation.setUpLanguage(22));
-        labelPassword.setText(translation.setUpLanguage(23));
-        labelQuestion.setText(translation.setUpLanguage(24));
-        labelAnswer.setText(translation.setUpLanguage(25));
-        labelTitle.setText(translation.setUpLanguage(28));
-        labelAlert.setVisible(false);
-    }
+    /**
+     *  Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
 
     private MainController mainControllerVar;
 
     public void setMainController(MainController msc)
-    {
-        this.mainControllerVar = msc;
-    }
+    { this.mainControllerVar = msc; }
 
     @FXML
     public void returnToMenu()
-    {
-        mainControllerVar.inicializujMenu();
-    }
+    { mainControllerVar.inicializujMenu(); }
 }
