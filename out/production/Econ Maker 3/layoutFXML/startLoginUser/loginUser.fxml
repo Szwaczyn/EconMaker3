@@ -40,7 +40,7 @@
             <Label fx:id="labelPassword" text="Hasło" />
             <PasswordField fx:id="textPassword" />
             <Label />
-            <Button fx:id="buttonLogin" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Zaloguj">
+            <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#procedureUserLogin" prefHeight="50.0" prefWidth="200.0" text="Zaloguj">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

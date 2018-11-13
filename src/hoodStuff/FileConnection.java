@@ -143,7 +143,7 @@ public class FileConnection
             fin = new FileInputStream(this.path + this.fileName);
         } catch (Exception e) {
             //TODO System error
-            System.out.println("Błąd podczas liczenia linijek");
+            System.out.println("Błąd podczas otrzymywania ścieżki : " + this.path + " nazwa pliku + " + this.fileName);
         }
         return fin;
     }
