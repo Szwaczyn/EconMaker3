@@ -4,6 +4,7 @@ import Controllers.MainController;
 import hoodStuff.Encrypting;
 import hoodStuff.FileConnection;
 import hoodStuff.LanguageEngine;
+import hoodStuff.UserData;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -92,17 +93,8 @@ public class LoginUserController
         Encrypting encrypt = new Encrypting(textPassword.getText());
         String inputPassword = encrypt.MD5();
 
-        int lineOfLogin = 1;
-
-        if(lineOfLogin != -1)
-        {
-            FileConnection user = new FileConnection("econmaker.user", "src/settings");
-            System.out.println(user.readThisFile(1));
-        }
-        else
-        {
-            System.out.println("Nie znaleziono loginu");
-        }
+        UserData usr = new UserData();
+        usr.getLineOfLogin("ms");
     }
 
     /**
