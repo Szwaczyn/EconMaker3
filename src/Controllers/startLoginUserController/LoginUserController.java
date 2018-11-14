@@ -1,14 +1,15 @@
 package Controllers.startLoginUserController;
 
 import Controllers.MainController;
+import hoodStuff.Encrypting;
 import hoodStuff.FileConnection;
 import hoodStuff.LanguageEngine;
-import hoodStuff.StringOperation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
 
 /**
  * Created $(DATE)
@@ -88,9 +89,20 @@ public class LoginUserController
     @FXML
     public void procedureUserLogin()
     {
-        StringOperation s = new StringOperation();
+        Encrypting encrypt = new Encrypting(textPassword.getText());
+        String inputPassword = encrypt.MD5();
 
-        System.out.println(s.encryptString(textPassword.getText()));
+        int lineOfLogin = 1;
+
+        if(lineOfLogin != -1)
+        {
+            FileConnection user = new FileConnection("econmaker.user", "src/settings");
+            System.out.println(user.readThisFile(1));
+        }
+        else
+        {
+            System.out.println("Nie znaleziono loginu");
+        }
     }
 
     /**
@@ -116,24 +128,6 @@ public class LoginUserController
     private boolean compareEncryptedPassword(String userPassword, String inputPassword)
     {
         return userPassword.equals(inputPassword);
-    }
-
-    private int getNumberOfLine(String login)
-    {
-        FileConnection file = new FileConnection("econmaker.user","src/settings/");
-        int actualLine = 1;
-        int sizeOfFile = file.amountOfLineInThisFile();
-        int result = 0;
-
-        do {
-            if(login.equals(file.readThisFile(actualLine)))
-            {
-                result = actualLine;
-            }
-            actualLine += 4;
-        } while(actualLine < sizeOfFile);
-
-        return result;
     }
 
     private void setLanguage()

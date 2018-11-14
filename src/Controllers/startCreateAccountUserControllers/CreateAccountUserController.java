@@ -122,15 +122,8 @@ public class CreateAccountUserController
 
     private String encryptText(String password)
     {
-        try {
-            MessageDigest sha = MessageDigest.getInstance("SHA-1");
-            sha.update(password.getBytes());
-            byte[] msgDiest = sha.digest();
-            password = msgDiest.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
+        Encrypting encrypt = new Encrypting(password);
+        password = encrypt.MD5();
         return password;
     }
 
