@@ -110,7 +110,7 @@ public class CreateAccountUserController
         if(!isThereLocalLogin(textLogin.getText()))
         {
             saveToFileNewUser(textLogin.getText().trim(), encryptText(textPassword.getText().trim()), textQuestion.getText().trim(),
-                    encryptText(textAnswer.getText().trim()));
+                    encryptText(textAnswer.getText().trim().toLowerCase()));
         }
         else
         {

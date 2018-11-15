@@ -21,7 +21,12 @@ public class UserData
 
     public void setUser(String user)
     {
-        // TODO method set user
+        int line = getLineOfLogin(user);
+        if(line != -1)
+        {
+            this.positionLogin = line;
+            this.user = user;
+        }
     }
 
     /**
@@ -108,6 +113,23 @@ public class UserData
         if(checkTheCorrectness(loginPosition, size))
         {
             result = getLine(loginPosition + 3);
+        }
+        else
+        {
+            // TODO System error
+            System.out.println("Wystąpił nieoczekiwany błąd ");
+        }
+        return result;
+    }
+
+    public String getAnswer()
+    {
+        int size = amountOfLineInThisFile();
+        String result = "";
+
+        if(checkTheCorrectness(this.getLoginPosition(), size))
+        {
+            result = getLine(this.getLoginPosition() + 3);
         }
         else
         {

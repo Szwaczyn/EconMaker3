@@ -19,6 +19,8 @@ public class LoginUserController
 {
     private MainController mainControllerVar;
 
+    UserData user = new UserData();
+
     LanguageEngine translation = new LanguageEngine();
 
     @FXML
@@ -72,19 +74,38 @@ public class LoginUserController
     @FXML
     public void rescuePassword()
     {
-        UserData user = new UserData(textRescueLogin.getText());
+        user.setUser(textRescueLogin.getText());
         int loginPosition = user.getLineOfLogin();
         if(loginPosition != -1)
         {
             setQuestion(user);
             setVisibleRescueQuestion(true);
         }
+        else
+        {
+            // TODO System error. Wrong login
+        }
     }
 
     @FXML
     public void sendRescueAnswer()
     {
-        setVisibleNewPassword(true);
+        String inputAnswer = textRescueAnswer.getText().toLowerCase();
+
+        Encrypting encrypt = new Encrypting(inputAnswer);
+        inputAnswer = encrypt.MD5();
+
+         String correctAnswer = user.getAnswer();
+
+         if(inputAnswer.equals(correctAnswer))
+         {
+             setVisibleNewPassword(true);
+         }
+         else
+         {
+             // TODO System error
+             System.out.println("Zła odpowiedź");
+         }
     }
 
     @FXML
