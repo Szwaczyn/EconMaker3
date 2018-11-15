@@ -12,10 +12,40 @@ public class UserData
 {
     private String file = "econmaker.user";
     private String path = "src/settings";
+    private String user = "";
+    private int positionLogin;
+
+    /**
+     *  Set method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    public void setUser(String user)
+    {
+        // TODO method set user
+    }
 
     /**
      *  Public method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    public int getLineOfLogin()
+    {
+        int amountLine = amountOfLineInThisFile();
+        int counter = 1;
+        int result = -1;
+        this.user = this.user.trim();
+
+        do{
+            if(this.user.equals(getLine(counter)))
+            {
+                result = counter;
+                break;
+            }
+            counter += 4;
+        } while(counter <= amountLine);
+
+        return result;
+    }
 
     public int getLineOfLogin(String login)
     {
@@ -55,13 +85,44 @@ public class UserData
 
     public String getQuestion(int loginPosition)
     {
-        return "TODO";
+        int size = amountOfLineInThisFile();
+        String result = "";
+
+        if(checkTheCorrectness(loginPosition, size))
+        {
+            result = getLine(loginPosition + 2);
+        }
+        else
+        {
+            // TODO System error
+            System.out.println("Wystąpił nieoczekiwany błąd ");
+        }
+        return result;
     }
 
     public String getAnswer(int loginPosition)
     {
-        return "TODO";
+        int size = amountOfLineInThisFile();
+        String result = "";
+
+        if(checkTheCorrectness(loginPosition, size))
+        {
+            result = getLine(loginPosition + 3);
+        }
+        else
+        {
+            // TODO System error
+            System.out.println("Wystąpił nieoczekiwany błąd ");
+        }
+        return result;
     }
+
+    public int getLoginPosition()
+    {
+        return this.positionLogin;
+    }
+
+    public String getLogin() {return this.user; }
 
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -145,5 +206,15 @@ public class UserData
      *  Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-    public UserData(){}
+    public UserData()
+    {
+        this.user = "";
+        this.positionLogin = -1;
+    }
+
+    public UserData(String login)
+    {
+        this.user = login;
+        this.positionLogin = getLineOfLogin();
+    }
 }

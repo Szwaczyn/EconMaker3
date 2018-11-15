@@ -72,7 +72,13 @@ public class LoginUserController
     @FXML
     public void rescuePassword()
     {
-        setVisibleRescueQuestion(true);
+        UserData user = new UserData(textRescueLogin.getText());
+        int loginPosition = user.getLineOfLogin();
+        if(loginPosition != -1)
+        {
+            setQuestion(user);
+            setVisibleRescueQuestion(true);
+        }
     }
 
     @FXML
@@ -97,10 +103,12 @@ public class LoginUserController
 
         if(inputPassword.equals(accountPassword))
         {
+            // TODO redirect to user desktop
             System.out.println("Zalogowano");
         }
         else
         {
+            // TODO System error
             System.out.println("Nie udało się zalogować");
         }
 
@@ -200,6 +208,12 @@ public class LoginUserController
         textRepeatRescuePassword.setVisible(!visible);
         textRescuePassword.setVisible(!visible);
         buttonSetNewPassword.setVisible(!visible);
+    }
+
+    private void setQuestion(UserData user)
+    {
+        String question = user.getQuestion(user.getLoginPosition());
+        labelHelpQuestion.setText("Pytanie pomocnicze: " + question);
     }
 
     /**
