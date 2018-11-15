@@ -52,6 +52,8 @@ public class LoginUserController
     Button buttonRescueSendAnswer = new Button();
     @FXML
     Button buttonSetNewPassword = new Button();
+    @FXML
+    Button position_1 = new Button();
 
     @FXML
     TextField textLogin = new TextField();
@@ -176,6 +178,9 @@ public class LoginUserController
         buttonRescuePassword.setText(translation.setUpLanguage(34));
         buttonRescueSendAnswer.setText(translation.setUpLanguage(35));
         buttonSetNewPassword.setText(translation.setUpLanguage(36));
+        position_1.setText(translation.setUpLanguage(6));
+        labelAnswerQuestion.setText(translation.setUpLanguage(25));
+        labelSetRescuePassword.setText(translation.setUpLanguage(30));
     }
 
     private void setVisibleRescueQuestion(boolean visibleSection)
@@ -234,7 +239,7 @@ public class LoginUserController
     private void setQuestion(UserData user)
     {
         String question = user.getQuestion(user.getLoginPosition());
-        labelHelpQuestion.setText("Pytanie pomocnicze: " + question);
+        labelHelpQuestion.setText(translation.setUpLanguage(39) + ": " + question);
     }
 
     /**
