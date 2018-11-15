@@ -90,11 +90,20 @@ public class LoginUserController
     @FXML
     public void procedureUserLogin()
     {
+        UserData usr = new UserData();
         Encrypting encrypt = new Encrypting(textPassword.getText());
         String inputPassword = encrypt.MD5();
+        String accountPassword = usr.getPassword(usr.getLineOfLogin(textLogin.getText()));
 
-        UserData usr = new UserData();
-        usr.getLineOfLogin("ms");
+        if(inputPassword.equals(accountPassword))
+        {
+            System.out.println("Zalogowano");
+        }
+        else
+        {
+            System.out.println("Nie udało się zalogować");
+        }
+
     }
 
     /**

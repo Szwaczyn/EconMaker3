@@ -22,8 +22,7 @@ public class UserData
         int amountLine = amountOfLineInThisFile();
         int counter = 1;
         int result = -1;
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getThisFileInputStreamReader()));
+        login = login.trim();
 
         do{
             if(login.equals(getLine(counter)))
@@ -37,9 +36,48 @@ public class UserData
         return result;
     }
 
+    public String getPassword(int loginPosition)
+    {
+        int size = amountOfLineInThisFile();
+        String result = "";
+
+        if(checkTheCorrectness(loginPosition, size))
+        {
+            result = getLine(loginPosition + 1);
+        }
+        else
+        {
+            // TODO System error
+            System.out.println("Wystąpił nieoczekiwany błąd ");
+        }
+        return result;
+    }
+
+    public String getQuestion(int loginPosition)
+    {
+        return "TODO";
+    }
+
+    public String getAnswer(int loginPosition)
+    {
+        return "TODO";
+    }
+
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private boolean checkTheCorrectness(int loginPosition, int size)
+    {
+        boolean result = false;
+
+        if((1 < loginPosition) && (loginPosition < size))
+        {
+            result = true;
+        }
+
+        return result;
+    }
 
     private int amountOfLineInThisFile()
     {
@@ -100,7 +138,7 @@ public class UserData
             System.out.println(e + " Main Class: FileConnection: readFile: Try read Line");
         }
 
-        return result;
+        return result.trim();
     }
 
     /**
