@@ -111,6 +111,10 @@ public class CreateAccountUserController
         {
             saveToFileNewUser(textLogin.getText().trim(), encryptText(textPassword.getText().trim()), textQuestion.getText().trim(),
                     encryptText(textAnswer.getText().trim().toLowerCase()));
+
+            UserData user = new UserData(textLogin.getText());
+
+            createUserProfile(user);
         }
         else
         {
@@ -118,6 +122,11 @@ public class CreateAccountUserController
         }
 
         labelAlert.setVisible(true);
+    }
+
+    private void createUserProfile(UserData user)
+    {
+        user.createUserProfile();
     }
 
     private String encryptText(String password)

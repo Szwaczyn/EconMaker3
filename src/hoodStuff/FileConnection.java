@@ -33,6 +33,21 @@ public class FileConnection
      *  Other methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
+    public void createFile()
+    {
+        File file = new File(path + fileName);
+
+        if(!file.exists())
+        {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Nie mozna utworzyć pliku");
+            }
+        }
+    }
+
     public String read(int lineInSettings)
     {
         String line = "";

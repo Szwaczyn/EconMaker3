@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created $(DATE)
@@ -14,6 +16,40 @@ public class UserData
     private String path = "src/settings";
     private String user = "";
     private int positionLogin;
+
+
+    /**
+     *  Public method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    public void createUserProfile()
+    {
+        String userFileSettings = this.user + ".dll";
+        String path ="src/settings/profiles/" + this.user + "/";
+
+        createUserFolder(path);
+        createUserSettings(userFileSettings, path);
+    }
+
+    /**
+     *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private void createUserFolder(String path)
+    {
+        try {
+            Files.createDirectory(Paths.get(path));
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("Błąd tworzenia folderu");
+        }
+    }
+
+    private void createUserSettings(String userSettings, String path)
+    {
+        FileConnection file = new FileConnection(userSettings, path);
+        file.createFile();
+    }
 
     /**
      *  Set method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -30,7 +66,7 @@ public class UserData
     }
 
     /**
-     *  Public method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     *  Get method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
     public int getLineOfLogin()
