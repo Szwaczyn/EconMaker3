@@ -49,6 +49,8 @@ public class UserData
     {
         FileConnection file = new FileConnection(userSettings, path);
         file.createFile();
+        file.writeDownThisFile("0");
+        file.writeDownThisFile("0");
     }
 
     /**
