@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import java.security.*;
 
 /**
  * Created $(DATE)
@@ -59,7 +58,7 @@ public class CreateAccountUserController
         if (checkTheCorrectness(textLogin.getText(), textPassword.getText(), textQuestion.getText(), textAnswer.getText())) {
             //TODO Check settings file and next establish connection to sql or local file
 
-            switch (settings.read(3)) {
+            switch (settings.readSettings(3)) {
                 case "DATABASE=Local": {
                     procedureSendUserToLocalDatabase();
                 }

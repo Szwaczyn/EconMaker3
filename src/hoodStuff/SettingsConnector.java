@@ -19,7 +19,7 @@ public class SettingsConnector extends FileConnection
 
         for(int i = 0; i<= 9; i++)
         {
-            settingsContent[i] = this.read(i+1);
+            settingsContent[i] = this.readSettings(i+1);
         }
 
         settingsContent[position-1] = Value;
@@ -69,10 +69,11 @@ public class SettingsConnector extends FileConnection
          * -1 - Błąd
          *  0 - Polski
          *  1 - Angielski
+         *  2 - Niemiecki
          */
         int language = 0;
 
-        String lines = read(2);
+        String lines = readSettings(2);
 
         if(lines.equals("LANGUAGE=PolLanguagePack.txt"))
         {
@@ -81,6 +82,10 @@ public class SettingsConnector extends FileConnection
         else if(lines.equals("LANGUAGE=EngLanguagePack.txt"))
         {
             language = 1;
+        }
+        else if(lines.equals("LANGUAGE=DeuLanguagePack.txt"))
+        {
+            language = 2;
         }
         else
         {
@@ -105,6 +110,10 @@ public class SettingsConnector extends FileConnection
             else if(language == 1)
             {
                 fin = new FileInputStream("src/settings/languagePack/EngLanguagePack.lg");
+            }
+            else if(language == 2)
+            {
+                fin = new FileInputStream("src/settings/languagePack/DeuLanguagePack.lg");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

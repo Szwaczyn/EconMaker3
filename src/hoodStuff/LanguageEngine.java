@@ -25,13 +25,13 @@ public class LanguageEngine extends FileConnection
         /**
          * Wczytanie informacja z pliku settings.dll do buforu
          */
-        lineSettings[0] = settings.read(1);
-        lineSettings[1] = settings.read(2);
-        lineSettings[2] = settings.read(3);
-        lineSettings[3] = settings.read(4);
-        lineSettings[4] = settings.read(5);
-        lineSettings[5] = settings.read(6);
-        lineSettings[6] = settings.read(7);
+        lineSettings[0] = settings.readSettings(1);
+        lineSettings[1] = settings.readSettings(2);
+        lineSettings[2] = settings.readSettings(3);
+        lineSettings[3] = settings.readSettings(4);
+        lineSettings[4] = settings.readSettings(5);
+        lineSettings[5] = settings.readSettings(6);
+        lineSettings[6] = settings.readSettings(7);
 
         switch (selectedLanguage)
         {
@@ -42,6 +42,10 @@ public class LanguageEngine extends FileConnection
             case "English":{
                 lineSettings[1] = "LANGUAGE=EngLanguagePack.txt";
             }break;
+
+            case "Deutsch":{
+                lineSettings[1] = "LANGUAGE=DeuLanguagePack.txt";
+            }
         }
 
         /**

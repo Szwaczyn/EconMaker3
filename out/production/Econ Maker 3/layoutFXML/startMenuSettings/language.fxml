@@ -59,5 +59,15 @@
          </image>
       </ImageView>
       <Label layoutX="215.0" layoutY="701.0" prefHeight="28.0" prefWidth="671.0" />
+      <RadioButton fx:id="radioDeu" layoutX="370.0" layoutY="250.0" mnemonicParsing="false" onAction="#changeLanguage" prefHeight="34.0" prefWidth="168.0" text="Deutsch" toggleGroup="$languageGroup">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </RadioButton>
+      <ImageView fitHeight="34.0" fitWidth="62.0" layoutX="306.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/icons/nie.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

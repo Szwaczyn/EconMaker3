@@ -28,6 +28,8 @@ public class LanguageController
     RadioButton radioPol = new RadioButton();
     @FXML
     RadioButton radioEng = new RadioButton();
+    @FXML
+    RadioButton radioDeu = new RadioButton();
 
     /**
      *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -46,6 +48,9 @@ public class LanguageController
 
             case "radioEng":{
                 translation.changeLanguagePack("English");
+            }break;
+            case "radioDeu":{
+                translation.changeLanguagePack("Deutsch");
             }break;
         }
     }

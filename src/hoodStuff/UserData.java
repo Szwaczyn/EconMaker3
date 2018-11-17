@@ -256,7 +256,7 @@ public class UserData
             }
         } catch (Exception e) {
             //TODO Make System Error
-            System.out.println(e + " Main Class: FileConnection: readFile: Try read Line");
+            System.out.println(e + " Main Class: FileConnection: readFile: Try readSettings Line");
         }
 
         return result.trim();

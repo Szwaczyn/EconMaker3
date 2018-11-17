@@ -165,8 +165,8 @@ public class DatabaseController
     {
         sqldb =  new SqlConnection();
         setUpLanguage();
-        // Line read settings database
-        String databaseInSettings = set.read(3);
+        // Line readSettings settings database
+        String databaseInSettings = set.readSettings(3);
         isSettedLocal(databaseInSettings);
         /**
          * Wyłączenie możliwości edycji pól w niewybranym oknie
@@ -246,7 +246,7 @@ public class DatabaseController
                 sql.setSelected(true);
                 local.setSelected(false);
 
-                String addresServer = set.read(4);
+                String addresServer = set.readSettings(4);
                 serverAdress.setText(addresServer);
                 sqldb.setAddressSQL(addresServer);
             }break;

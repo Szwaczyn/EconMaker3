@@ -48,7 +48,7 @@ public class FileConnection
         }
     }
 
-    public String read(int lineInSettings)
+    public String readSettings(int lineInSettings)
     {
         String line = "";
         String[] lineSettings = new String[10];
@@ -108,7 +108,7 @@ public class FileConnection
             bufor = readLine(line, reader);
         } catch (Exception e) {
             //TODO Make error system
-            System.out.println("nie można wczytać modułu: Class FileConnection: Method read : " + e + this.fileName);
+            System.out.println("nie można wczytać modułu: Class FileConnection: Method readSettings : " + e + this.fileName);
         }
 
         return bufor;
@@ -187,7 +187,7 @@ public class FileConnection
             }
         } catch (Exception e) {
             //TODO Make System Error
-            System.out.println(e + " Main Class: FileConnection: readFile: Try read Line");
+            System.out.println(e + " Main Class: FileConnection: readFile: Try readSettings Line");
         }
 
         try {
