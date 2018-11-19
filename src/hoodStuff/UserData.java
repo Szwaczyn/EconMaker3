@@ -1,11 +1,9 @@
 package hoodStuff;
 
+import builder.EncryptBuilder;
 import builder.UserDataBuilder;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -33,9 +31,77 @@ public class UserData
         createUserSettings(userFileSettings, path);
     }
 
+    public void rewritePassword(String newPassword)
+    {
+        int sizeOfTab = amountOfLineInThisFile();
+        String[] bufor = new String[sizeOfTab];
+
+        bufor = fillTab(bufor, sizeOfTab);
+
+        newPassword = encryptNewPassword(newPassword);
+
+        inputToBuforNewPassword(bufor, this.positionLogin, newPassword);
+
+        saveBuforToFile(bufor);
+    }
+
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private void saveBuforToFile(String[] bufor)
+    {
+        FileWriter fw = null;
+
+        try {
+            fw = new FileWriter("src/settings/econmaker.user");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedWriter bw = new BufferedWriter(fw);
+        try {
+            for (int i = 0; i < bufor.length; i++) {
+                bw.write(bufor[i]);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String[] inputToBuforNewPassword(String[] bufor, int line, String newPassword)
+    {
+        bufor[line] = newPassword;
+
+        return bufor;
+    }
+
+    private String encryptNewPassword(String newPassword)
+    {
+        Encrypting encrypt = new EncryptBuilder()
+                .addContent(newPassword)
+                .build();
+
+        return encrypt.MD5();
+    }
+
+    private String[] fillTab(String[] bufor, int sizeOfTab)
+    {
+        for(int i = 0; i < sizeOfTab; i++)
+        {
+            bufor[i] = getLine(i + 1);
+        }
+
+        return bufor;
+    }
 
     private void createUserFolder(String path)
     {
@@ -267,18 +333,6 @@ public class UserData
     /**
      *  Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
-
-//    public UserData()
-//    {
-//        this.user = "";
-//        this.positionLogin = -1;
-//    }
-
-//    public UserData(String login)
-//    {
-//        this.user = login;
-//        this.positionLogin = getLineOfLogin();
-//    }
 
     public UserData(UserDataBuilder userDataBuilder)
     {

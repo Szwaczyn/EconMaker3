@@ -81,7 +81,7 @@
             </Button>
          </children>
       </VBox>
-      <Label fx:id="labelAlert" layoutX="521.0" layoutY="694.0" prefHeight="36.0" prefWidth="497.0" text="Label" visible="false">
+      <Label fx:id="labelAlert" layoutX="246.0" layoutY="694.0" prefHeight="36.0" prefWidth="916.0" text="Label" visible="false">
          <font>
             <Font size="25.0" />
          </font>

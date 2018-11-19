@@ -1,17 +1,19 @@
 package Controllers.startLoginUserController;
 
 import Controllers.MainController;
+import Controllers.userDesktop.userDesktopController;
 import builder.EncryptBuilder;
 import builder.UserDataBuilder;
 import hoodStuff.Encrypting;
-import hoodStuff.FileConnection;
 import hoodStuff.LanguageEngine;
 import hoodStuff.UserData;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 
 /**
@@ -78,22 +80,23 @@ public class LoginUserController
     @FXML
     public void rescuePassword()
     {
-
         user = new UserDataBuilder()
                 .addUser(textRescueLogin.getText())
                 .build();
 
-        //user.setUser(textRescueLogin.getText());
-
         int loginPosition = user.getLineOfLogin();
+
         if(loginPosition != -1)
         {
+            setDisableLogin(true);
+
             setQuestion(user);
             setVisibleRescueQuestion(true);
         }
         else
         {
-            // TODO System error. Wrong login
+            labelAlert.setVisible(true);
+            labelAlert.setText(translation.setUpLanguage(47));
         }
     }
 
@@ -124,7 +127,18 @@ public class LoginUserController
     @FXML
     public void setNewPassword()
     {
-        System.out.println("ok");
+        if(textRescuePassword.getText().equals(textRepeatRescuePassword.getText()))
+        {
+            user.rewritePassword(textRepeatRescuePassword.getText());
+            labelAlert.setText(translation.setUpLanguage(48));
+
+            revertStage();
+        }
+        else
+        {
+            labelAlert.setVisible(true);
+            labelAlert.setText(translation.setUpLanguage(49));
+        }
     }
 
     @FXML
@@ -143,13 +157,12 @@ public class LoginUserController
 
         if(inputPassword.equals(accountPassword))
         {
-            // TODO redirect to user desktop
-            System.out.println("Zalogowano");
+            goToDesktopUser(user);
         }
         else
         {
-            // TODO System error
-            System.out.println("Nie udało się zalogować");
+            labelAlert.setText(translation.setUpLanguage(45));
+            labelAlert.setVisible(true);
         }
 
     }
@@ -167,6 +180,40 @@ public class LoginUserController
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private void revertStage()
+    {
+        setVisibleNewPassword(false);
+        setVisibleRescueQuestion(false);
+        setDisableLogin(false);
+
+        textRescueLogin.setText("");
+        textRescueAnswer.setText("");
+        textRescuePassword.setText("");
+        textRepeatRescuePassword.setText("");
+
+        textLogin.setText("");
+        textPassword.setText("");
+
+        labelAlert.setVisible(true);
+        labelAlert.setText(translation.setUpLanguage(50) + " " + user.getLogin());
+    }
+
+    private void goToDesktopUser(UserData user)
+    {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/layoutFXML/userDesktop/userDesktop.fxml"));
+        try {
+            Pane pane = loader.load();
+            userDesktopController target = loader.getController();
+            target.setUser(user);
+            mainControllerVar.clearScreen();
+            target.setMainController(mainControllerVar);
+            mainControllerVar.setScreen(pane);
+        } catch (Exception e) {
+            // TODO System service error
+            System.out.println("Nie można załadadować okna database.fxml");
+        }
+    }
 
     private void setLanguage()
     {
@@ -240,6 +287,13 @@ public class LoginUserController
         textRepeatRescuePassword.setVisible(!visible);
         textRescuePassword.setVisible(!visible);
         buttonSetNewPassword.setVisible(!visible);
+    }
+
+    private void setDisableLogin(boolean setDisable)
+    {
+        textLogin.setDisable(setDisable);
+        textPassword.setDisable(setDisable);
+        buttonLogin.setDisable(setDisable);
     }
 
     private void setQuestion(UserData user)
