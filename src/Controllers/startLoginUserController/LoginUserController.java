@@ -2,6 +2,7 @@ package Controllers.startLoginUserController;
 
 import Controllers.MainController;
 import builder.EncryptBuilder;
+import builder.UserDataBuilder;
 import hoodStuff.Encrypting;
 import hoodStuff.FileConnection;
 import hoodStuff.LanguageEngine;
@@ -20,7 +21,7 @@ public class LoginUserController
 {
     private MainController mainControllerVar;
 
-    UserData user = new UserData();
+    UserData user;
 
     LanguageEngine translation = new LanguageEngine();
 
@@ -77,7 +78,13 @@ public class LoginUserController
     @FXML
     public void rescuePassword()
     {
-        user.setUser(textRescueLogin.getText());
+
+        user = new UserDataBuilder()
+                .addUser(textRescueLogin.getText())
+                .build();
+
+        //user.setUser(textRescueLogin.getText());
+
         int loginPosition = user.getLineOfLogin();
         if(loginPosition != -1)
         {
@@ -123,12 +130,16 @@ public class LoginUserController
     @FXML
     public void procedureUserLogin()
     {
-        UserData usr = new UserData();
+        user = new UserDataBuilder()
+                .addUser(textLogin.getText())
+                .build();
+
         Encrypting encrypt = new EncryptBuilder()
                 .addContent(textPassword.getText())
                 .build();
+
         String inputPassword = encrypt.MD5();
-        String accountPassword = usr.getPassword(usr.getLineOfLogin(textLogin.getText()));
+        String accountPassword = user.getPassword(user.getLoginPosition());
 
         if(inputPassword.equals(accountPassword))
         {
@@ -156,17 +167,6 @@ public class LoginUserController
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
-
-    private String getUserPassword(int numberOfLine)
-    {
-        FileConnection file = new FileConnection("econmaker.user", "src/settings");
-        return file.readThisFile(numberOfLine + 1);
-    }
-
-    private boolean compareEncryptedPassword(String userPassword, String inputPassword)
-    {
-        return userPassword.equals(inputPassword);
-    }
 
     private void setLanguage()
     {

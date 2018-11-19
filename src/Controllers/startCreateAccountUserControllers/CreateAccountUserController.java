@@ -2,6 +2,7 @@ package Controllers.startCreateAccountUserControllers;
 
 import Controllers.MainController;
 import builder.EncryptBuilder;
+import builder.UserDataBuilder;
 import hoodStuff.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -112,7 +113,9 @@ public class CreateAccountUserController
             saveToFileNewUser(textLogin.getText().trim(), encryptText(textPassword.getText().trim()), textQuestion.getText().trim(),
                     encryptText(textAnswer.getText().trim().toLowerCase()));
 
-            UserData user = new UserData(textLogin.getText());
+            UserData user = new UserDataBuilder()
+                    .addUser(textLogin.getText())
+                    .build();
 
             createUserProfile(user);
         }

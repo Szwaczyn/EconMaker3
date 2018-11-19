@@ -1,5 +1,7 @@
 package hoodStuff;
 
+import builder.UserDataBuilder;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -266,15 +268,23 @@ public class UserData
      *  Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-    public UserData()
-    {
-        this.user = "";
-        this.positionLogin = -1;
-    }
+//    public UserData()
+//    {
+//        this.user = "";
+//        this.positionLogin = -1;
+//    }
 
-    public UserData(String login)
+//    public UserData(String login)
+//    {
+//        this.user = login;
+//        this.positionLogin = getLineOfLogin();
+//    }
+
+    public UserData(UserDataBuilder userDataBuilder)
     {
-        this.user = login;
-        this.positionLogin = getLineOfLogin();
+        this.file = userDataBuilder.getFile();
+        this.path = userDataBuilder.getPath();
+        this.user = userDataBuilder.getUser();
+        this.positionLogin = userDataBuilder.getPositionLogin();
     }
 }
