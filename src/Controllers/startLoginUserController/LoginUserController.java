@@ -1,6 +1,7 @@
 package Controllers.startLoginUserController;
 
 import Controllers.MainController;
+import builder.EncryptBuilder;
 import hoodStuff.Encrypting;
 import hoodStuff.FileConnection;
 import hoodStuff.LanguageEngine;
@@ -94,7 +95,10 @@ public class LoginUserController
     {
         String inputAnswer = textRescueAnswer.getText().toLowerCase();
 
-        Encrypting encrypt = new Encrypting(inputAnswer);
+        Encrypting encrypt = new EncryptBuilder()
+                .addContent(inputAnswer)
+                .build();
+
         inputAnswer = encrypt.MD5();
 
          String correctAnswer = user.getAnswer();
@@ -120,7 +124,9 @@ public class LoginUserController
     public void procedureUserLogin()
     {
         UserData usr = new UserData();
-        Encrypting encrypt = new Encrypting(textPassword.getText());
+        Encrypting encrypt = new EncryptBuilder()
+                .addContent(textPassword.getText())
+                .build();
         String inputPassword = encrypt.MD5();
         String accountPassword = usr.getPassword(usr.getLineOfLogin(textLogin.getText()));
 

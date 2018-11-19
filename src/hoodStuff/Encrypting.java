@@ -1,5 +1,7 @@
 package hoodStuff;
 
+import builder.EncryptBuilder;
+
 import java.math.BigInteger;
 import java.security.*;
 
@@ -50,10 +52,13 @@ public class Encrypting
      *  Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-    public Encrypting() {}
-
-    public Encrypting(String string)
+    public Encrypting(EncryptBuilder build)
     {
-        this.content = string;
+        this.content = build.getContent();
     }
+
+//    public Encrypting(String string)
+//    {
+//        this.content = string;
+//    }
 }

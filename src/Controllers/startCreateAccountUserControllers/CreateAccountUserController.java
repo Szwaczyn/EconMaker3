@@ -1,6 +1,7 @@
 package Controllers.startCreateAccountUserControllers;
 
 import Controllers.MainController;
+import builder.EncryptBuilder;
 import hoodStuff.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -130,7 +131,10 @@ public class CreateAccountUserController
 
     private String encryptText(String password)
     {
-        Encrypting encrypt = new Encrypting(password);
+        Encrypting encrypt = new EncryptBuilder()
+                .addContent(password)
+                .build();
+
         password = encrypt.MD5();
         return password;
     }
