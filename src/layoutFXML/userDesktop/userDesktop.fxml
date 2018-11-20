@@ -26,32 +26,32 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="buttonIncome" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Przychody">
+            <Button fx:id="buttonIncome" mnemonicParsing="false" onAction="#actionIncome" prefHeight="50.0" prefWidth="200.0" text="Przychody">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="buttonExpenditiures" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Wydatki">
+            <Button fx:id="buttonExpenditiures" mnemonicParsing="false" onAction="#actionExpenditiures" prefHeight="50.0" prefWidth="200.0" text="Wydatki">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="buttonBoudget" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Budżet">
+            <Button fx:id="buttonBoudget" mnemonicParsing="false" onAction="#actionBoudget" prefHeight="50.0" prefWidth="200.0" text="Budżet">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="buttonStatistics" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Statystyka">
+            <Button fx:id="buttonStatistics" mnemonicParsing="false" onAction="#actionStatistics" prefHeight="50.0" prefWidth="200.0" text="Statystyka">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="buttonSettings" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Ustawienia">
+            <Button fx:id="buttonSettings" mnemonicParsing="false" onAction="#actionSettings" prefHeight="50.0" prefWidth="200.0" text="Ustawienia">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="buttonLogOut" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Wyloguj">
+            <Button fx:id="buttonLogOut" mnemonicParsing="false" onAction="#actionLogOut" prefHeight="50.0" prefWidth="200.0" text="Wyloguj">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
