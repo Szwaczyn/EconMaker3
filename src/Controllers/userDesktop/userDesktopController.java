@@ -164,13 +164,7 @@ public class userDesktopController extends ClassController
     /**
      *  Windows System - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
-
-    @FXML
-    public void returnToStartMenu()
-    {
-        mainControllerVar.inicializujMenu();
-    }
-
+    
     public void setMainController(MainController msc)
     {
         this.mainControllerVar = msc;

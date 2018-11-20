@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0"
-      xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.userDesktop.userSettingsController">
+<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.userDesktop.userSettingsController">
    <children>
       <ImageView fx:id="button_1" fitHeight="80.0" fitWidth="1241.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,6 +22,16 @@
       <VBox layoutY="80.0" prefHeight="443.0" prefWidth="200.0">
          <children>
             <Button fx:id="buttonReview" mnemonicParsing="false" onAction="#actionReturn" prefHeight="50.0" prefWidth="200.0" text="Powrót">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="bankAccount" mnemonicParsing="false" onAction="#actionBankAccount" prefHeight="50.0" prefWidth="200.0" text="Konta bankowe">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="userAccount" mnemonicParsing="false" onAction="#actionUserAccount" prefHeight="50.0" prefWidth="200.0" text="Konto użytkownika">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

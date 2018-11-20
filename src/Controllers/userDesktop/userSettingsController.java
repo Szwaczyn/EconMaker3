@@ -23,4 +23,32 @@ public class userSettingsController extends ClassController
 
         window.changeWindow();
     }
+
+    @FXML
+    public void actionBankAccount()
+    {
+        userDesktopController target = new userDesktopController();
+
+        ChangeWindow window = new ChangeWindowBuilder()
+                .addPath("/layoutFXML/userDesktop/userSettings/userSettingsBankAccount.fxml")
+                .addMainController(getController())
+                .addClassController(target)
+                .build();
+
+        window.changeWindow();
+    }
+
+    @FXML
+    public void actionUserAccount()
+    {
+        userDesktopController target = new userDesktopController();
+
+        ChangeWindow window = new ChangeWindowBuilder()
+                .addPath("/layoutFXML/userDesktop/userSettings/userSettingsUserAccount.fxml")
+                .addMainController(getController())
+                .addClassController(target)
+                .build();
+
+        window.changeWindow();
+    }
 }
