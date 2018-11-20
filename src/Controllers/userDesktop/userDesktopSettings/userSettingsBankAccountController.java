@@ -5,6 +5,7 @@ import Controllers.userDesktop.userReviewController;
 import builder.ChangeWindowBuilder;
 import hoodStuff.ChangeWindow;
 import hoodStuff.LanguageEngine;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,11 +38,53 @@ public class userSettingsBankAccountController extends ClassController
         win.changeWindow();
     }
 
+    @FXML
+    public void actionSetTab(ActionEvent key)
+    {
+        RadioButton source = (RadioButton) key.getSource();
+
+        switch(source.getId())
+        {
+            case "radioCreateAccount":{
+                setCreateAccountSelected(true);
+            }break;
+
+            case "radioDeleteAccount":{
+                setCreateAccountSelected(false);
+            }
+        }
+    }
+
+    @FXML
+    public void actionClearTextField() { clearTextField(); }
+
+    @FXML
+    public void actionCreateAccount()
+    {
+        if(procedureCreateAccount(textNameOfNewAccount.getText(), textConditionOfNewAccount.getText()))
+        {
+            labelAlert.setText(translation.setUpLanguage(60));
+            labelAlert.setVisible(true);
+        }
+        else
+        {
+            labelAlert.setText(translation.setUpLanguage(61));
+            labelAlert.setVisible(true);
+        }
+    }
+
     /**
      *  private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-
+    private boolean procedureCreateAccount(String nameOfNewAccount, String conditionOfAccount)
+    {
+        // TODO wczytanie pliku
+        // TODO Sprawdzenie czy nie istnieje już konto o podanej nazwie
+        // TODO Wprowadzenie danych do pliku konfiguracyjnego
+        // TODO Utworzenie pliku historii konta
+        return false;
+    }
 
     /**
      *  initialize - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -50,6 +93,7 @@ public class userSettingsBankAccountController extends ClassController
     public void initialize()
     {
         setUpLanguage();
+        setCreateAccountSelected(radioCreateAccount.isSelected());
     }
 
     private void setUpLanguage()
@@ -69,6 +113,31 @@ public class userSettingsBankAccountController extends ClassController
         buttonClearDeleteAccount.setText(translation.setUpLanguage(27));
 
         buttonReturn.setText(translation.setUpLanguage(6));
+    }
+
+    private void setCreateAccountSelected(boolean var)
+    {
+        textNameOfDeleteAccount.setDisable(var);
+        textPasswordDeleteAccount.setDisable(var);
+
+        buttonDeleteAccount.setDisable(var);
+        buttonClearDeleteAccount.setDisable(var);
+
+        textNameOfNewAccount.setDisable(!var);
+        textConditionOfNewAccount.setDisable(!var);
+
+        buttonClearNewAccount.setDisable(!var);
+        buttonCreateAccount.setDisable(!var);
+
+        clearTextField();
+    }
+
+    private void clearTextField()
+    {
+        textConditionOfNewAccount.setText("");
+        textNameOfNewAccount.setText("");
+        textPasswordDeleteAccount.setText("");
+        textNameOfDeleteAccount.setText("");
     }
 
     /**

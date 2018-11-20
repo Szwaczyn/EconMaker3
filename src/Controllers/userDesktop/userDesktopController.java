@@ -44,6 +44,7 @@ public class userDesktopController extends ClassController
     public void review()
     {
         userReviewController target = new userReviewController();
+        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userReview.fxml")
@@ -58,6 +59,7 @@ public class userDesktopController extends ClassController
     public void actionIncome()
     {
         userReviewController target = new userReviewController();
+        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userIncome.fxml")
@@ -72,6 +74,7 @@ public class userDesktopController extends ClassController
     public void actionExpenditiures()
     {
         userReviewController target = new userReviewController();
+        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userExpenditiures.fxml")
@@ -86,6 +89,7 @@ public class userDesktopController extends ClassController
     public void actionBoudget()
     {
         userReviewController target = new userReviewController();
+        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userBoudget.fxml")
@@ -100,6 +104,7 @@ public class userDesktopController extends ClassController
     public void actionStatistics()
     {
         userReviewController target = new userReviewController();
+        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userStatistics.fxml")
@@ -114,6 +119,7 @@ public class userDesktopController extends ClassController
     public void actionSettings()
     {
         userReviewController target = new userReviewController();
+        target.setUser(user);
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userSettings.fxml")
@@ -164,7 +170,7 @@ public class userDesktopController extends ClassController
     /**
      *  Windows System - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
-    
+
     public void setMainController(MainController msc)
     {
         this.mainControllerVar = msc;

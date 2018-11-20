@@ -1,10 +1,28 @@
 package Controllers;
 
+import hoodStuff.UserData;
+
 /**
  * Created $(DATE)
  */
 public class ClassController
 {
+    private UserData user;
+
+    /**
+     * User - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    public UserData getUser()
+    {
+        return this.user;
+    }
+
+    public void setUser(UserData user)
+    {
+        this.user = user;
+    }
+
     /**
      * Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -20,4 +38,5 @@ public class ClassController
     {
         return mainControllerVar;
     }
+
 }

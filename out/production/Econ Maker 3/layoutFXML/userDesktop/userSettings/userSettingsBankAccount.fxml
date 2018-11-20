@@ -30,7 +30,7 @@
       </ImageView>
       <VBox layoutY="80.0" prefHeight="443.0" prefWidth="200.0">
          <children>
-            <Button fx:id="buttonReview" mnemonicParsing="false" onAction="#actionReturn" prefHeight="50.0" prefWidth="200.0" text="Powrót">
+            <Button fx:id="buttonReturn" mnemonicParsing="false" onAction="#actionReturn" prefHeight="50.0" prefWidth="200.0" text="Powrót">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -45,10 +45,13 @@
                      <children>
                         <VBox prefHeight="577.0" prefWidth="500.0" spacing="20.0">
                            <children>
-                              <RadioButton fx:id="radioCreateAccount" mnemonicParsing="false" text="Tworzenie konta bankowego">
+                              <RadioButton fx:id="radioCreateAccount" mnemonicParsing="false" onAction="#actionSetTab" selected="true" text="Tworzenie konta bankowego">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="createAccount" />
                                  </toggleGroup>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </RadioButton>
                               <Label fx:id="labelNameOfNewAccount" text="Nazwa nowego konta: ">
                                  <font>
@@ -64,9 +67,15 @@
                               <TextField fx:id="textConditionOfNewAccount" />
                               <HBox prefHeight="50.0" prefWidth="440.0">
                                  <children>
-                                    <Button fx:id="buttonCreateAccount" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Utwórz" />
+                                    <Button fx:id="buttonCreateAccount" mnemonicParsing="false" onAction="#actionCreateAccount" prefHeight="50.0" prefWidth="200.0" text="Utwórz">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
                                     <Pane prefHeight="50.0" prefWidth="40.0" />
-                                    <Button fx:id="buttonClearNewAccount" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Wyczyść" />
+                                    <Button fx:id="buttonClearNewAccount" mnemonicParsing="false" onAction="#actionClearTextField" prefHeight="50.0" prefWidth="200.0" text="Wyczyść">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -82,7 +91,10 @@
                               <Insets left="30.0" right="30.0" top="50.0" />
                            </padding>
                            <children>
-                              <RadioButton fx:id="radioDeleteAccount" mnemonicParsing="false" text="Usuwanie konta bankowego" toggleGroup="$createAccount" />
+                              <RadioButton fx:id="radioDeleteAccount" mnemonicParsing="false" onAction="#actionSetTab" text="Usuwanie konta bankowego" toggleGroup="$createAccount">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
                               <Label fx:id="labelNameOfDeleteAccount" text="Nazwa usuwanego konta: ">
                                  <font>
                                     <Font size="14.0" />
@@ -97,9 +109,15 @@
                               <TextField fx:id="textPasswordDeleteAccount" />
                               <HBox prefHeight="50.0" prefWidth="440.0">
                                  <children>
-                                    <Button fx:id="buttonDeleteAccount" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Usuń" />
+                                    <Button fx:id="buttonDeleteAccount" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Usuń">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
                                     <Pane prefHeight="50.0" prefWidth="40.0" />
-                                    <Button fx:id="buttonClearDeleteAccount" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Wyczyść" />
+                                    <Button fx:id="buttonClearDeleteAccount" mnemonicParsing="false" onAction="#actionClearTextField" prefHeight="50.0" prefWidth="200.0" text="Wyczyść">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor></Button>
                                  </children>
                                  <opaqueInsets>
                                     <Insets />

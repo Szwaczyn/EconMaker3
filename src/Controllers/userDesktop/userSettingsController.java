@@ -10,10 +10,12 @@ import javafx.fxml.FXML;
  */
 public class userSettingsController extends ClassController
 {
+
     @FXML
     public void actionReturn()
     {
         userDesktopController target = new userDesktopController();
+        target.setUser(this.getUser());
 
         ChangeWindow window = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userDesktop.fxml")
@@ -28,6 +30,7 @@ public class userSettingsController extends ClassController
     public void actionBankAccount()
     {
         userDesktopController target = new userDesktopController();
+        target.setUser(this.getUser());
 
         ChangeWindow window = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userSettings/userSettingsBankAccount.fxml")
@@ -42,6 +45,7 @@ public class userSettingsController extends ClassController
     public void actionUserAccount()
     {
         userDesktopController target = new userDesktopController();
+        target.setUser(this.getUser());
 
         ChangeWindow window = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userSettings/userSettingsUserAccount.fxml")
