@@ -58,7 +58,7 @@ public class userDesktopController extends ClassController
     @FXML
     public void actionIncome()
     {
-        userReviewController target = new userReviewController();
+        userIncomeController target = new userIncomeController();
         target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
@@ -73,7 +73,7 @@ public class userDesktopController extends ClassController
     @FXML
     public void actionExpenditiures()
     {
-        userReviewController target = new userReviewController();
+        userExpenditiuresController target = new userExpenditiuresController();
         target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
@@ -88,7 +88,7 @@ public class userDesktopController extends ClassController
     @FXML
     public void actionBoudget()
     {
-        userReviewController target = new userReviewController();
+        userBoudgetController target = new userBoudgetController();
         target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
@@ -103,7 +103,7 @@ public class userDesktopController extends ClassController
     @FXML
     public void actionStatistics()
     {
-        userReviewController target = new userReviewController();
+        userStatisticsController target = new userStatisticsController();
         target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
@@ -118,13 +118,13 @@ public class userDesktopController extends ClassController
     @FXML
     public void actionSettings()
     {
-        userReviewController target = new userReviewController();
-        target.setUser(user);
+        userSettingsController target = new userSettingsController();
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userSettings.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
+                .addLogin(user.getLogin())
                 .build();
 
         win.changeWindow();

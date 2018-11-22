@@ -8,10 +8,18 @@ import hoodStuff.UserData;
 public class ClassController
 {
     private UserData user;
+    private String tempLogin;
 
     /**
      * User - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    public void setTempLogin(String tempLogin)
+    {
+        this.tempLogin = tempLogin;
+    }
+
+    public String getTempLogin() {return this.tempLogin; }
 
     public UserData getUser()
     {
@@ -27,7 +35,7 @@ public class ClassController
      * Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-    private MainController mainControllerVar;
+    public MainController mainControllerVar;
 
     public void setMainController(MainController msc)
     {

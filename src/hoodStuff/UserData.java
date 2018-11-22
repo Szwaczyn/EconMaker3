@@ -250,7 +250,7 @@ public class UserData
         return this.positionLogin;
     }
 
-    public String getLogin() {return this.user; }
+    public String getLogin() { return this.user; }
 
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

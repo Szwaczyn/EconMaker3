@@ -3,15 +3,14 @@ package Controllers.userDesktop.userDesktopSettings;
 import Controllers.ClassController;
 import Controllers.userDesktop.userReviewController;
 import builder.ChangeWindowBuilder;
-import hoodStuff.ChangeWindow;
-import hoodStuff.LanguageEngine;
+import builder.UserFileBuilder;
+import hoodStuff.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.text.TextBoundsType;
 
 /**
  * Created $(DATE)
@@ -79,11 +78,28 @@ public class userSettingsBankAccountController extends ClassController
 
     private boolean procedureCreateAccount(String nameOfNewAccount, String conditionOfAccount)
     {
-        // TODO wczytanie pliku
-        // TODO Sprawdzenie czy nie istnieje już konto o podanej nazwie
-        // TODO Wprowadzenie danych do pliku konfiguracyjnego
+        boolean isCreated = false;
+
+        String login = getTempLogin().trim();
+
+        UserFile write = new UserFileBuilder()
+                .addFileName(login + ".dll")
+                .addPath("src/settings/profiles/" + login + "/")
+                .build();
+
+        if(!checkExisitng(write, nameOfNewAccount) && checkCorrectenss(conditionOfAccount))
+        {
+            write.writeDown(nameOfNewAccount);
+            write.writeDown(conditionOfAccount);
+
+            write.setFileName("BASE" + nameOfNewAccount + ".base");
+            write.createFile();
+
+            isCreated = true;
+        }
+
         // TODO Utworzenie pliku historii konta
-        return false;
+        return isCreated;
     }
 
     /**
@@ -138,6 +154,46 @@ public class userSettingsBankAccountController extends ClassController
         textNameOfNewAccount.setText("");
         textPasswordDeleteAccount.setText("");
         textNameOfDeleteAccount.setText("");
+
+        labelAlert.setVisible(false);
+    }
+
+    /**
+     *  private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private boolean checkCorrectenss(String conditionOfNewAccount)
+    {
+        boolean correct = true;
+        try {
+            int test = Integer.parseInt(conditionOfNewAccount);
+        } catch(Exception e) {
+            correct = false;
+        }
+
+        return correct;
+    }
+
+    private boolean checkExisitng(UserFile fileUser, String nameOfNewAccount)
+    {
+        int size = fileUser.size();
+        boolean isExist = false;
+
+        for(int i = size; i >= 1; i--)
+        {
+            if(fileUser.readLine(size).equals(nameOfNewAccount.trim()))
+            {
+                isExist = true;
+                break;
+            }
+        }
+
+        return isExist;
+    }
+
+    private void inputToUserFile(UserFile file, String nameOfNewAccount, int Condition)
+    {
+
     }
 
     /**

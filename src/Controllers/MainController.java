@@ -7,6 +7,8 @@ import javafx.scene.layout.StackPane;
 
 public class MainController
 {
+    public String user;
+
     @FXML
     private StackPane mainStackPane;
 

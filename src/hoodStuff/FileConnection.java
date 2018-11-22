@@ -1,5 +1,7 @@
 package hoodStuff;
 
+import builder.FileConnectionBuilder;
+
 import java.io.*;
 import java.nio.Buffer;
 
@@ -96,7 +98,6 @@ public class FileConnection
         }
     }
 
-    //Have to be set the file name of this object
     public String readThisFile(int line)
     {
         line--;
@@ -130,6 +131,11 @@ public class FileConnection
         }
 
         return counter;
+    }
+
+    public String show()
+    {
+        return this.path + "    " + this.fileName;
     }
 
     /**
@@ -239,5 +245,11 @@ public class FileConnection
     {
         this.fileName = fileName;
         this.path = path;
+    }
+
+    public FileConnection(FileConnectionBuilder build)
+    {
+        this.fileName = build.getFileName();
+        this.path = build.getPath();
     }
 }
