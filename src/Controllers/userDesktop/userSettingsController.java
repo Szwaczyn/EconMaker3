@@ -4,7 +4,9 @@ import Controllers.ClassController;
 import Controllers.userDesktop.userDesktopSettings.userSettingsBankAccountController;
 import Controllers.userDesktop.userDesktopSettings.userSettingsUserAccountController;
 import builder.ChangeWindowBuilder;
+import builder.UserDataBuilder;
 import hoodStuff.ChangeWindow;
+import hoodStuff.UserData;
 import javafx.fxml.FXML;
 
 /**
@@ -17,13 +19,11 @@ public class userSettingsController extends ClassController
     public void actionReturn()
     {
         userSettingsController target = new userSettingsController();
-        target.setUser(this.getUser());
 
         ChangeWindow window = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userDesktop.fxml")
                 .addMainController(getController())
                 .addClassController(target)
-                .addLogin(getTempLogin())
                 .build();
 
         window.changeWindow();
@@ -33,13 +33,11 @@ public class userSettingsController extends ClassController
     public void actionBankAccount()
     {
         userSettingsBankAccountController target = new userSettingsBankAccountController();
-        target.setUser(this.getUser());
 
         ChangeWindow window = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userSettings/userSettingsBankAccount.fxml")
                 .addMainController(getController())
                 .addClassController(target)
-                .addLogin(getTempLogin())
                 .build();
 
         window.changeWindow();
@@ -50,13 +48,11 @@ public class userSettingsController extends ClassController
     public void actionUserAccount()
     {
         userSettingsUserAccountController target = new userSettingsUserAccountController();
-        target.setUser(this.getUser());
 
         ChangeWindow window = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userSettings/userSettingsUserAccount.fxml")
                 .addMainController(getController())
                 .addClassController(target)
-                .addLogin(getTempLogin())
                 .build();
 
         window.changeWindow();
@@ -64,6 +60,11 @@ public class userSettingsController extends ClassController
 
     public void initialize()
     {
+        try {
+            System.out.println(usr.getLogin());
+        } catch (Exception e){
+            System.out.println(e);
+        }
 
     }
 }

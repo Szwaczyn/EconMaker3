@@ -3,6 +3,7 @@ package Controllers.userDesktop.userDesktopSettings;
 import Controllers.ClassController;
 import Controllers.userDesktop.userReviewController;
 import builder.ChangeWindowBuilder;
+import builder.UserDataBuilder;
 import builder.UserFileBuilder;
 import hoodStuff.*;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
  */
 public class userSettingsBankAccountController extends ClassController
 {
+    UserData user;
     LanguageEngine translation = new LanguageEngine();
 
     /**
@@ -60,7 +62,7 @@ public class userSettingsBankAccountController extends ClassController
     @FXML
     public void actionCreateAccount()
     {
-        if(procedureCreateAccount(textNameOfNewAccount.getText(), textConditionOfNewAccount.getText()))
+        if(procedureCreateAccount(textNameOfNewAccount.getText().toLowerCase().trim(), textConditionOfNewAccount.getText()))
         {
             labelAlert.setText(translation.setUpLanguage(60));
             labelAlert.setVisible(true);
@@ -80,7 +82,7 @@ public class userSettingsBankAccountController extends ClassController
     {
         boolean isCreated = false;
 
-        String login = getTempLogin().trim();
+        String login = "";
 
         UserFile write = new UserFileBuilder()
                 .addFileName(login + ".dll")
@@ -108,6 +110,8 @@ public class userSettingsBankAccountController extends ClassController
 
     public void initialize()
     {
+        System.out.println(usr.getLogin());
+
         setUpLanguage();
         setCreateAccountSelected(radioCreateAccount.isSelected());
     }
@@ -189,11 +193,6 @@ public class userSettingsBankAccountController extends ClassController
         }
 
         return isExist;
-    }
-
-    private void inputToUserFile(UserFile file, String nameOfNewAccount, int Condition)
-    {
-
     }
 
     /**

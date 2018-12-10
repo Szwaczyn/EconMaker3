@@ -7,29 +7,7 @@ import hoodStuff.UserData;
  */
 public class ClassController
 {
-    private UserData user;
-    private String tempLogin;
-
-    /**
-     * User - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     */
-
-    public void setTempLogin(String tempLogin)
-    {
-        this.tempLogin = tempLogin;
-    }
-
-    public String getTempLogin() {return this.tempLogin; }
-
-    public UserData getUser()
-    {
-        return this.user;
-    }
-
-    public void setUser(UserData user)
-    {
-        this.user = user;
-    }
+    public UserData userSession;
 
     /**
      * Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -334,6 +334,12 @@ public class UserData
      *  Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
+    public void initialize(String login)
+    {
+        this.user = login;
+        this.positionLogin = getLineOfLogin();
+    }
+
     public UserData(UserDataBuilder userDataBuilder)
     {
         this.file = userDataBuilder.getFile();

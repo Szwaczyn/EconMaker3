@@ -44,7 +44,6 @@ public class userDesktopController extends ClassController
     public void review()
     {
         userReviewController target = new userReviewController();
-        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userReview.fxml")
@@ -59,7 +58,6 @@ public class userDesktopController extends ClassController
     public void actionIncome()
     {
         userIncomeController target = new userIncomeController();
-        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userIncome.fxml")
@@ -74,7 +72,6 @@ public class userDesktopController extends ClassController
     public void actionExpenditiures()
     {
         userExpenditiuresController target = new userExpenditiuresController();
-        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userExpenditiures.fxml")
@@ -89,7 +86,6 @@ public class userDesktopController extends ClassController
     public void actionBoudget()
     {
         userBoudgetController target = new userBoudgetController();
-        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userBoudget.fxml")
@@ -104,7 +100,6 @@ public class userDesktopController extends ClassController
     public void actionStatistics()
     {
         userStatisticsController target = new userStatisticsController();
-        target.setUser(this.getUser());
 
         ChangeWindow win = new ChangeWindowBuilder()
                 .addPath("/layoutFXML/userDesktop/userStatistics.fxml")
@@ -124,7 +119,7 @@ public class userDesktopController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userSettings.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
-                .addLogin(user.getLogin())
+                .addUserSession(user)
                 .build();
 
         win.changeWindow();
