@@ -252,6 +252,20 @@ public class UserData
 
     public String getLogin() { return this.user; }
 
+    public boolean checkPassword(String password)
+    {
+        boolean isEqual = false;
+        Encrypting encrypt = new EncryptBuilder()
+                .addContent(password)
+                .build();
+
+        password = encrypt.MD5();
+
+        if(password.equals(getPassword(getLoginPosition()))) isEqual = true;
+
+        return isEqual;
+    }
+
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */

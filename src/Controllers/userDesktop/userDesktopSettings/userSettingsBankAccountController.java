@@ -10,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.File;
+
 /**
  * Created $(DATE)
  */
@@ -24,20 +26,36 @@ public class userSettingsBankAccountController extends ClassController
     @FXML
     public void actionDeleteAccount()
     {
-        UserFile userFile = new UserFileBuilder()
-                .addFileName(userSession.getLogin() + ".dll")
-                .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
-                .build();
+        if(userSession.checkPassword(textPasswordDeleteAccount.getText()))
+        {
+            UserFile userFile = new UserFileBuilder()
+                    .addFileName(userSession.getLogin() + ".dll")
+                    .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
+                    .build();
 
 
-        int lineToDelete = userFile.searchLine(choiceBoxNameOfDeleteAccount.getValue().toString());
-        userFile.removeLine(lineToDelete);
-        userFile.removeLine(lineToDelete);
+            int lineToDelete = userFile.searchLine(choiceBoxNameOfDeleteAccount.getValue().toString());
+            userFile.removeLine(lineToDelete);
+            userFile.removeLine(lineToDelete);
 
-        choiceBoxNameOfDeleteAccount.getItems().remove(choiceBoxNameOfDeleteAccount.getValue());
+            String fileName = "/BASE" + choiceBoxNameOfDeleteAccount.getValue().toString() + ".base";
+            File fileTodelete = new File("src/settings/profiles/" + userSession.getLogin() + fileName);
+            fileTodelete.delete();
+
+            choiceBoxNameOfDeleteAccount.getItems().remove(choiceBoxNameOfDeleteAccount.getValue());
+            choiceBoxNameOfDeleteAccount.getSelectionModel().selectFirst();
+
+            labelAlert.setText(translation.setUpLanguage(67));
+            labelAlert.setVisible(true);
+        }
+        else
+        {
+            labelAlert.setText(translation.setUpLanguage(66));
+            labelAlert.setVisible(true);
+        }
+
+
         //TODO check password
-        //TODO Delete from user dll
-        //TODO Delete base of bank
     }
 
     /**
@@ -67,6 +85,7 @@ public class userSettingsBankAccountController extends ClassController
         {
             case "radioCreateAccount":{
                 setCreateAccountSelected(true);
+                choiceBoxNameOfDeleteAccount.getItems().clear();
             }break;
 
             case "radioDeleteAccount":{
