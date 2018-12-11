@@ -290,7 +290,7 @@ public class userSettingsBankAccountController extends ClassController
     @FXML
     TextField textConditionOfNewAccount = new TextField();
     @FXML
-    TextField textPasswordDeleteAccount = new TextField();
+    PasswordField textPasswordDeleteAccount = new PasswordField();
 
     @FXML
     Button buttonCreateAccount = new Button();
