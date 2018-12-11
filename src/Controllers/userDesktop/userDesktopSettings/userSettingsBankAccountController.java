@@ -8,21 +8,30 @@ import builder.UserFileBuilder;
 import hoodStuff.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 /**
  * Created $(DATE)
  */
 public class userSettingsBankAccountController extends ClassController
 {
-    UserData user;
     LanguageEngine translation = new LanguageEngine();
 
     /**
-     *  Action controllers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     *  Delete controllers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    @FXML
+    public void deleteAccount()
+    {
+        //TODO Look fo exist account and input to menu button
+        //TODO check password
+        //TODO Delete from user dll
+        //TODO Delete base of bank
+    }
+
+    /**
+     *  Create controllers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
     @FXML
@@ -52,6 +61,7 @@ public class userSettingsBankAccountController extends ClassController
 
             case "radioDeleteAccount":{
                 setCreateAccountSelected(false);
+                lookForExistAccount();
             }
         }
     }
@@ -78,15 +88,32 @@ public class userSettingsBankAccountController extends ClassController
      *  private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
+    private void lookForExistAccount()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getLogin() + ".dll")
+                .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
+                .build();
+
+        int size = file.size();
+
+        MenuItem[] positionInMenu = new MenuItem[size / 2];
+
+        for(int i = 2; i <= size / 2; i += 2)
+        {
+            System.out.println(file.readLine(i));
+        }
+    }
+
     private boolean procedureCreateAccount(String nameOfNewAccount, String conditionOfAccount)
     {
         boolean isCreated = false;
 
-        String login = "";
+        System.out.println(userSession);
 
         UserFile write = new UserFileBuilder()
-                .addFileName(login + ".dll")
-                .addPath("src/settings/profiles/" + login + "/")
+                .addFileName(userSession.getLogin() + ".dll")
+                .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
                 .build();
 
         if(!checkExisitng(write, nameOfNewAccount) && checkCorrectenss(conditionOfAccount))
@@ -100,7 +127,6 @@ public class userSettingsBankAccountController extends ClassController
             isCreated = true;
         }
 
-        // TODO Utworzenie pliku historii konta
         return isCreated;
     }
 
@@ -110,8 +136,6 @@ public class userSettingsBankAccountController extends ClassController
 
     public void initialize()
     {
-        System.out.println(usr.getLogin());
-
         setUpLanguage();
         setCreateAccountSelected(radioCreateAccount.isSelected());
     }
@@ -137,7 +161,7 @@ public class userSettingsBankAccountController extends ClassController
 
     private void setCreateAccountSelected(boolean var)
     {
-        textNameOfDeleteAccount.setDisable(var);
+        MenuButtonNameOfAccountToDelete.setDisable(var);
         textPasswordDeleteAccount.setDisable(var);
 
         buttonDeleteAccount.setDisable(var);
@@ -157,7 +181,7 @@ public class userSettingsBankAccountController extends ClassController
         textConditionOfNewAccount.setText("");
         textNameOfNewAccount.setText("");
         textPasswordDeleteAccount.setText("");
-        textNameOfDeleteAccount.setText("");
+        MenuButtonNameOfAccountToDelete.setText("");
 
         labelAlert.setVisible(false);
     }
@@ -185,7 +209,7 @@ public class userSettingsBankAccountController extends ClassController
 
         for(int i = size; i >= 1; i--)
         {
-            if(fileUser.readLine(size).equals(nameOfNewAccount.trim()))
+            if(fileUser.readLine(i).trim().equals(nameOfNewAccount.trim()))
             {
                 isExist = true;
                 break;
@@ -220,8 +244,6 @@ public class userSettingsBankAccountController extends ClassController
     @FXML
     TextField textConditionOfNewAccount = new TextField();
     @FXML
-    TextField textNameOfDeleteAccount = new TextField();
-    @FXML
     TextField textPasswordDeleteAccount = new TextField();
 
     @FXML
@@ -234,4 +256,8 @@ public class userSettingsBankAccountController extends ClassController
     Button buttonClearDeleteAccount = new Button();
     @FXML
     Button buttonReturn = new Button();
+
+    @FXML
+    MenuButton MenuButtonNameOfAccountToDelete = new MenuButton();
+
 }

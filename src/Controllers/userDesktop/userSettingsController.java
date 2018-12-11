@@ -38,6 +38,7 @@ public class userSettingsController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userSettings/userSettingsBankAccount.fxml")
                 .addMainController(getController())
                 .addClassController(target)
+                .addUserSession(this.userSession)
                 .build();
 
         window.changeWindow();
@@ -53,6 +54,7 @@ public class userSettingsController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userSettings/userSettingsUserAccount.fxml")
                 .addMainController(getController())
                 .addClassController(target)
+                .addUserSession(this.userSession)
                 .build();
 
         window.changeWindow();
@@ -60,11 +62,6 @@ public class userSettingsController extends ClassController
 
     public void initialize()
     {
-        try {
-            System.out.println(usr.getLogin());
-        } catch (Exception e){
-            System.out.println(e);
-        }
 
     }
 }

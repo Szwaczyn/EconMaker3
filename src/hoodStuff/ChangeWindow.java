@@ -26,7 +26,7 @@ public class ChangeWindow
             Pane pane = loader.load();
             this.target = loader.getController();
             this.target.setMainController(this.mainControllerVar);
-            this.target.usr = userSession;
+            this.target.userSession = userSession;
             this.mainControllerVar.setScreen(pane);
         } catch(Exception e) {
             //TODO Make System Error
