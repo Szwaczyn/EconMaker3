@@ -3,10 +3,10 @@ package Controllers.userDesktop.userDesktopSettings;
 import Controllers.ClassController;
 import Controllers.userDesktop.userReviewController;
 import builder.ChangeWindowBuilder;
-import builder.UserDataBuilder;
 import builder.UserFileBuilder;
 import hoodStuff.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -61,7 +61,7 @@ public class userSettingsBankAccountController extends ClassController
 
             case "radioDeleteAccount":{
                 setCreateAccountSelected(false);
-                lookForExistAccount();
+                setMenuDeleteAccount();
             }
         }
     }
@@ -88,7 +88,18 @@ public class userSettingsBankAccountController extends ClassController
      *  private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-    private void lookForExistAccount()
+    private void setMenuDeleteAccount()
+    {
+        String[] items = lookForExistAccount();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i++)
+        {
+            choiceBoxNameOfDeleteAccount.getItems().add(items[i]);
+        }
+    }
+
+    private String[] lookForExistAccount()
     {
         UserFile file = new UserFileBuilder()
                 .addFileName(userSession.getLogin() + ".dll")
@@ -96,13 +107,19 @@ public class userSettingsBankAccountController extends ClassController
                 .build();
 
         int size = file.size();
+        size -= 2;
+        size = size / 2;
 
-        MenuItem[] positionInMenu = new MenuItem[size / 2];
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
 
-        for(int i = 2; i <= size / 2; i += 2)
+        for(int i = 3; i <= size * 2 + 2; i += 2)
         {
-            System.out.println(file.readLine(i));
+            positionInMenu[iterator] = file.readLine(i);
+            iterator += 1;
         }
+
+        return positionInMenu;
     }
 
     private boolean procedureCreateAccount(String nameOfNewAccount, String conditionOfAccount)
@@ -161,7 +178,7 @@ public class userSettingsBankAccountController extends ClassController
 
     private void setCreateAccountSelected(boolean var)
     {
-        MenuButtonNameOfAccountToDelete.setDisable(var);
+        choiceBoxNameOfDeleteAccount.setDisable(var);
         textPasswordDeleteAccount.setDisable(var);
 
         buttonDeleteAccount.setDisable(var);
@@ -181,7 +198,6 @@ public class userSettingsBankAccountController extends ClassController
         textConditionOfNewAccount.setText("");
         textNameOfNewAccount.setText("");
         textPasswordDeleteAccount.setText("");
-        MenuButtonNameOfAccountToDelete.setText("");
 
         labelAlert.setVisible(false);
     }
@@ -258,6 +274,6 @@ public class userSettingsBankAccountController extends ClassController
     Button buttonReturn = new Button();
 
     @FXML
-    MenuButton MenuButtonNameOfAccountToDelete = new MenuButton();
+    ChoiceBox choiceBoxNameOfDeleteAccount = new ChoiceBox();
 
 }
