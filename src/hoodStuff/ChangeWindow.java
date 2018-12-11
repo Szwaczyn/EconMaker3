@@ -17,7 +17,6 @@ public class ChangeWindow
     private ClassController target;
     private MainController mainControllerVar;
     private UserData userSession;
-    private String login;
 
     public void changeWindow()
     {
@@ -40,6 +39,5 @@ public class ChangeWindow
         this.target = build.getClassController();
         this.mainControllerVar = build.getMainControllerVar();
         this.userSession = build.getUserSession();
-        this.login = build.getLogin();
     }
 }

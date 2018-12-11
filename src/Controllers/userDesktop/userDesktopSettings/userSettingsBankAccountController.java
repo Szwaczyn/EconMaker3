@@ -22,9 +22,19 @@ public class userSettingsBankAccountController extends ClassController
      */
 
     @FXML
-    public void deleteAccount()
+    public void actionDeleteAccount()
     {
-        //TODO Look fo exist account and input to menu button
+        UserFile userFile = new UserFileBuilder()
+                .addFileName(userSession.getLogin() + ".dll")
+                .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
+                .build();
+
+
+        int lineToDelete = userFile.searchLine(choiceBoxNameOfDeleteAccount.getValue().toString());
+        userFile.removeLine(lineToDelete);
+        userFile.removeLine(lineToDelete);
+
+        choiceBoxNameOfDeleteAccount.getItems().remove(choiceBoxNameOfDeleteAccount.getValue());
         //TODO check password
         //TODO Delete from user dll
         //TODO Delete base of bank
@@ -62,6 +72,7 @@ public class userSettingsBankAccountController extends ClassController
             case "radioDeleteAccount":{
                 setCreateAccountSelected(false);
                 setMenuDeleteAccount();
+                choiceBoxNameOfDeleteAccount.getSelectionModel().selectFirst();
             }
         }
     }

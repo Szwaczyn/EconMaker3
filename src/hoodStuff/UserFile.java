@@ -90,6 +90,46 @@ public class UserFile
         return numberOfActualLine;
     }
 
+    public void removeLine(int numberOfLine)
+    {
+        int size = size();
+
+        String[] bufor = new String[size];
+        for(int i = 0; i <= size - 1; i += 1)
+        {
+            bufor[i] = readLine(i + 1);
+        }
+
+        File overWriteFile = new File(this.path + this.fileName);
+        overWriteFile.delete();
+        createFile();
+
+        for(int i = 0; i <= size - 1; i += 1)
+        {
+            if((i + 1) != numberOfLine)
+            {
+                writeDown(bufor[i]);
+            }
+        }
+    }
+
+    public int searchLine(String word)
+    {
+        int size = size();
+        int result = -1;
+
+        for(int i = 1; i <= size; i += 1)
+        {
+            if(readLine(i).trim().toLowerCase().equals(word.trim().toLowerCase()))
+            {
+                result = i;
+            }
+        }
+
+        return result;
+    }
+
+
     /**
      *  Seters method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -147,6 +187,8 @@ public class UserFile
 
         return reader;
     }
+
+    private void overWrite(String line, int nr){}
 
     /**
      *   Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
