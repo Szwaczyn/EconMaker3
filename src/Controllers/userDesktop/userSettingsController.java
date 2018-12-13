@@ -24,6 +24,7 @@ public class userSettingsController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userDesktop.fxml")
                 .addMainController(getController())
                 .addClassController(target)
+                .addUserSession(this.userSession)
                 .build();
 
         window.changeWindow();

@@ -71,6 +71,7 @@ public class userSettingsBankAccountController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userSettings.fxml")
                 .addClassController(target)
                 .addMainController(getController())
+                .addUserSession(this.userSession)
                 .build();
 
         win.changeWindow();
