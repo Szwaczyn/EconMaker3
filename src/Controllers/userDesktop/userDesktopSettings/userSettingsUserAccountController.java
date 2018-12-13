@@ -3,8 +3,12 @@ package Controllers.userDesktop.userDesktopSettings;
 import Controllers.ClassController;
 import Controllers.userDesktop.userReviewController;
 import builder.ChangeWindowBuilder;
+import builder.EncryptBuilder;
+import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
+import hoodStuff.Encrypting;
 import hoodStuff.LanguageEngine;
+import hoodStuff.UserFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -48,7 +52,33 @@ public class userSettingsUserAccountController extends ClassController
     @FXML
     public void actionChangePassword()
     {
+        if(passwordFieldChangePassword.getText().equals(passwordFieldRepeatChangePassword.getText()) && !passwordFieldChangePassword.getText().isEmpty())
+        {
+            UserFile file = new UserFileBuilder()
+                    .addPath("src/settings/")
+                    .addFileName("econmaker.user")
+                    .build();
 
+            Encrypting encrypt = new EncryptBuilder()
+                    .addContent(passwordFieldChangePassword.getText())
+                    .build();
+
+
+                file.changeLine(encrypt.MD5(), this.userSession.getLoginPosition() + 1);
+                labelAlert.setText(translation.setUpLanguage(75));
+                labelAlert.setVisible(true);
+
+
+        }
+        else
+        {
+            labelAlert.setText(translation.setUpLanguage(49));
+            labelAlert.setVisible(true);
+        }
+
+        // TODO find line password user
+        // TODO encrypt new passsword
+        // TODO change password line
     }
 
     @FXML
@@ -72,6 +102,8 @@ public class userSettingsUserAccountController extends ClassController
         setLanguage();
 
         selectedChangePassword(true);
+        hideAlert();
+
     }
 
     private void setLanguage()
@@ -106,6 +138,12 @@ public class userSettingsUserAccountController extends ClassController
         buttonClearChangePassword.setDisable(!isSelectedChangePassword);
     }
 
+    private void hideAlert()
+    {
+        labelAlert.setVisible(false);
+        labelAlert.setText("");
+    }
+
     /**
      *  Controllers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -137,5 +175,7 @@ public class userSettingsUserAccountController extends ClassController
     Label labelRepearNewPassword = new Label();
     @FXML
     Label labelDeleteAccountPassword = new Label();
+    @FXML
+    Label labelAlert = new Label();
 
 }

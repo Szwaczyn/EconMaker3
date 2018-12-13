@@ -129,6 +129,28 @@ public class UserFile
         return result;
     }
 
+    public void changeLine(String newLine, int numberOfNewLine)
+    {
+        int size = size();
+
+        String[] bufor = new String[size];
+        for(int i = 0; i <= size - 1; i += 1)
+        {
+            bufor[i] = readLine(i + 1);
+        }
+
+        File overWriteFile = new File(this.path + this.fileName);
+        overWriteFile.delete();
+        createFile();
+
+        bufor[numberOfNewLine] = newLine;
+
+        for(int i = 0; i <= size - 1; i += 1)
+        {
+            writeDown(bufor[i]);
+        }
+    }
+
 
     /**
      *  Seters method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
