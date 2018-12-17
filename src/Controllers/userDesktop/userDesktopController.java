@@ -19,7 +19,6 @@ public class userDesktopController extends ClassController
     private MainController mainControllerVar;
 
     LanguageEngine translation = new LanguageEngine();
-    UserData user;
 
     @FXML
     Button buttonReview = new Button();
@@ -49,6 +48,7 @@ public class userDesktopController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userReview.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
+                .addUserSession(this.userSession)
                 .build();
 
         win.changeWindow();
@@ -63,6 +63,7 @@ public class userDesktopController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userIncome.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
+                .addUserSession(this.userSession)
                 .build();
 
         win.changeWindow();
@@ -77,6 +78,7 @@ public class userDesktopController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userExpenditiures.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
+                .addUserSession(this.userSession)
                 .build();
 
         win.changeWindow();
@@ -91,6 +93,7 @@ public class userDesktopController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userBoudget.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
+                .addUserSession(this.userSession)
                 .build();
 
         win.changeWindow();
@@ -105,6 +108,7 @@ public class userDesktopController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userStatistics.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
+                .addUserSession(this.userSession)
                 .build();
 
         win.changeWindow();
@@ -119,7 +123,7 @@ public class userDesktopController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userSettings.fxml")
                 .addClassController(target)
                 .addMainController(mainControllerVar)
-                .addUserSession(user)
+                .addUserSession(this.userSession)
                 .build();
 
         win.changeWindow();
@@ -153,14 +157,6 @@ public class userDesktopController extends ClassController
         buttonLogOut.setText(translation.setUpLanguage(44));
     }
 
-    /**
-     *  Set methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     */
-
-    public void setUser(UserData user)
-    {
-        this.user = user;
-    }
 
     /**
      *  Windows System - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

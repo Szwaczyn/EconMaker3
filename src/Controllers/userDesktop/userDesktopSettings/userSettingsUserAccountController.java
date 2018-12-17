@@ -50,6 +50,8 @@ public class userSettingsUserAccountController extends ClassController
         passwordFieldRepeatChangePassword.setText("");
         passwordFieldChangePassword.setText("");
         passwordFieldDeleteAccount.setText("");
+        labelAlert.setText("");
+        labelAlert.setVisible(false);
     }
 
     @FXML
@@ -103,6 +105,11 @@ public class userSettingsUserAccountController extends ClassController
             file.deleteDirectory(userDirectory);
             userSession = null;
             mainControllerVar.inicializujMenu();
+        }
+        else
+        {
+            labelAlert.setText(translation.setUpLanguage(66));
+            labelAlert.setVisible(true);
         }
     }
 

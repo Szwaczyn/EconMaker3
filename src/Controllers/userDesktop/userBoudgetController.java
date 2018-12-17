@@ -19,6 +19,7 @@ public class userBoudgetController extends ClassController
                 .addPath("/layoutFXML/userDesktop/userDesktop.fxml")
                 .addMainController(getController())
                 .addClassController(target)
+                .addUserSession(userSession)
                 .build();
 
         window.changeWindow();
