@@ -84,7 +84,7 @@ public class UserFile
             readFile.close();
         } catch (IOException e) {
             // TODO SYstem error
-            System.out.println("Class: FileConnection: Method: ReadFIle try close file wrong");
+            System.out.println("Class: FileConnection: Method: size try close file wrong");
         }
 
         return numberOfActualLine;
@@ -131,24 +131,28 @@ public class UserFile
 
     public void changeLine(String newLine, int numberOfNewLine)
     {
-        int size = size();
+        int sizeFile = size();
+        String[] bufor = new String[sizeFile];
 
-        String[] bufor = new String[size];
-        for(int i = 0; i <= size - 1; i += 1)
+        for(int i = 0; i <= sizeFile - 1; i ++)
         {
             bufor[i] = readLine(i + 1);
         }
 
-        File overWriteFile = new File(this.path + this.fileName);
-        overWriteFile.delete();
-        createFile();
+        try {
+            PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(this.path + this.fileName)));
+            print.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         bufor[numberOfNewLine] = newLine;
 
-        for(int i = 0; i <= size - 1; i += 1)
+        for(int i = 0; i <= sizeFile - 1; i++)
         {
             writeDown(bufor[i]);
         }
+
     }
 
 

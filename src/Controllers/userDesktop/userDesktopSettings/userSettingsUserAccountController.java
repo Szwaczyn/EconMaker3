@@ -64,10 +64,9 @@ public class userSettingsUserAccountController extends ClassController
                     .build();
 
 
-                file.changeLine(encrypt.MD5(), this.userSession.getLoginPosition() + 1);
-                labelAlert.setText(translation.setUpLanguage(75));
-                labelAlert.setVisible(true);
-
+            file.changeLine(encrypt.MD5(), userSession.getLoginPosition());
+            labelAlert.setText(translation.setUpLanguage(75));
+            labelAlert.setVisible(true);
 
         }
         else
@@ -75,10 +74,6 @@ public class userSettingsUserAccountController extends ClassController
             labelAlert.setText(translation.setUpLanguage(49));
             labelAlert.setVisible(true);
         }
-
-        // TODO find line password user
-        // TODO encrypt new passsword
-        // TODO change password line
     }
 
     @FXML
