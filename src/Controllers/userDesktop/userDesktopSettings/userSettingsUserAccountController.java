@@ -15,6 +15,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Label;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Created $(DATE)
  */
@@ -79,7 +82,28 @@ public class userSettingsUserAccountController extends ClassController
     @FXML
     public void actionDeleteAccount()
     {
+        Encrypting encrypt = new EncryptBuilder()
+                .addContent(passwordFieldDeleteAccount.getText())
+                .build();
 
+        UserFile file = new UserFileBuilder()
+                .addPath("src/settings/")
+                .addFileName("econmaker.user")
+                .build();
+
+        String password = encrypt.MD5();
+        if(password.equals(file.readLine(userSession.getLoginPosition() + 1)))
+        {
+            file.removeLine(userSession.getLoginPosition());
+            file.removeLine(userSession.getLoginPosition());
+            file.removeLine(userSession.getLoginPosition());
+            file.removeLine(userSession.getLoginPosition());
+
+            File userDirectory = new File("src/settings/profiles/" + userSession.getLogin());
+            file.deleteDirectory(userDirectory);
+            userSession = null;
+            mainControllerVar.inicializujMenu();
+        }
     }
 
     @FXML

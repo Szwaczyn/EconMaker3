@@ -100,9 +100,7 @@ public class UserFile
             bufor[i] = readLine(i + 1);
         }
 
-        File overWriteFile = new File(this.path + this.fileName);
-        overWriteFile.delete();
-        createFile();
+        clearFile();
 
         for(int i = 0; i <= size - 1; i += 1)
         {
@@ -139,12 +137,7 @@ public class UserFile
             bufor[i] = readLine(i + 1);
         }
 
-        try {
-            PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(this.path + this.fileName)));
-            print.write("");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        clearFile();
 
         bufor[numberOfNewLine] = newLine;
 
@@ -153,6 +146,41 @@ public class UserFile
             writeDown(bufor[i]);
         }
 
+    }
+
+    public void deleteDirectory(File directory)
+    {
+        if(directory.isDirectory()){
+
+            //directory is empty, then delete it
+            if(directory.list().length==0){
+
+                directory.delete();
+
+            }else{
+
+                //list all the directory contents
+                String files[] = directory.list();
+
+                for (String temp : files) {
+                    //construct the file structure
+                    File fileDelete = new File(directory, temp);
+
+                    //recursive delete
+                    deleteDirectory(fileDelete);
+                }
+
+                //check the directory again, if empty then delete it
+                if(directory.list().length==0){
+                    directory.delete();
+
+                }
+            }
+
+        }else{
+            //if file, then delete it
+            directory.delete();
+        }
     }
 
 
@@ -215,6 +243,17 @@ public class UserFile
     }
 
     private void overWrite(String line, int nr){}
+
+    private void clearFile()
+    {
+        try {
+            PrintWriter print = new PrintWriter(new BufferedWriter(new FileWriter(this.path + this.fileName)));
+            print.write("");
+            print.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      *   Constructors - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -78,7 +78,7 @@
             <Insets left="30.0" right="30.0" top="20.0" />
          </padding>
          <children>
-            <RadioButton fx:id="radioDeleteAccount" mnemonicParsing="false" text="Usuwanie konta" toggleGroup="$userrAccount">
+            <RadioButton fx:id="radioDeleteAccount" mnemonicParsing="false" onAction="#changeTab" text="Usuwanie konta" toggleGroup="$userrAccount">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></RadioButton>
