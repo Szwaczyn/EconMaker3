@@ -3,10 +3,15 @@ package Controllers.userDesktop.userDesktopBoudget;
 import Controllers.ClassController;
 import Controllers.userDesktop.userBoudgetController;
 import builder.ChangeWindowBuilder;
+import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
 import hoodStuff.LanguageEngine;
+import hoodStuff.UserFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created $(DATE)
@@ -18,7 +23,17 @@ public class userBoudgetCreateDeleteController extends ClassController
     @FXML
     public void actionCreateBoudget()
     {
-        System.out.println("Utwórz");
+        File file = new File("src/settings/profiles/" + userSession.getLogin() + "/boudget" + userSession.getLogin() + ".dll");
+        if(!file.exists())
+        {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+
+        addBoudget(textNameOfNewBoudget.getText(), textConditionOfNewBoudget.getText());
     }
 
     @FXML
@@ -55,6 +70,22 @@ public class userBoudgetCreateDeleteController extends ClassController
         textConditionOfNewBoudget.setText("");
         textNameOfNewBoudget.setText("");
     }
+
+    /**
+     *  Private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private void addBoudget(String nameOfBudget, String amountOfBoudget)
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
+                .addFileName("/boudget" + userSession.getLogin() + ".dll")
+                .build();
+
+        file.writeDown(nameOfBudget);
+        file.writeDown(amountOfBoudget);
+    }
+
 
     /**
      *  Items methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
