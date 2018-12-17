@@ -205,7 +205,7 @@ public class LoginUserController
         try {
             Pane pane = loader.load();
             userDesktopController target = loader.getController();
-            target.setUser(user);
+            target.userSession = user;
             mainControllerVar.clearScreen();
             target.setMainController(mainControllerVar);
             mainControllerVar.setScreen(pane);
