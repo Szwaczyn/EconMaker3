@@ -45,6 +45,16 @@ public class UserData
         saveBuforToFile(bufor);
     }
 
+    public String getBoudgetFileName()
+    {
+        return "boudget" + this.user + ".dll";
+    }
+
+    public String getProfilPath()
+    {
+        return UserFile.PROFILE_PATH + this.getLogin() + "/";
+    }
+
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */

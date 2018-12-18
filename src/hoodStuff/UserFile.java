@@ -11,6 +11,9 @@ public class UserFile
 {
     private String fileName;
     private String path;
+    public static final String PROFILE_PATH = "src/settings/profiles/";
+    public static final String SETTINGS_PATH = "src/settings/";
+    public static final String USERS_PATH = "econmaker.user";
 
     /**
      *  Public method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

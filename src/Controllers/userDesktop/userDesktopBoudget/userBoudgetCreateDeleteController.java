@@ -3,8 +3,10 @@ package Controllers.userDesktop.userDesktopBoudget;
 import Controllers.ClassController;
 import Controllers.userDesktop.userBoudgetController;
 import builder.ChangeWindowBuilder;
+import builder.EncryptBuilder;
 import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
+import hoodStuff.Encrypting;
 import hoodStuff.LanguageEngine;
 import hoodStuff.UserFile;
 import javafx.fxml.FXML;
@@ -39,13 +41,44 @@ public class userBoudgetCreateDeleteController extends ClassController
     @FXML
     public void actionDeleteBoudget()
     {
-        System.out.println("Usuń");
+        Encrypting password = new EncryptBuilder()
+                .addContent(textPasswordDeleteBoudget.getText().trim())
+                .build();
+
+        UserFile file = new UserFileBuilder()
+                .addPath(UserFile.SETTINGS_PATH)
+                .addFileName(UserFile.USERS_PATH)
+                .build();
+
+        if(password.MD5().equals(file.readLine(userSession.getLoginPosition() + 1).trim()))
+        {
+            UserFile boudget = new UserFileBuilder()
+                    .addPath(userSession.getProfilPath())
+                    .addFileName(userSession.getBoudgetFileName())
+                    .build();
+
+            int lineToRemove = boudget.searchLine(choiceBoxNameOfDeleteBoudget.getValue().toString());
+            boudget.removeLine(lineToRemove);
+            boudget.removeLine(lineToRemove);
+
+            choiceBoxNameOfDeleteBoudget.getItems().remove(choiceBoxNameOfDeleteBoudget.getValue());
+            choiceBoxNameOfDeleteBoudget.getSelectionModel().selectFirst();
+
+            actionClearTextField();
+
+            setAlert(translation.setUpLanguage(84));
+        }
+        else
+        {
+            setAlert(translation.setUpLanguage(63));
+        }
     }
 
     @FXML
     public void actionSetTab()
     {
         changeTab(radioCreateBoudget.isSelected());
+        choiceBoxNameOfDeleteBoudget.getItems().clear();
         if(radioDeleteBoudget.isSelected())
         {
             setMenuDeleteBoudget();
@@ -121,7 +154,6 @@ public class userBoudgetCreateDeleteController extends ClassController
                 .build();
 
         int size = file.size();
-        size -= 2;
         size = size / 2;
 
         String[] positionInMenu = new String[size];
