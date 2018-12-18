@@ -46,6 +46,11 @@ public class userBoudgetCreateDeleteController extends ClassController
     public void actionSetTab()
     {
         changeTab(radioCreateBoudget.isSelected());
+        if(radioDeleteBoudget.isSelected())
+        {
+            setMenuDeleteBoudget();
+            choiceBoxNameOfDeleteBoudget.getSelectionModel().selectFirst();
+        }
     }
 
     @FXML
@@ -82,10 +87,65 @@ public class userBoudgetCreateDeleteController extends ClassController
                 .addFileName("/boudget" + userSession.getLogin() + ".dll")
                 .build();
 
-        file.writeDown(nameOfBudget);
-        file.writeDown(amountOfBoudget);
+        if(file.searchLine(nameOfBudget) == -1)
+        {
+            file.writeDown(nameOfBudget);
+            file.writeDown(amountOfBoudget);
+
+            setAlert(translation.setUpLanguage(82));
+        }
+        else
+        {
+            setAlert(translation.setUpLanguage(83));
+        }
+
     }
 
+    private void setAlert(String alert)
+    {
+        labelAlert.setText(alert);
+        labelAlert.setVisible(true);
+    }
+
+    private void clearAlert()
+    {
+        labelAlert.setText("");
+        labelAlert.setVisible(true);
+    }
+
+    private String[] lookForExistBoudget()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName("boudget" + userSession.getLogin() + ".dll")
+                .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
+                .build();
+
+        int size = file.size();
+        size -= 2;
+        size = size / 2;
+
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
+
+        for(int i = 1; i <= size * 2; i += 2)
+        {
+            positionInMenu[iterator] = file.readLine(i);
+            iterator += 1;
+        }
+
+        return positionInMenu;
+    }
+
+    private void setMenuDeleteBoudget()
+    {
+        String[] items = lookForExistBoudget();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i++)
+        {
+            choiceBoxNameOfDeleteBoudget.getItems().add(items[i]);
+        }
+    }
 
     /**
      *  Items methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -125,8 +185,7 @@ public class userBoudgetCreateDeleteController extends ClassController
         buttonDeleteBoudget.setDisable(isSelectedCreateBoudget);
         buttonClearDeleteBoudget.setDisable(isSelectedCreateBoudget);
 
-        labelAlert.setText("");
-        labelAlert.setVisible(false);
+        clearAlert();
     }
 
     @FXML

@@ -53,9 +53,6 @@ public class userSettingsBankAccountController extends ClassController
             labelAlert.setText(translation.setUpLanguage(66));
             labelAlert.setVisible(true);
         }
-
-
-        //TODO check password
     }
 
     /**
