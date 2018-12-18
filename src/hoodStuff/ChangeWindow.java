@@ -27,6 +27,7 @@ public class ChangeWindow
             this.target.setMainController(this.mainControllerVar);
             this.target.userSession = userSession;
             this.mainControllerVar.setScreen(pane);
+            // TODO Przekazywanie tablicy budzetu this.target.
         } catch(Exception e) {
             //TODO Make System Error
             System.out.println("Nie można załadować okna " + e);

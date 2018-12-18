@@ -15,6 +15,7 @@ public class ChangeWindowBuilder
     private MainController mainControllerVar;
     private UserData userSession;
     private String login;
+    private String[] boudget;
 
     /**
      * Add Method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -50,6 +51,12 @@ public class ChangeWindowBuilder
         return this;
     }
 
+    public ChangeWindowBuilder addBoudget(String[] boudget)
+    {
+        this.boudget = boudget;
+        return this;
+    }
+
     /**
      * Get Method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -71,6 +78,8 @@ public class ChangeWindowBuilder
     public UserData getUserSession() { return  userSession; }
 
     public String getLogin() { return login; }
+
+    public String[] getBoudget() { return boudget; }
 
     /**
      * Build Method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -26,7 +26,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="buttonReview" mnemonicParsing="false" onAction="#actionReturn" prefHeight="50.0" prefWidth="200.0" text="Przegląd">
+            <Button fx:id="buttonReview" mnemonicParsing="false" onAction="#actionReview" prefHeight="50.0" prefWidth="200.0" text="Przegląd">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

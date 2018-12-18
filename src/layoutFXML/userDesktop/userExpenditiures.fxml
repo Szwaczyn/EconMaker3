@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0"
-      xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.userDesktop.userExpenditiuresController">
+<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.userDesktop.userIncomeController">
    <children>
       <ImageView fx:id="button_1" fitHeight="80.0" fitWidth="1241.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,5 +35,66 @@
             </Button>
          </children>
       </VBox>
+      <HBox layoutX="200.0" layoutY="80.0" prefHeight="670.0" prefWidth="1001.0">
+         <children>
+            <VBox prefHeight="685.0" prefWidth="522.0" spacing="20.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" top="30.0" />
+               </padding>
+               <children>
+                  <Label fx:id="labelAccount" text="Konto" />
+                  <ChoiceBox fx:id="choiceBoxAccount" prefHeight="30.0" prefWidth="472.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ChoiceBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="670.0" prefWidth="500.0" spacing="20.0">
+               <padding>
+                  <Insets left="20.0" right="20.0" top="30.0" />
+               </padding>
+               <children>
+                  <Label fx:id="labelNameOfIncome" text="Nazwa" />
+                  <TextField fx:id="textNameOfIncome" />
+                  <Label fx:id="labelValueOfIncome" text="Wartość" />
+                  <TextField fx:id="textValuieOdIncome" />
+                  <Label fx:id="labelCategoryOfIncome" text="Kategoria" />
+                  <ChoiceBox fx:id="choiceBoxCategoryOfIncome" prefHeight="30.0" prefWidth="450.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ChoiceBox>
+                  <Label fx:id="labelDataOfIncome" text="Data" />
+                  <DatePicker fx:id="dataPickerOfIncome" prefHeight="30.0" prefWidth="450.0" />
+                  <CheckBox mnemonicParsing="false" text="Budżet">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </CheckBox>
+                  <Label text="Wybierz budżet" />
+                  <ChoiceBox prefHeight="30.0" prefWidth="450.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ChoiceBox>
+                  <HBox prefHeight="40.0" prefWidth="450.0">
+                     <children>
+                        <Button fx:id="buttonSaveIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Zapisz">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Pane prefHeight="40.0" prefWidth="74.0" />
+                        <Button fx:id="buttonClearIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Wyczyść">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </Pane>
