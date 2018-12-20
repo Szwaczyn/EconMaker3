@@ -154,17 +154,17 @@ public class userSettingsBankAccountController extends ClassController
     {
         boolean isCreated = false;
 
-        System.out.println(userSession);
-
         UserFile write = new UserFileBuilder()
                 .addFileName(userSession.getLogin() + ".dll")
                 .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
                 .build();
 
-        if(!checkExisitng(write, nameOfNewAccount) && checkCorrectenss(conditionOfAccount))
+        DataIntegration integration = new DataIntegration(conditionOfAccount);
+
+        if(!checkExisitng(write, nameOfNewAccount) && integration.isItValidCurrency())
         {
             write.writeDown(nameOfNewAccount);
-            write.writeDown(conditionOfAccount);
+            write.writeDown(integration.getValidCurrency());
 
             write.setFileName("BASE" + nameOfNewAccount + ".base");
             write.createFile();
@@ -230,21 +230,11 @@ public class userSettingsBankAccountController extends ClassController
         labelAlert.setVisible(false);
     }
 
+
     /**
      *  private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-    private boolean checkCorrectenss(String conditionOfNewAccount)
-    {
-        boolean correct = true;
-        try {
-            int test = Integer.parseInt(conditionOfNewAccount);
-        } catch(Exception e) {
-            correct = false;
-        }
-
-        return correct;
-    }
 
     private boolean checkExisitng(UserFile fileUser, String nameOfNewAccount)
     {

@@ -46,7 +46,7 @@ public class UserData
         saveBuforToFile(bufor);
     }
 
-    public String getBoudgetFileName()
+    public String getFileNameBoudget()
     {
         return "boudget" + this.user + ".dll";
     }

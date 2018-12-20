@@ -5,10 +5,7 @@ import Controllers.userDesktop.userBoudgetController;
 import builder.ChangeWindowBuilder;
 import builder.EncryptBuilder;
 import builder.UserFileBuilder;
-import hoodStuff.ChangeWindow;
-import hoodStuff.Encrypting;
-import hoodStuff.LanguageEngine;
-import hoodStuff.UserFile;
+import hoodStuff.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -25,16 +22,6 @@ public class userBoudgetCreateDeleteController extends ClassController
     @FXML
     public void actionCreateBoudget()
     {
-        File file = new File("src/settings/profiles/" + userSession.getLogin() + "/boudget" + userSession.getLogin() + ".dll");
-        if(!file.exists())
-        {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-        }
-
         addBoudget(textNameOfNewBoudget.getText(), textConditionOfNewBoudget.getText());
     }
 
@@ -54,7 +41,7 @@ public class userBoudgetCreateDeleteController extends ClassController
         {
             UserFile boudget = new UserFileBuilder()
                     .addPath(userSession.getProfilPath())
-                    .addFileName(userSession.getBoudgetFileName())
+                    .addFileName(userSession.getFileNameBoudget())
                     .build();
 
             int lineToRemove = boudget.searchLine(choiceBoxNameOfDeleteBoudget.getValue().toString());
@@ -79,6 +66,7 @@ public class userBoudgetCreateDeleteController extends ClassController
     {
         changeTab(radioCreateBoudget.isSelected());
         choiceBoxNameOfDeleteBoudget.getItems().clear();
+        checkFile();
         if(radioDeleteBoudget.isSelected())
         {
             setMenuDeleteBoudget();
@@ -120,10 +108,12 @@ public class userBoudgetCreateDeleteController extends ClassController
                 .addFileName("/boudget" + userSession.getLogin() + ".dll")
                 .build();
 
-        if(file.searchLine(nameOfBudget) == -1)
+        DataIntegration integration = new DataIntegration(amountOfBoudget);
+
+        if(file.searchLine(nameOfBudget) == -1 && integration.isItValidCurrency())
         {
             file.writeDown(nameOfBudget);
-            file.writeDown(amountOfBoudget);
+            file.writeDown(integration.getValidCurrency());
 
             setAlert(translation.setUpLanguage(82));
         }
@@ -154,15 +144,20 @@ public class userBoudgetCreateDeleteController extends ClassController
                 .build();
 
         int size = file.size();
-        size = size / 2;
 
-        String[] positionInMenu = new String[size];
-        int iterator = 0;
-
-        for(int i = 1; i <= size * 2; i += 2)
+        String[] positionInMenu = null;
+        if(size > 1)
         {
-            positionInMenu[iterator] = file.readLine(i);
-            iterator += 1;
+            size = size / 2;
+
+            positionInMenu = new String[size];
+            int iterator = 0;
+
+            for(int i = 1; i <= size * 2; i += 2)
+            {
+                positionInMenu[iterator] = file.readLine(i);
+                iterator += 1;
+            }
         }
 
         return positionInMenu;
@@ -218,6 +213,19 @@ public class userBoudgetCreateDeleteController extends ClassController
         buttonClearDeleteBoudget.setDisable(isSelectedCreateBoudget);
 
         clearAlert();
+    }
+
+    private void checkFile()
+    {
+        File file = new File(userSession.getProfilePath() + userSession.getFileNameBoudget());
+        if(!file.exists())
+        {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
     }
 
     @FXML
