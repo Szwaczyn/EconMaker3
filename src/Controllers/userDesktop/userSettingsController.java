@@ -61,6 +61,21 @@ public class userSettingsController extends ClassController
         window.changeWindow();
     }
 
+    @FXML
+    public void actionUserCategories()
+    {
+        userSettingsUserAccountController target = new userSettingsUserAccountController();
+
+        ChangeWindow window = new ChangeWindowBuilder()
+                .addPath("/layoutFXML/userDesktop/userSettings/userSettingsUserAccount.fxml")
+                .addMainController(getController())
+                .addClassController(target)
+                .addUserSession(this.userSession)
+                .build();
+
+        window.changeWindow();
+    }
+
     public void initialize()
     {
 

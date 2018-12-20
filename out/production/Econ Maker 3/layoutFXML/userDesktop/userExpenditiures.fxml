@@ -46,7 +46,10 @@
                </padding>
                <children>
                   <Label fx:id="labelAccount" text="Konto" />
-                  <ChoiceBox fx:id="choiceBoxAccount" prefHeight="30.0" prefWidth="472.0" />
+                  <ChoiceBox fx:id="choiceBoxAccount" prefHeight="30.0" prefWidth="472.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ChoiceBox>
                </children>
             </VBox>
             <VBox prefHeight="670.0" prefWidth="500.0" spacing="20.0">
@@ -59,17 +62,34 @@
                   <Label fx:id="labelValueOfIncome" text="Wartość" />
                   <TextField fx:id="textValuieOdIncome" />
                   <Label fx:id="labelCategoryOfIncome" text="Kategoria" />
-                  <ChoiceBox fx:id="choiceBoxCategoryOfIncome" prefHeight="30.0" prefWidth="450.0" />
+                  <ChoiceBox fx:id="choiceBoxCategoryOfIncome" prefHeight="30.0" prefWidth="450.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ChoiceBox>
                   <Label fx:id="labelDataOfIncome" text="Data" />
                   <DatePicker fx:id="dataPickerOfIncome" prefHeight="30.0" prefWidth="450.0" />
-                  <CheckBox mnemonicParsing="false" text="Budżet" />
+                  <CheckBox mnemonicParsing="false" text="Budżet">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </CheckBox>
                   <Label text="Wybierz budżet" />
-                  <ChoiceBox prefHeight="30.0" prefWidth="450.0" />
+                  <ChoiceBox prefHeight="30.0" prefWidth="450.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ChoiceBox>
                   <HBox prefHeight="40.0" prefWidth="450.0">
                      <children>
-                        <Button fx:id="buttonSaveIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Zapisz" />
+                        <Button fx:id="buttonSaveIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Zapisz">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                         <Pane prefHeight="40.0" prefWidth="74.0" />
-                        <Button fx:id="buttonClearIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Wyczyść" />
+                        <Button fx:id="buttonClearIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Wyczyść">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </HBox>
                </children>

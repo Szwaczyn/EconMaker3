@@ -186,6 +186,12 @@ public class UserFile
         }
     }
 
+    public boolean isExist()
+    {
+        File file = new File(this.path + this.fileName);
+        return file.exists();
+    }
+
 
     /**
      *  Seters method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
