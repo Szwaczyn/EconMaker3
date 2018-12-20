@@ -40,6 +40,8 @@ public class userSettingsCategoriesController extends ClassController
         {
             file.writeDown(textNewCategory.getText());
             setAlert(translation.setUpLanguage(94));
+
+            textNewCategory.setText("");
         }
         else
         {
@@ -56,17 +58,39 @@ public class userSettingsCategoriesController extends ClassController
 
         if(encrypt.MD5().equals(userSession.getPassword()))
         {
-            
+            UserFile file = new UserFileBuilder()
+                    .addFileName(userSession.getFileNameCategories())
+                    .addPath(userSession.getProfilePath())
+                    .build();
+
+            int positionToRemove = file.searchLine(choiceCategory.getValue().toString());
+            file.removeLine(positionToRemove);
+
+            setAlert(translation.setUpLanguage(95));
         }
         else
         {
             setAlert(translation.setUpLanguage(63));
         }
+
+        passwordFieldDeleteCategory.setText("");
+        choiceCategory.getItems().clear();
+        fillChoiceBox();
     }
 
     @FXML
     public void changeTab()
     {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getFileNameCategories())
+                .addPath(userSession.getProfilePath())
+                .build();
+
+        if(!file.isExist())
+        {
+            file.createFile();
+        }
+
         setTab(radioNewCategory.isSelected());
     }
 
