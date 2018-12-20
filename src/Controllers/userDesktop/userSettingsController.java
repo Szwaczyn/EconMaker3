@@ -2,6 +2,7 @@ package Controllers.userDesktop;
 
 import Controllers.ClassController;
 import Controllers.userDesktop.userDesktopSettings.userSettingsBankAccountController;
+import Controllers.userDesktop.userDesktopSettings.userSettingsCategoriesController;
 import Controllers.userDesktop.userDesktopSettings.userSettingsUserAccountController;
 import builder.ChangeWindowBuilder;
 import builder.UserDataBuilder;
@@ -64,10 +65,10 @@ public class userSettingsController extends ClassController
     @FXML
     public void actionUserCategories()
     {
-        userSettingsUserAccountController target = new userSettingsUserAccountController();
+        userSettingsCategoriesController target = new userSettingsCategoriesController();
 
         ChangeWindow window = new ChangeWindowBuilder()
-                .addPath("/layoutFXML/userDesktop/userSettings/userSettingsUserAccount.fxml")
+                .addPath("/layoutFXML/userDesktop/userSettings/userSettingsCategoriesController.fxml")
                 .addMainController(getController())
                 .addClassController(target)
                 .addUserSession(this.userSession)

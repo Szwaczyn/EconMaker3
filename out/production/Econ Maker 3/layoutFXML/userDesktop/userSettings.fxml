@@ -36,6 +36,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button fx:id="userAccount1" mnemonicParsing="false" onAction="#actionUserCategories" prefHeight="50.0" prefWidth="200.0" text="Kategorie">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </VBox>
    </children>

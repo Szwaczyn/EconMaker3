@@ -118,20 +118,20 @@ public class userSettingsBankAccountController extends ClassController
 
     private void setMenuDeleteAccount()
     {
-        String[] items = lookForExistAccount();
-        int sizeOfItem = items.length;
+    String[] items = lookForExistAccount();
+    int sizeOfItem = items.length;
 
-        for(int i = 0; i <= sizeOfItem - 1; i++)
-        {
-            choiceBoxNameOfDeleteAccount.getItems().add(items[i]);
-        }
+    for(int i = 0; i <= sizeOfItem - 1; i++)
+    {
+        choiceBoxNameOfDeleteAccount.getItems().add(items[i]);
     }
+}
 
     private String[] lookForExistAccount()
     {
         UserFile file = new UserFileBuilder()
                 .addFileName(userSession.getLogin() + ".dll")
-                .addPath("src/settings/profiles/" + userSession.getLogin() + "/")
+                .addPath(userSession.getProfilePath())
                 .build();
 
         int size = file.size();

@@ -3,8 +3,12 @@ package Controllers.userDesktop.userDesktopSettings;
 import Controllers.ClassController;
 import Controllers.userDesktop.userReviewController;
 import builder.ChangeWindowBuilder;
+import builder.EncryptBuilder;
+import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
+import hoodStuff.Encrypting;
 import hoodStuff.LanguageEngine;
+import hoodStuff.UserFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -22,13 +26,42 @@ public class userSettingsCategoriesController extends ClassController
     @FXML
     public void actionNewCategory()
     {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getFileNameCategories())
+                .addPath(userSession.getProfilePath())
+                .build();
 
+        if(!file.isExist())
+        {
+            file.createFile();
+        }
+
+        if(file.searchLine(textNewCategory.getText().trim()) == -1 && !textNewCategory.getText().isEmpty())
+        {
+            file.writeDown(textNewCategory.getText());
+            setAlert(translation.setUpLanguage(94));
+        }
+        else
+        {
+            setAlert(translation.setUpLanguage(93));
+        }
     }
 
     @FXML
     public void actionDeleteCategory()
     {
+        Encrypting encrypt = new EncryptBuilder()
+                .addContent(passwordFieldDeleteCategory.getText().trim())
+                .build();
 
+        if(encrypt.MD5().equals(userSession.getPassword()))
+        {
+            
+        }
+        else
+        {
+            setAlert(translation.setUpLanguage(63));
+        }
     }
 
     @FXML
@@ -48,7 +81,9 @@ public class userSettingsCategoriesController extends ClassController
     @FXML
     public void initialize()
     {
+        radioNewCategory.setSelected(true);
         setTab(radioNewCategory.isSelected());
+        setLanguage();
     }
 
     @FXML
@@ -92,13 +127,64 @@ public class userSettingsCategoriesController extends ClassController
         passwordFieldDeleteCategory.setDisable(isSelectedNewCategory);
         buttonDeleteCategory.setDisable(isSelectedNewCategory);
         buttonClearDeleteCategory.setDisable(isSelectedNewCategory);
+        choiceCategory.setDisable(isSelectedNewCategory);
 
         clearAlert();
+        choiceCategory.getItems().clear();
+
+        if(!isSelectedNewCategory)
+        {
+            fillChoiceBox();
+        }
     }
 
     private void setLanguage()
     {
+        buttonReturn.setText(translation.setUpLanguage(6));
+        buttonNewCategory.setText(translation.setUpLanguage(26));
+        buttonClearDeleteCategory.setText(translation.setUpLanguage(27));
+        buttonClearNewCategory.setText(translation.setUpLanguage(27));
 
+        radioNewCategory.setText(translation.setUpLanguage(89));
+        radioDeleteCategory.setText(translation.setUpLanguage(90));
+
+        labelDeleteCategoryPassword.setText(translation.setUpLanguage(14));
+        labelNewCategory.setText(translation.setUpLanguage(91));
+        labelDeleteCategory.setText(translation.setUpLanguage(92));
+    }
+
+    private void fillChoiceBox()
+    {
+        String[] items = lookForExistCategories();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i++)
+        {
+            choiceCategory.getItems().add(items[i]);
+        }
+
+        choiceCategory.getSelectionModel().selectFirst();
+    }
+
+    private String[] lookForExistCategories()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getFileNameCategories())
+                .addPath(userSession.getProfilePath())
+                .build();
+
+        int size = file.size();
+
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
+
+        for(int i = 0; i <= size - 1; i += 1)
+        {
+            positionInMenu[iterator] = file.readLine(i + 1);
+            iterator += 1;
+        }
+
+        return positionInMenu;
     }
 
     @FXML

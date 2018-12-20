@@ -2,6 +2,7 @@ package hoodStuff;
 
 import builder.EncryptBuilder;
 import builder.UserDataBuilder;
+import builder.UserFileBuilder;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -53,6 +54,16 @@ public class UserData
     public String getProfilPath()
     {
         return UserFile.PROFILE_PATH + this.getLogin() + "/";
+    }
+
+    public String getPassword()
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(UserFile.SETTINGS_PATH)
+                .addFileName(UserFile.USERS_PATH)
+                .build();
+
+        return file.readLine(this.positionLogin + 1);
     }
 
     /**
@@ -275,6 +286,13 @@ public class UserData
 
         return isEqual;
     }
+
+    public String getFileNameCategories()
+    {
+        return "categories" + this.getLogin() + ".dll";
+    }
+
+    public String getProfilePath() { return UserFile.PROFILE_PATH + this.getLogin() + "/"; }
 
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
