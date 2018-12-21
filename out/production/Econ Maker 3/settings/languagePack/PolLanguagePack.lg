@@ -80,7 +80,7 @@ Wartość nowego budżetu
 Usuwanie budżetu
 Nazwa usuwanego budżetu
 Dodano nowy budżet
-Nie dodano budżetu, już taki istnieje
+Nie dodano budżetu, już taki istnieje lub błędna wartość!
 Budżet został usunięty
 Pokaż
 Wybierz budżet do wyświetlenia
@@ -93,3 +93,6 @@ Kategoria
 Dana ktegoria już istnieje!
 Kategoria została dodana
 Kategoria została usunięta
+Nazwa przychodu
+Wartość przychodu
+Data przychodu
