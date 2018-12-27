@@ -23,7 +23,6 @@ public class userIncomeController extends ClassController
      *  Action method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-
     @FXML
     public void actionReturn()
     {
@@ -45,6 +44,28 @@ public class userIncomeController extends ClassController
         choiceBoxCategoryOfIncome.setDisable(!checkBoxCategory.isSelected());
     }
 
+    @FXML
+    public void clearField()
+    {
+        textNameOfIncome.setText("");
+        textValuieOdIncome.setText("");
+        checkBoxCategory.setSelected(false);
+    }
+
+    @FXML
+    public void addNewIncome()
+    {
+        String accountOfNewIncome = choiceBoxAccount.getValue().toString();
+        String nameOfNewIncome = textNameOfIncome.getText();
+        String valueOfNewIncome = textValuieOdIncome.getText();
+        String categoryOfNewIncome;
+
+        if(checkBoxCategory.isSelected())
+        {
+            categoryOfNewIncome = choiceBoxCategoryOfIncome.getValue().toString();
+        }
+    }
+
     /**
      *  Initialize method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -57,15 +78,12 @@ public class userIncomeController extends ClassController
 
         if(userSession != null)
         {
+            choiceBoxAccount.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setCondition(newValue.toString()) );
             setMenuAccount();
             choiceBoxAccount.getSelectionModel().selectFirst();
             setDisableSectionOfIncome(false);
+            setCondition(choiceBoxAccount.getValue().toString());
         }
-    }
-
-    public void showUser()
-    {
-        System.out.println("Show user " + userSession);
     }
 
     private void setDisableSectionOfIncome(boolean disable)
@@ -100,7 +118,7 @@ public class userIncomeController extends ClassController
         String[] items = lookForExistAccount();
         int sizeOfItem = items.length;
 
-        for(int i = 0; i <= sizeOfItem - 1; i++)
+        for(int i = 0; i <= sizeOfItem - 1; i += 2)
         {
             choiceBoxAccount.getItems().add(items[i]);
         }
@@ -120,12 +138,13 @@ public class userIncomeController extends ClassController
 
         int size = file.size();
         size -= 2;
-        size = size / 2;
 
         String[] positionInMenu = new String[size];
         int iterator = 0;
 
-        for(int i = 3; i <= size * 2 + 2; i += 2)
+        tab = positionInMenu;
+
+        for(int i = 3; i <= size + 2; i ++)
         {
             positionInMenu[iterator] = file.readLine(i);
             iterator += 1;
@@ -134,7 +153,30 @@ public class userIncomeController extends ClassController
         return positionInMenu;
     }
 
+    private void setCondition(String setAccount)
+    {
+        int idOfPosition = getIdOfPosition(setAccount, tab);
+        labelCondition.setText(tab[idOfPosition + 1] + " zł");
+    }
+
+    private int getIdOfPosition(String position, String[] tab)
+    {
+        int size = tab.length;
+        int result = -1;
+
+        for(int i = 0; i <= size - 1; i++)
+        {
+            if(tab[i].trim().equals(position.trim()))
+            {
+                result = i;
+            }
+        }
+
+        return result;
+    }
+
     LanguageEngine translation = new LanguageEngine();
+    String[] tab = null;
 
     @FXML
     Button buttonReturn = new Button();
