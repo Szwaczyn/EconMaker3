@@ -4,8 +4,12 @@ import Controllers.ClassController;
 import builder.ChangeWindowBuilder;
 import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
+import hoodStuff.DataIntegration;
 import hoodStuff.LanguageEngine;
 import hoodStuff.UserFile;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 
@@ -19,18 +23,6 @@ public class userIncomeController extends ClassController
      *  Action method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
-    @FXML
-    public void loadContent()
-    {
-        if(choiceBoxAccount.getItems().isEmpty()) { setMenuAccount(); }
-        System.out.println("ok");
-    }
-
-    @FXML
-    public void loadEqupiment()
-    {
-        if(choiceBoxAccount.getSelectionModel().isEmpty()) { setDisableSectionOfIncome(false); }
-    }
 
     @FXML
     public void actionReturn()
@@ -60,8 +52,20 @@ public class userIncomeController extends ClassController
     public void initialize()
     {
         setLanguage();
-        checkCategory();
+        choiceBoxCategoryOfIncome.setDisable(true);
         setDisableSectionOfIncome(true);
+
+        if(userSession != null)
+        {
+            setMenuAccount();
+            choiceBoxAccount.getSelectionModel().selectFirst();
+            setDisableSectionOfIncome(false);
+        }
+    }
+
+    public void showUser()
+    {
+        System.out.println("Show user " + userSession);
     }
 
     private void setDisableSectionOfIncome(boolean disable)
@@ -85,6 +89,7 @@ public class userIncomeController extends ClassController
         labelNameOfIncome.setText(translation.setUpLanguage(96));
         labelValueOfIncome.setText(translation.setUpLanguage(97));
         labelDataOfIncome.setText(translation.setUpLanguage(98));
+        labelCurrentCondition.setText(translation.setUpLanguage(99));
 
         checkBoxCategory.setText(translation.setUpLanguage(88));
     }
@@ -107,6 +112,11 @@ public class userIncomeController extends ClassController
                 .addFileName(userSession.getLogin() + ".dll")
                 .addPath(userSession.getProfilePath())
                 .build();
+
+        if(!file.isExist())
+        {
+            file.createFile();
+        }
 
         int size = file.size();
         size -= 2;
@@ -146,6 +156,10 @@ public class userIncomeController extends ClassController
     Label labelValueOfIncome = new Label();
     @FXML
     Label labelDataOfIncome = new Label();
+    @FXML
+    Label labelCurrentCondition = new Label();
+    @FXML
+    Label labelCondition = new Label();
 
     @FXML
     CheckBox checkBoxCategory = new CheckBox();

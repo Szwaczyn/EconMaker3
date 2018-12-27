@@ -13,6 +13,11 @@ public class ClassController
      * Windows system - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
+    public void showUser()
+    {
+        System.out.println(userSession);
+    }
+
     public MainController mainControllerVar;
 
     public void setMainController(MainController msc)

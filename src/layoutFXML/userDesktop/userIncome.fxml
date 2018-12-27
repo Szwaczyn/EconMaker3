@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.userDesktop.userIncomeController">
    <children>
@@ -46,10 +47,24 @@
                </padding>
                <children>
                   <Label fx:id="labelAccount" text="Konto" />
-                  <ChoiceBox fx:id="choiceBoxAccount" onMouseClicked="#loadEqupiment" onMouseEntered="#loadContent" prefHeight="30.0" prefWidth="472.0">
+                  <ChoiceBox fx:id="choiceBoxAccount" prefHeight="30.0" prefWidth="472.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ChoiceBox>
+                  <HBox prefHeight="26.0" prefWidth="472.0">
+                     <children>
+                        <Label fx:id="labelCurrentCondition" text="Aktualny stan: ">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelCondition" text="0">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <VBox prefHeight="670.0" prefWidth="500.0" spacing="20.0">
