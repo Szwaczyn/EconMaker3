@@ -36,9 +36,9 @@
             </Button>
          </children>
       </VBox>
-      <HBox layoutX="200.0" layoutY="80.0" prefHeight="670.0" prefWidth="1001.0">
+      <HBox layoutX="200.0" layoutY="80.0" prefHeight="615.0" prefWidth="1001.0">
          <children>
-            <VBox prefHeight="685.0" prefWidth="522.0" spacing="20.0">
+            <VBox prefHeight="608.0" prefWidth="512.0" spacing="20.0">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -82,7 +82,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></ChoiceBox>
                   <Label fx:id="labelDataOfIncome" text="Data" />
-                  <DatePicker fx:id="dataPickerOfIncome" prefHeight="30.0" prefWidth="450.0">
+                  <DatePicker fx:id="datePickerOfIncome" prefHeight="30.0" prefWidth="450.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></DatePicker>
@@ -103,5 +103,10 @@
             </VBox>
          </children>
       </HBox>
+      <Label fx:id="labelAlert" alignment="CENTER" layoutX="200.0" layoutY="695.0" prefHeight="57.0" prefWidth="1001.0" text="Label">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

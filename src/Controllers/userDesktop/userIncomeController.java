@@ -7,11 +7,12 @@ import hoodStuff.ChangeWindow;
 import hoodStuff.DataIntegration;
 import hoodStuff.LanguageEngine;
 import hoodStuff.UserFile;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
+import javafx.util.StringConverter;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created $(DATE)
@@ -58,11 +59,49 @@ public class userIncomeController extends ClassController
         String accountOfNewIncome = choiceBoxAccount.getValue().toString();
         String nameOfNewIncome = textNameOfIncome.getText();
         String valueOfNewIncome = textValuieOdIncome.getText();
-        String categoryOfNewIncome;
+        String dateOfIncome = String.valueOf(datePickerOfIncome.getValue());
 
-        if(checkBoxCategory.isSelected())
+        DataIntegration integration = new DataIntegration(valueOfNewIncome);
+
+        if(!integration.isItValidCurrency())
         {
-            categoryOfNewIncome = choiceBoxCategoryOfIncome.getValue().toString();
+            labelAlert.setText(translation.setUpLanguage(100));
+        }
+        else
+        {
+            UserFile file = new UserFileBuilder()
+                    .addPath(userSession.getProfilePath())
+                    .addFileName("BASE"+accountOfNewIncome+".base")
+                    .build();
+
+            file.writeDown(nameOfNewIncome);
+            file.writeDown("+ " + valueOfNewIncome);
+            file.writeDown(dateOfIncome);
+            if(checkBoxCategory.isSelected() && !choiceBoxCategoryOfIncome.getValue().toString().isEmpty())
+            {
+                file.writeDown(choiceBoxCategoryOfIncome.getValue().toString());
+            }
+            else {
+                file.writeDown(" ");
+            }
+
+            file = new UserFileBuilder()
+                    .addPath(userSession.getProfilePath())
+                    .addFileName(userSession.getLogin() + ".dll")
+                    .build();
+
+            int lineToChange = file.searchLine(choiceBoxAccount.getValue().toString());
+            double oldValue = Double.parseDouble(tab[idOfAccount + 1]);
+            double amountToAdd = Double.parseDouble(valueOfNewIncome);
+            oldValue += amountToAdd;
+            String newValue = String.valueOf(oldValue);
+
+            file.changeLine(integration.getValidCurrency(newValue), lineToChange);
+
+            labelAlert.setText(translation.setUpLanguage(101));
+
+            tab = lookForExistAccount();
+            setCondition(choiceBoxAccount.getValue().toString());
         }
     }
 
@@ -92,7 +131,7 @@ public class userIncomeController extends ClassController
         textValuieOdIncome.setDisable(disable);
         checkBoxCategory.setDisable(disable);
         choiceBoxCategoryOfIncome.setDisable(disable);
-        dataPickerOfIncome.setDisable(disable);
+        datePickerOfIncome.setDisable(disable);
         buttonSaveIncome.setDisable(disable);
         buttonClearIncome.setDisable(disable);
     }
@@ -155,8 +194,9 @@ public class userIncomeController extends ClassController
 
     private void setCondition(String setAccount)
     {
-        int idOfPosition = getIdOfPosition(setAccount, tab);
-        labelCondition.setText(tab[idOfPosition + 1] + " zł");
+        idOfAccount = getIdOfPosition(setAccount, tab);
+
+        labelCondition.setText(tab[idOfAccount + 1] + " zł");
     }
 
     private int getIdOfPosition(String position, String[] tab)
@@ -177,6 +217,7 @@ public class userIncomeController extends ClassController
 
     LanguageEngine translation = new LanguageEngine();
     String[] tab = null;
+    int idOfAccount;
 
     @FXML
     Button buttonReturn = new Button();
@@ -202,6 +243,8 @@ public class userIncomeController extends ClassController
     Label labelCurrentCondition = new Label();
     @FXML
     Label labelCondition = new Label();
+    @FXML
+    Label labelAlert = new Label();
 
     @FXML
     CheckBox checkBoxCategory = new CheckBox();
@@ -212,5 +255,5 @@ public class userIncomeController extends ClassController
     TextField textValuieOdIncome = new TextField();
 
     @FXML
-    DatePicker dataPickerOfIncome = new DatePicker();
+    DatePicker datePickerOfIncome = new DatePicker();
 }
