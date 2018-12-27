@@ -76,7 +76,10 @@
                   <TextField fx:id="textNameOfIncome" />
                   <Label fx:id="labelValueOfIncome" text="Wartość" />
                   <TextField fx:id="textValuieOdIncome" />
-                  <CheckBox fx:id="checkBoxCategory" mnemonicParsing="false" onAction="#checkCategory" text="Kategorie" />
+                  <CheckBox fx:id="checkBoxCategory" mnemonicParsing="false" onAction="#checkCategory" text="Kategorie">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
                   <ChoiceBox fx:id="choiceBoxCategoryOfIncome" prefHeight="30.0" prefWidth="450.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />

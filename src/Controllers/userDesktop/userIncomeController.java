@@ -9,10 +9,6 @@ import hoodStuff.LanguageEngine;
 import hoodStuff.UserFile;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
-import javafx.util.StringConverter;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Created $(DATE)
@@ -43,6 +39,14 @@ public class userIncomeController extends ClassController
     public void checkCategory()
     {
         choiceBoxCategoryOfIncome.setDisable(!checkBoxCategory.isSelected());
+        choiceBoxCategoryOfIncome.getItems().clear();
+        fillChoiceBoxCategoryOfIncome();
+        if(choiceBoxCategoryOfIncome.getItems().isEmpty())
+        {
+            labelAlert.setText(translation.setUpLanguage(102));
+            checkBoxCategory.setSelected(false);
+            choiceBoxCategoryOfIncome.setDisable(true);
+        }
     }
 
     @FXML
@@ -123,6 +127,8 @@ public class userIncomeController extends ClassController
             setDisableSectionOfIncome(false);
             setCondition(choiceBoxAccount.getValue().toString());
         }
+
+        choiceBoxCategoryOfIncome.setDisable(true);
     }
 
     private void setDisableSectionOfIncome(boolean disable)
@@ -186,6 +192,40 @@ public class userIncomeController extends ClassController
         for(int i = 3; i <= size + 2; i ++)
         {
             positionInMenu[iterator] = file.readLine(i);
+            iterator += 1;
+        }
+
+        return positionInMenu;
+    }
+
+    private void fillChoiceBoxCategoryOfIncome()
+    {
+        String[] items = lookForExistCategories();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i++)
+        {
+            choiceBoxCategoryOfIncome.getItems().add(items[i]);
+        }
+
+        choiceBoxCategoryOfIncome.getSelectionModel().selectFirst();
+    }
+
+    private String[] lookForExistCategories()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getFileNameCategories())
+                .addPath(userSession.getProfilePath())
+                .build();
+
+        int size = file.size();
+
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
+
+        for(int i = 0; i <= size - 1; i += 1)
+        {
+            positionInMenu[iterator] = file.readLine(i + 1);
             iterator += 1;
         }
 
