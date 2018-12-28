@@ -76,6 +76,12 @@ public class userSettingsCategoriesController extends ClassController
         passwordFieldDeleteCategory.setText("");
         choiceCategory.getItems().clear();
         fillChoiceBox();
+
+        if(choiceCategory.getItems().isEmpty())
+        {
+            setAlert(translation.setUpLanguage(103));
+            buttonDeleteCategory.setDisable(true);
+        }
     }
 
     @FXML
@@ -159,6 +165,11 @@ public class userSettingsCategoriesController extends ClassController
         if(!isSelectedNewCategory)
         {
             fillChoiceBox();
+            if(choiceCategory.getItems().isEmpty())
+            {
+                setAlert(translation.setUpLanguage(103));
+                buttonDeleteCategory.setDisable(true);
+            }
         }
     }
 

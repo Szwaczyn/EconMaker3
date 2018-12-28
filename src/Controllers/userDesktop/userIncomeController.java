@@ -67,9 +67,10 @@ public class userIncomeController extends ClassController
 
         DataIntegration integration = new DataIntegration(valueOfNewIncome);
 
-        if(!integration.isItValidCurrency())
+        if(!integration.isItValidCurrency() || !checkDate(dateOfIncome))
         {
             labelAlert.setText(translation.setUpLanguage(100));
+
         }
         else
         {
@@ -112,6 +113,24 @@ public class userIncomeController extends ClassController
     /**
      *  Initialize method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private boolean checkDate(String date)
+    {
+        boolean isValidDate = true;
+        String[] splitedDate = date.split("-");
+
+        try{
+            if(Integer.parseInt(splitedDate[2]) < 0 && Integer.parseInt(splitedDate[2]) > 31) isValidDate = false;
+            if(Integer.parseInt(splitedDate[1]) < 0 && Integer.parseInt(splitedDate[1]) > 12) isValidDate = false;
+            Integer.parseInt(splitedDate[0]);
+
+
+        } catch(Exception e) {
+            isValidDate = false;
+        }
+
+        return isValidDate;
+    }
 
     public void initialize()
     {
