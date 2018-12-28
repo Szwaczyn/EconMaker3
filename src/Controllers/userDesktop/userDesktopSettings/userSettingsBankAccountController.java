@@ -45,8 +45,17 @@ public class userSettingsBankAccountController extends ClassController
             choiceBoxNameOfDeleteAccount.getItems().remove(choiceBoxNameOfDeleteAccount.getValue());
             choiceBoxNameOfDeleteAccount.getSelectionModel().selectFirst();
 
+            clearTextField();
+
             labelAlert.setText(translation.setUpLanguage(67));
             labelAlert.setVisible(true);
+
+            if(choiceBoxNameOfDeleteAccount.getItems().isEmpty())
+            {
+                labelAlert.setText(translation.setUpLanguage(104));
+                labelAlert.setVisible(true);
+                buttonDeleteAccount.setDisable(true);
+            }
         }
         else
         {
@@ -90,6 +99,13 @@ public class userSettingsBankAccountController extends ClassController
                 setCreateAccountSelected(false);
                 setMenuDeleteAccount();
                 choiceBoxNameOfDeleteAccount.getSelectionModel().selectFirst();
+
+                if(choiceBoxNameOfDeleteAccount.getItems().isEmpty())
+                {
+                    labelAlert.setText(translation.setUpLanguage(104));
+                    labelAlert.setVisible(true);
+                    buttonDeleteAccount.setDisable(true);
+                }
             }
         }
     }
@@ -102,6 +118,7 @@ public class userSettingsBankAccountController extends ClassController
     {
         if(procedureCreateAccount(textNameOfNewAccount.getText().toLowerCase().trim(), textConditionOfNewAccount.getText()))
         {
+            clearTextField();
             labelAlert.setText(translation.setUpLanguage(60));
             labelAlert.setVisible(true);
         }
