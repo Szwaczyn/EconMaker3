@@ -45,10 +45,9 @@ public class userSettingsBankAccountController extends ClassController
             choiceBoxNameOfDeleteAccount.getItems().remove(choiceBoxNameOfDeleteAccount.getValue());
             choiceBoxNameOfDeleteAccount.getSelectionModel().selectFirst();
 
-            clearTextField();
-
             labelAlert.setText(translation.setUpLanguage(67));
             labelAlert.setVisible(true);
+            textPasswordDeleteAccount.setText("");
 
             if(choiceBoxNameOfDeleteAccount.getItems().isEmpty())
             {

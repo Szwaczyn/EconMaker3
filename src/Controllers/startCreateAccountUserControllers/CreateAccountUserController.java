@@ -118,10 +118,12 @@ public class CreateAccountUserController
                     .build();
 
             createUserProfile(user);
+            clearTextField();
+            labelAlert.setText(translation.setUpLanguage(106));
         }
         else
         {
-            labelAlert.setText("Taki użytkownik już istnieje.");
+            labelAlert.setText(translation.setUpLanguage(105));
         }
 
         labelAlert.setVisible(true);

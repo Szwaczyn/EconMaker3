@@ -72,6 +72,7 @@ public class userSettingsUserAccountController extends ClassController
             file.changeLine(encrypt.MD5(), userSession.getLoginPosition());
             labelAlert.setText(translation.setUpLanguage(75));
             labelAlert.setVisible(true);
+            actionClearField();
 
         }
         else
