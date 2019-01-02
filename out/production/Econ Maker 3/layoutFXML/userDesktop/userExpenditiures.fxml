@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.userDesktop.userIncomeController">
+<Pane fx:id="paneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="748.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.userDesktop.userExpenditiuresController">
    <children>
       <ImageView fx:id="button_1" fitHeight="80.0" fitWidth="1241.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -28,7 +28,7 @@
       </ImageView>
       <VBox layoutY="80.0" prefHeight="443.0" prefWidth="200.0">
          <children>
-            <Button fx:id="buttonReview" mnemonicParsing="false" onAction="#actionReturn" prefHeight="50.0" prefWidth="200.0" text="Powrót">
+            <Button fx:id="buttonReturn" mnemonicParsing="false" onAction="#actionReturn" prefHeight="50.0" prefWidth="200.0" text="Powrót">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -57,36 +57,36 @@
                   <Insets left="20.0" right="20.0" top="30.0" />
                </padding>
                <children>
-                  <Label fx:id="labelNameOfIncome" text="Nazwa" />
-                  <TextField fx:id="textNameOfIncome" />
-                  <Label fx:id="labelValueOfIncome" text="Wartość" />
-                  <TextField fx:id="textValuieOdIncome" />
-                  <Label fx:id="labelCategoryOfIncome" text="Kategoria" />
-                  <ChoiceBox fx:id="choiceBoxCategoryOfIncome" prefHeight="30.0" prefWidth="450.0">
+                  <Label fx:id="labelNameOfExpenditiure" text="Nazwa" />
+                  <TextField fx:id="textNameOfExpenditiure" />
+                  <Label fx:id="labelValueOfExpenditiure" text="Wartość" />
+                  <TextField fx:id="textValuieOfExpenditiure" />
+                  <CheckBox fx:id="checkBoxCategoryOfExpenditiure" mnemonicParsing="false" text="Kategorie" />
+                  <ChoiceBox fx:id="choiceBoxCategoryOfExpenditiure" prefHeight="30.0" prefWidth="450.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ChoiceBox>
-                  <Label fx:id="labelDataOfIncome" text="Data" />
-                  <DatePicker fx:id="datePickerOfIncome" prefHeight="30.0" prefWidth="450.0" />
-                  <CheckBox mnemonicParsing="false" text="Budżet">
+                  <Label fx:id="labelDataOfExpenditiure" text="Data" />
+                  <DatePicker fx:id="datePickerOfExpenditiure" prefHeight="30.0" prefWidth="450.0" />
+                  <CheckBox fx:id="checkBoxBoudgetOfExpenditiure" mnemonicParsing="false" text="Budżet">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </CheckBox>
-                  <Label text="Wybierz budżet" />
-                  <ChoiceBox prefHeight="30.0" prefWidth="450.0">
+                  <Label fx:id="labelSetBoudgetOfExpenditiure" text="Wybierz budżet" />
+                  <ChoiceBox fx:id="choiceBoxSetBoudgetOfExpenditiure" prefHeight="30.0" prefWidth="450.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ChoiceBox>
                   <HBox prefHeight="40.0" prefWidth="450.0">
                      <children>
-                        <Button fx:id="buttonSaveIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Zapisz">
+                        <Button fx:id="buttonSaveExpenditiure" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Zapisz">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
                         <Pane prefHeight="40.0" prefWidth="74.0" />
-                        <Button fx:id="buttonClearIncome" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Wyczyść">
+                        <Button fx:id="buttonClearExpenditiure" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Wyczyść">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>

@@ -68,7 +68,7 @@
                      </cursor></ChoiceBox>
                   <Label fx:id="labelDataOfExpenditiure" text="Data" />
                   <DatePicker fx:id="datePickerOfExpenditiure" prefHeight="30.0" prefWidth="450.0" />
-                  <CheckBox fx:id="CheckBoxBoudgetOfExpenditiure" mnemonicParsing="false" text="Budżet">
+                  <CheckBox fx:id="checkBoxBoudgetOfExpenditiure" mnemonicParsing="false" text="Budżet">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
