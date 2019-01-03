@@ -254,7 +254,6 @@ public class userIncomeController extends ClassController
     private void setCondition(String setAccount)
     {
         idOfAccount = getIdOfPosition(setAccount, tab);
-
         labelCondition.setText(tab[idOfAccount + 1] + " zł");
     }
 

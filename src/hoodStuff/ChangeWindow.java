@@ -2,6 +2,7 @@ package hoodStuff;
 
 import Controllers.ClassController;
 import Controllers.MainController;
+import Controllers.userDesktop.userExpenditiuresController;
 import Controllers.userDesktop.userIncomeController;
 import builder.ChangeWindowBuilder;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,10 @@ public class ChangeWindow
             {
                 procedureInitialaizeIncomeController();
             }
+            else if(this.target instanceof userExpenditiuresController)
+            {
+                procedureInitializeExpenditiureController();
+            }
             // TODO Przekazywanie tablicy budzetu this.target.
         } catch(Exception e) {
             //TODO Make System Error
@@ -51,6 +56,12 @@ public class ChangeWindow
     private void procedureInitialaizeIncomeController()
     {
         userIncomeController usr = (userIncomeController) this.target;
+        usr.initialize();
+    }
+
+    private void procedureInitializeExpenditiureController()
+    {
+        userExpenditiuresController usr = (userExpenditiuresController) this.target;
         usr.initialize();
     }
 }

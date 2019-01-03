@@ -2,8 +2,10 @@ package Controllers.userDesktop;
 
 import Controllers.ClassController;
 import builder.ChangeWindowBuilder;
+import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
 import hoodStuff.LanguageEngine;
+import hoodStuff.UserFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -12,6 +14,10 @@ import javafx.scene.control.*;
  */
 public class userExpenditiuresController extends ClassController
 {
+    /**
+     *  Action - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
     @FXML
     public void actionReturn()
     {
@@ -27,7 +33,6 @@ public class userExpenditiuresController extends ClassController
         window.changeWindow();
     }
 
-
     /**
      *  Initialize - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -35,6 +40,14 @@ public class userExpenditiuresController extends ClassController
     public void initialize()
     {
         setUpLanguage();
+
+        if(this.userSession != null)
+        {
+            choiceBoxAccount.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setCondition(newValue.toString()) );
+            setMenuAccount();
+            choiceBoxAccount.getSelectionModel().selectFirst();
+            setCondition(choiceBoxAccount.getValue().toString());
+        }
     }
 
     private void setUpLanguage()
@@ -49,7 +62,74 @@ public class userExpenditiuresController extends ClassController
         labelNameOfExpenditiure.setText(translation.setUpLanguage(107));
         labelValueOfExpenditiure.setText(translation.setUpLanguage(108));
         labelDataOfExpenditiure.setText(translation.setUpLanguage(109));
+        labelCurrentCondition.setText(translation.setUpLanguage(99));
     }
+
+    private void setCondition(String setAccount)
+    {
+        idOfAccount = getIdOfPosition(setAccount, tab);
+        labelCondition.setText(tab[idOfAccount + 1] + " zł");
+    }
+
+    private int getIdOfPosition(String position, String[] tab)
+    {
+        int size = tab.length;
+        int result = -1;
+
+        for(int i = 0; i <= size - 1; i++)
+        {
+            if(tab[i].trim().equals(position.trim()))
+            {
+                result = i;
+            }
+        }
+
+        return result;
+    }
+
+    private void setMenuAccount()
+    {
+        choiceBoxAccount.getItems().clear();
+        String[] items = lookForExistAccount();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i += 2)
+        {
+            choiceBoxAccount.getItems().add(items[i]);
+        }
+    }
+
+    private String[] lookForExistAccount()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getLogin() + ".dll")
+                .addPath(userSession.getProfilePath())
+                .build();
+
+        if(!file.isExist())
+        {
+            file.createFile();
+        }
+
+        int size = file.size();
+        size -= 2;
+
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
+
+        tab = positionInMenu;
+
+        for(int i = 3; i <= size + 2; i ++)
+        {
+            positionInMenu[iterator] = file.readLine(i);
+            iterator += 1;
+        }
+
+        return positionInMenu;
+    }
+
+    String[] tab = null;
+    int idOfAccount;
 
     /**
      *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -74,6 +154,10 @@ public class userExpenditiuresController extends ClassController
     Label labelDataOfExpenditiure = new Label();
     @FXML
     Label labelSetBoudgetOfExpenditiure = new Label();
+    @FXML
+    Label labelCurrentCondition = new Label();
+    @FXML
+    Label labelCondition = new Label();
 
     @FXML
     CheckBox checkBoxCategoryOfExpenditiure = new CheckBox();
