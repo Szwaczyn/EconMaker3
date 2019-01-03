@@ -38,6 +38,14 @@ public class userExpenditiuresController extends ClassController
     public void setCategory()
     {
         setDisableSectionOfCategory( !checkBoxCategoryOfExpenditiure.isSelected() );
+        choiceBoxCategoryOfExpenditiure.getItems().clear();
+        fillChoiceBoxCategoryOfIncome();
+        if(choiceBoxCategoryOfExpenditiure.getItems().isEmpty() && checkBoxCategoryOfExpenditiure.isSelected())
+        {
+            setAlert(translation.setUpLanguage(102));
+            checkBoxCategoryOfExpenditiure.setSelected(false);
+            choiceBoxCategoryOfExpenditiure.setDisable(true);
+        }
     }
 
     @FXML
@@ -63,11 +71,9 @@ public class userExpenditiuresController extends ClassController
     {
         DataIntegration integration = new DataIntegration(textValuieOfExpenditiure.getText());
 
-        System.out.println(integration.isValidDate(datePickerOfExpenditiure.getValue().toString()));
-
         if(integration.isItValidCurrency() && integration.isValidDate(datePickerOfExpenditiure.getValue().toString()))
         {
-            System.out.println("ok");
+
         }
         else
         {
@@ -90,15 +96,16 @@ public class userExpenditiuresController extends ClassController
                 setMenuAccount();
                 choiceBoxAccount.getSelectionModel().selectFirst();
                 setCondition(choiceBoxAccount.getValue().toString());
+
             } catch (Exception e) {
                 setAlert(translation.setUpLanguage(104));
             }
 
             setDisableSectionOfExpenditiure(choiceBoxAccount.getItems().isEmpty());
-        }
 
-        setBoudget();
-        setCategory();
+            setBoudget();
+            setCategory();
+        }
     }
 
     private void setDisableSectionOfExpenditiure(boolean set)
@@ -212,6 +219,40 @@ public class userExpenditiuresController extends ClassController
     {
         labelAlert.setText("");
         labelAlert.setVisible(false);
+    }
+
+    private void fillChoiceBoxCategoryOfIncome()
+    {
+        String[] items = lookForExistCategories();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i++)
+        {
+            choiceBoxCategoryOfExpenditiure.getItems().add(items[i]);
+        }
+
+        choiceBoxCategoryOfExpenditiure.getSelectionModel().selectFirst();
+    }
+
+    private String[] lookForExistCategories()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getFileNameCategories())
+                .addPath(userSession.getProfilePath())
+                .build();
+
+        int size = file.size();
+
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
+
+        for(int i = 0; i <= size - 1; i += 1)
+        {
+            positionInMenu[iterator] = file.readLine(i + 1);
+            iterator += 1;
+        }
+
+        return positionInMenu;
     }
 
     String[] tab = null;
