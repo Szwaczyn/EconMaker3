@@ -39,7 +39,8 @@ public class userExpenditiuresController extends ClassController
     {
         setDisableSectionOfCategory( !checkBoxCategoryOfExpenditiure.isSelected() );
         choiceBoxCategoryOfExpenditiure.getItems().clear();
-        fillChoiceBoxCategoryOfIncome();
+        fillChoiceBoxCategoryOfExpenditiure();
+        choiceBoxSetBoudgetOfExpenditiure.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> setConditionOfBoudget(newValue.toString()));
         if(choiceBoxCategoryOfExpenditiure.getItems().isEmpty() && checkBoxCategoryOfExpenditiure.isSelected())
         {
             setAlert(translation.setUpLanguage(102));
@@ -52,6 +53,14 @@ public class userExpenditiuresController extends ClassController
     public void setBoudget()
     {
         setDisableSectionOfBoudget( !checkBoxBoudgetOfExpenditiure.isSelected() );
+        choiceBoxSetBoudgetOfExpenditiure.getItems().clear();
+        fillChoiceBoxBoudgetOfExpenditiure();
+        if(choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty() && checkBoxBoudgetOfExpenditiure.isSelected())
+        {
+            setAlert(translation.setUpLanguage(102));
+            checkBoxBoudgetOfExpenditiure.setSelected(false);
+            choiceBoxSetBoudgetOfExpenditiure.setDisable(true);
+        }
     }
 
     @FXML
@@ -152,6 +161,13 @@ public class userExpenditiuresController extends ClassController
         labelCondition.setText(tab[idOfAccount + 1] + " zł");
     }
 
+    private void setConditionOfBoudget(String setBoudget)
+    {
+        idOfBoudget = getIdOfPosition(setBoudget, tabBoudget);
+        if(checkBoxBoudgetOfExpenditiure.isSelected()) labelSetBoudgetOfExpenditiure.setText(translation.setUpLanguage(99) + tabBoudget[idOfBoudget + 1] +
+                " zł");
+    }
+
     private int getIdOfPosition(String position, String[] tab)
     {
         int size = tab.length;
@@ -221,7 +237,7 @@ public class userExpenditiuresController extends ClassController
         labelAlert.setVisible(false);
     }
 
-    private void fillChoiceBoxCategoryOfIncome()
+    private void fillChoiceBoxCategoryOfExpenditiure()
     {
         String[] items = lookForExistCategories();
         int sizeOfItem = items.length;
@@ -255,8 +271,52 @@ public class userExpenditiuresController extends ClassController
         return positionInMenu;
     }
 
+    private void fillChoiceBoxBoudgetOfExpenditiure()
+    {
+        choiceBoxSetBoudgetOfExpenditiure.getItems().clear();
+        String[] items = lookForExistBoudget();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i += 2)
+        {
+            choiceBoxSetBoudgetOfExpenditiure.getItems().add(items[i]);
+        }
+
+        choiceBoxSetBoudgetOfExpenditiure.getSelectionModel().selectFirst();
+    }
+
+    private String[] lookForExistBoudget()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getFileNameBoudget())
+                .addPath(userSession.getProfilePath())
+                .build();
+
+        if(!file.isExist())
+        {
+            file.createFile();
+        }
+
+        int size = file.size();
+
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
+
+        tabBoudget = positionInMenu;
+
+        for(int i = 1; i <= size; i ++)
+        {
+            positionInMenu[iterator] = file.readLine(i);
+            iterator += 1;
+        }
+
+        return positionInMenu;
+    }
+
     String[] tab = null;
+    String[] tabBoudget = null;
     int idOfAccount;
+    int idOfBoudget;
 
     /**
      *  Controls - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

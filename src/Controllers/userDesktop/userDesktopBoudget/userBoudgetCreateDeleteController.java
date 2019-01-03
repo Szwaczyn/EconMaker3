@@ -23,6 +23,7 @@ public class userBoudgetCreateDeleteController extends ClassController
     public void actionCreateBoudget()
     {
         addBoudget(textNameOfNewBoudget.getText(), textConditionOfNewBoudget.getText());
+        actionClearTextField();
     }
 
     @FXML
