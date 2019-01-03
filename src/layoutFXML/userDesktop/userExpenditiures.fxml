@@ -36,7 +36,7 @@
             </Button>
          </children>
       </VBox>
-      <HBox layoutX="200.0" layoutY="80.0" prefHeight="670.0" prefWidth="1001.0">
+      <HBox layoutX="200.0" layoutY="80.0" prefHeight="623.0" prefWidth="1001.0">
          <children>
             <VBox prefHeight="685.0" prefWidth="522.0" spacing="20.0">
                <HBox.margin>
@@ -76,14 +76,17 @@
                   <TextField fx:id="textNameOfExpenditiure" />
                   <Label fx:id="labelValueOfExpenditiure" text="Wartość" />
                   <TextField fx:id="textValuieOfExpenditiure" />
-                  <CheckBox fx:id="checkBoxCategoryOfExpenditiure" mnemonicParsing="false" text="Kategorie" />
+                  <CheckBox fx:id="checkBoxCategoryOfExpenditiure" mnemonicParsing="false" onAction="#setCategory" text="Kategorie">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
                   <ChoiceBox fx:id="choiceBoxCategoryOfExpenditiure" prefHeight="30.0" prefWidth="450.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ChoiceBox>
                   <Label fx:id="labelDataOfExpenditiure" text="Data" />
                   <DatePicker fx:id="datePickerOfExpenditiure" prefHeight="30.0" prefWidth="450.0" />
-                  <CheckBox fx:id="checkBoxBoudgetOfExpenditiure" mnemonicParsing="false" text="Budżet">
+                  <CheckBox fx:id="checkBoxBoudgetOfExpenditiure" mnemonicParsing="false" onAction="#setBoudget" text="Budżet">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -101,7 +104,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
                         <Pane prefHeight="40.0" prefWidth="74.0" />
-                        <Button fx:id="buttonClearExpenditiure" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Wyczyść">
+                        <Button fx:id="buttonClearExpenditiure" mnemonicParsing="false" onAction="#cleatTextField" prefHeight="40.0" prefWidth="210.0" text="Wyczyść">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
@@ -111,5 +114,10 @@
             </VBox>
          </children>
       </HBox>
+      <Label fx:id="labelAlert" alignment="CENTER" contentDisplay="CENTER" layoutX="200.0" layoutY="703.0" prefHeight="50.0" prefWidth="1001.0" text="Label">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

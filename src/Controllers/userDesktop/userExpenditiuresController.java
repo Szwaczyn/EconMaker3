@@ -33,6 +33,30 @@ public class userExpenditiuresController extends ClassController
         window.changeWindow();
     }
 
+    @FXML
+    public void setCategory()
+    {
+        setDisableSectionOfCategory( !checkBoxCategoryOfExpenditiure.isSelected() );
+    }
+
+    @FXML
+    public void setBoudget()
+    {
+        setDisableSectionOfBoudget( !checkBoxBoudgetOfExpenditiure.isSelected() );
+    }
+
+    @FXML
+    public void cleatTextField()
+    {
+        textNameOfExpenditiure.setText("");
+        textValuieOfExpenditiure.setText("");
+        checkBoxCategoryOfExpenditiure.setSelected(false);
+        setCategory();
+        checkBoxBoudgetOfExpenditiure.setSelected(false);
+        setBoudget();
+        clearAlert();
+    }
+
     /**
      *  Initialize - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -43,12 +67,41 @@ public class userExpenditiuresController extends ClassController
 
         if(this.userSession != null)
         {
-            choiceBoxAccount.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setCondition(newValue.toString()) );
-            setMenuAccount();
-            choiceBoxAccount.getSelectionModel().selectFirst();
-            setCondition(choiceBoxAccount.getValue().toString());
+            try {
+                choiceBoxAccount.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> setCondition(newValue.toString()));
+                setMenuAccount();
+                choiceBoxAccount.getSelectionModel().selectFirst();
+                setCondition(choiceBoxAccount.getValue().toString());
+            } catch (Exception e) {
+                setAlert(translation.setUpLanguage(104));
+            }
+
+            setDisableSectionOfExpenditiure(choiceBoxAccount.getItems().isEmpty());
         }
+
+        setBoudget();
+        setCategory();
     }
+
+    private void setDisableSectionOfExpenditiure(boolean set)
+    {
+        textNameOfExpenditiure.setDisable(set);
+        textValuieOfExpenditiure.setDisable(set);
+        checkBoxCategoryOfExpenditiure.setDisable(set);
+        choiceBoxCategoryOfExpenditiure.setDisable(set);
+        datePickerOfExpenditiure.setDisable(set);
+        checkBoxBoudgetOfExpenditiure.setDisable(set);
+        choiceBoxSetBoudgetOfExpenditiure.setDisable(set);
+        buttonSaveExpenditiure.setDisable(set);
+        buttonClearExpenditiure.setDisable(set);
+    }
+
+    private void setDisableSectionOfCategory(boolean set)
+    {
+        choiceBoxCategoryOfExpenditiure.setDisable(set);
+    }
+
+    private void setDisableSectionOfBoudget(boolean set) { choiceBoxSetBoudgetOfExpenditiure.setDisable(set); }
 
     private void setUpLanguage()
     {
@@ -63,6 +116,9 @@ public class userExpenditiuresController extends ClassController
         labelValueOfExpenditiure.setText(translation.setUpLanguage(108));
         labelDataOfExpenditiure.setText(translation.setUpLanguage(109));
         labelCurrentCondition.setText(translation.setUpLanguage(99));
+
+        labelAlert.setText("");
+        labelAlert.setVisible(false);
     }
 
     private void setCondition(String setAccount)
@@ -128,6 +184,18 @@ public class userExpenditiuresController extends ClassController
         return positionInMenu;
     }
 
+    private void setAlert(String alert)
+    {
+        labelAlert.setText(alert);
+        labelAlert.setVisible(true);
+    }
+
+    private void clearAlert()
+    {
+        labelAlert.setText("");
+        labelAlert.setVisible(false);
+    }
+
     String[] tab = null;
     int idOfAccount;
 
@@ -158,6 +226,8 @@ public class userExpenditiuresController extends ClassController
     Label labelCurrentCondition = new Label();
     @FXML
     Label labelCondition = new Label();
+    @FXML
+    Label labelAlert = new Label();
 
     @FXML
     CheckBox checkBoxCategoryOfExpenditiure = new CheckBox();
