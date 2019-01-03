@@ -85,7 +85,10 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></ChoiceBox>
                   <Label fx:id="labelDataOfExpenditiure" text="Data" />
-                  <DatePicker fx:id="datePickerOfExpenditiure" prefHeight="30.0" prefWidth="450.0" />
+                  <DatePicker fx:id="datePickerOfExpenditiure" prefHeight="30.0" prefWidth="450.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></DatePicker>
                   <CheckBox fx:id="checkBoxBoudgetOfExpenditiure" mnemonicParsing="false" onAction="#setBoudget" text="Budżet">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -99,7 +102,7 @@
                   </ChoiceBox>
                   <HBox prefHeight="40.0" prefWidth="450.0">
                      <children>
-                        <Button fx:id="buttonSaveExpenditiure" mnemonicParsing="false" prefHeight="40.0" prefWidth="210.0" text="Zapisz">
+                        <Button fx:id="buttonSaveExpenditiure" mnemonicParsing="false" onAction="#actionAddExpenditiure" prefHeight="40.0" prefWidth="210.0" text="Zapisz">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>

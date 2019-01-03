@@ -4,6 +4,7 @@ import Controllers.ClassController;
 import builder.ChangeWindowBuilder;
 import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
+import hoodStuff.DataIntegration;
 import hoodStuff.LanguageEngine;
 import hoodStuff.UserFile;
 import javafx.fxml.FXML;
@@ -55,6 +56,23 @@ public class userExpenditiuresController extends ClassController
         checkBoxBoudgetOfExpenditiure.setSelected(false);
         setBoudget();
         clearAlert();
+    }
+
+    @FXML
+    public void actionAddExpenditiure()
+    {
+        DataIntegration integration = new DataIntegration(textValuieOfExpenditiure.getText());
+
+        System.out.println(integration.isValidDate(datePickerOfExpenditiure.getValue().toString()));
+
+        if(integration.isItValidCurrency() && integration.isValidDate(datePickerOfExpenditiure.getValue().toString()))
+        {
+            System.out.println("ok");
+        }
+        else
+        {
+            setAlert(translation.setUpLanguage(100));
+        }
     }
 
     /**

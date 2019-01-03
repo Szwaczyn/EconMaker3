@@ -1,5 +1,10 @@
 package hoodStuff;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Created $(DATE)
  */
@@ -61,6 +66,29 @@ public class DataIntegration
         }
 
         return String.valueOf(result);
+    }
+
+    public boolean isValidDate(String date)
+    {
+        String[] dateTab = date.split("-");
+        GregorianCalendar today = new GregorianCalendar();
+        boolean isThisValidDate = false;
+
+        int actualYear = today.get(Calendar.YEAR);
+        int month = today.get(Calendar.MONTH) + 1;
+        int day = today.get(Calendar.DAY_OF_MONTH);
+
+        if(actualYear == Integer.parseInt(dateTab[0]) && month >= Integer.parseInt(dateTab[1]) && day >= Integer.parseInt(dateTab[2]))
+        {
+            if(month == Integer.parseInt(dateTab[1]))
+            {
+                if(day >= Integer.parseInt(dateTab[2])) isThisValidDate = true;
+            }
+            else if(month > Integer.parseInt(dateTab[1])) isThisValidDate = true;
+        }
+        else if(actualYear > Integer.parseInt(dateTab[0])) isThisValidDate = true;
+
+        return isThisValidDate;
     }
 
     public DataIntegration(){}
