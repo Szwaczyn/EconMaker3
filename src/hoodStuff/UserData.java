@@ -294,6 +294,11 @@ public class UserData
 
     public String getProfilePath() { return UserFile.PROFILE_PATH + this.getLogin() + "/"; }
 
+    public String getFileNameAccount(String nameOfAccount)
+    {
+        return "BASE" + nameOfAccount.trim() + ".base";
+    }
+
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */

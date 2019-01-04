@@ -40,7 +40,6 @@ public class userExpenditiuresController extends ClassController
         setDisableSectionOfCategory( !checkBoxCategoryOfExpenditiure.isSelected() );
         choiceBoxCategoryOfExpenditiure.getItems().clear();
         fillChoiceBoxCategoryOfExpenditiure();
-        choiceBoxSetBoudgetOfExpenditiure.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> setConditionOfBoudget(newValue.toString()));
         if(choiceBoxCategoryOfExpenditiure.getItems().isEmpty() && checkBoxCategoryOfExpenditiure.isSelected())
         {
             setAlert(translation.setUpLanguage(102));
@@ -53,7 +52,7 @@ public class userExpenditiuresController extends ClassController
     public void setBoudget()
     {
         setDisableSectionOfBoudget( !checkBoxBoudgetOfExpenditiure.isSelected() );
-        choiceBoxSetBoudgetOfExpenditiure.getItems().clear();
+        if(!choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty())choiceBoxSetBoudgetOfExpenditiure.getItems().clear();
         fillChoiceBoxBoudgetOfExpenditiure();
         if(choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty() && checkBoxBoudgetOfExpenditiure.isSelected())
         {
@@ -82,12 +81,45 @@ public class userExpenditiuresController extends ClassController
 
         if(integration.isItValidCurrency() && integration.isValidDate(datePickerOfExpenditiure.getValue().toString()))
         {
+            String name = textNameOfExpenditiure.getText();
+            String value = textValuieOfExpenditiure.getText();
+            String date = datePickerOfExpenditiure.getValue().toString();
+            String category;
+            if(checkBoxCategoryOfExpenditiure.isSelected()) category = choiceBoxCategoryOfExpenditiure.getValue().toString();
 
+            if(checkBoxBoudgetOfExpenditiure.isSelected())
+            {
+
+            }
         }
         else
         {
             setAlert(translation.setUpLanguage(100));
         }
+    }
+
+    /**
+     *  Operation - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     */
+
+    private void saveToOperationFile(String data)
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilPath())
+                .addFileName(this.userSession.getFileNameAccount(choiceBoxAccount.getValue().toString()))
+                .build();
+
+        file.writeDown(data);
+    }
+
+    private void saveToBoudgetOperation(String data)
+    {
+
+    }
+
+    private void changeLineInBoudget()
+    {
+        
     }
 
     /**
@@ -111,7 +143,7 @@ public class userExpenditiuresController extends ClassController
             }
 
             setDisableSectionOfExpenditiure(choiceBoxAccount.getItems().isEmpty());
-
+            choiceBoxSetBoudgetOfExpenditiure.getSelectionModel().selectedItemProperty().addListener( (newValue) -> setConditionOfBoudget(newValue.toString()));
             setBoudget();
             setCategory();
         }
@@ -163,6 +195,7 @@ public class userExpenditiuresController extends ClassController
 
     private void setConditionOfBoudget(String setBoudget)
     {
+        System.out.println(setBoudget);
         idOfBoudget = getIdOfPosition(setBoudget, tabBoudget);
         if(checkBoxBoudgetOfExpenditiure.isSelected()) labelSetBoudgetOfExpenditiure.setText(translation.setUpLanguage(99) + tabBoudget[idOfBoudget + 1] +
                 " zł");
