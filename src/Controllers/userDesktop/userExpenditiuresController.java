@@ -52,8 +52,7 @@ public class userExpenditiuresController extends ClassController
     public void setBoudget()
     {
         setDisableSectionOfBoudget( !checkBoxBoudgetOfExpenditiure.isSelected() );
-        if(!choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty())choiceBoxSetBoudgetOfExpenditiure.getItems().clear();
-        fillChoiceBoxBoudgetOfExpenditiure();
+        if(choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty())fillChoiceBoxBoudgetOfExpenditiure();
         if(choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty() && checkBoxBoudgetOfExpenditiure.isSelected())
         {
             setAlert(translation.setUpLanguage(102));
@@ -143,7 +142,7 @@ public class userExpenditiuresController extends ClassController
             }
 
             setDisableSectionOfExpenditiure(choiceBoxAccount.getItems().isEmpty());
-            choiceBoxSetBoudgetOfExpenditiure.getSelectionModel().selectedItemProperty().addListener( (newValue) -> setConditionOfBoudget(newValue.toString()));
+            choiceBoxSetBoudgetOfExpenditiure.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setConditionOfBoudget(newValue.toString()));
             setBoudget();
             setCategory();
         }
