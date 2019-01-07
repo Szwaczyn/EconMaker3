@@ -299,6 +299,8 @@ public class UserData
         return "BASE" + nameOfAccount.trim() + ".base";
     }
 
+    public String getFileNameProfile() { return this.user + ".dll"; }
+
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */

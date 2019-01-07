@@ -92,16 +92,23 @@ public class userExpenditiuresController extends ClassController
 
         if(integration.isItValidCurrency() && integration.isValidDate(datePickerOfExpenditiure.getValue().toString()))
         {
+            System.out.println("to jestem");
             String name = textNameOfExpenditiure.getText();
             String value = textValuieOfExpenditiure.getText();
             String date = datePickerOfExpenditiure.getValue().toString();
-            String category;
+            String category = "";
             if(checkBoxCategoryOfExpenditiure.isSelected()) category = choiceBoxCategoryOfExpenditiure.getValue().toString();
 
             if(checkBoxBoudgetOfExpenditiure.isSelected())
             {
-
+                changeLineInBoudget(value);
             }
+
+            saveToOperationFile(name);
+            saveToOperationFile("-" + value);
+            saveToOperationFile(date);
+            saveToOperationFile(category);
+            cleatTextField();
         }
         else
         {
@@ -125,12 +132,50 @@ public class userExpenditiuresController extends ClassController
 
     private void saveToBoudgetOperation(String data)
     {
-
+        //TODO make file with boudger operation log
     }
 
-    private void changeLineInBoudget()
+    private void changeLineInBoudget(String data)
     {
-        
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilPath())
+                .addFileName(this.userSession.getFileNameBoudget())
+                .build();
+
+        int lineToChange = file.searchLine(choiceBoxSetBoudgetOfExpenditiure.getValue().toString());
+
+        double oldValue, newValue = 0.0;
+
+        try{
+            oldValue = Double.parseDouble(file.readLine(lineToChange));
+            newValue = oldValue - Double.parseDouble(data);
+        } catch (Exception e) {
+            setAlert(translation.setUpLanguage(111));
+        }
+
+
+        file.changeLine(String.valueOf(newValue), lineToChange);
+
+        setBoudget();
+    }
+
+    private void setNewValueAccount(String value, String accountName)
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(this.userSession.getFileNameProfile())
+                .addPath(this.userSession.getProfilPath())
+                .build();
+
+        int lineToChange = file.searchLine(accountName);
+
+        double oldValue, newValue;
+
+        try{
+            oldValue = Double.parseDouble(file.readLine(lineToChange));
+        } catch(Exception e) {
+            setAlert(translation.setUpLanguage(111));
+        }
+        //TODO Zapis do pliku profil
     }
 
     /**
