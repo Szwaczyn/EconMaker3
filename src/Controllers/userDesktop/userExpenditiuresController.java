@@ -52,12 +52,24 @@ public class userExpenditiuresController extends ClassController
     public void setBoudget()
     {
         setDisableSectionOfBoudget( !checkBoxBoudgetOfExpenditiure.isSelected() );
-        if(choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty())fillChoiceBoxBoudgetOfExpenditiure();
+        if(choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty())
+        {
+            fillChoiceBoxBoudgetOfExpenditiure();
+        }
+        if(checkBoxBoudgetOfExpenditiure.isSelected())
+        {
+            setConditionOfBoudget(choiceBoxSetBoudgetOfExpenditiure.getValue().toString());
+        }
         if(choiceBoxSetBoudgetOfExpenditiure.getItems().isEmpty() && checkBoxBoudgetOfExpenditiure.isSelected())
         {
             setAlert(translation.setUpLanguage(102));
             checkBoxBoudgetOfExpenditiure.setSelected(false);
             choiceBoxSetBoudgetOfExpenditiure.setDisable(true);
+        }
+        if(!checkBoxBoudgetOfExpenditiure.isSelected())
+        {
+            labelSetBoudgetOfExpenditiure.setText(translation.setUpLanguage(110));
+            choiceBoxSetBoudgetOfExpenditiure.getSelectionModel().selectFirst();
         }
     }
 
@@ -194,7 +206,6 @@ public class userExpenditiuresController extends ClassController
 
     private void setConditionOfBoudget(String setBoudget)
     {
-        System.out.println(setBoudget);
         idOfBoudget = getIdOfPosition(setBoudget, tabBoudget);
         if(checkBoxBoudgetOfExpenditiure.isSelected()) labelSetBoudgetOfExpenditiure.setText(translation.setUpLanguage(99) + tabBoudget[idOfBoudget + 1] +
                 " zł");
