@@ -10,6 +10,8 @@ import hoodStuff.UserFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
+
 /**
  * Created $(DATE)
  */
@@ -105,9 +107,12 @@ public class userExpenditiuresController extends ClassController
             }
 
             saveToOperationFile(name);
-            saveToOperationFile("-" + value);
+            saveToOperationFile("- " + value);
             saveToOperationFile(date);
             saveToOperationFile(category);
+
+            setNewValueAccount(value, choiceBoxAccount.getValue().toString());
+
             cleatTextField();
         }
         else
@@ -144,17 +149,18 @@ public class userExpenditiuresController extends ClassController
 
         int lineToChange = file.searchLine(choiceBoxSetBoudgetOfExpenditiure.getValue().toString());
 
-        double oldValue, newValue = 0.0;
+        double oldValue, newValue = 0;
 
-        try{
-            oldValue = Double.parseDouble(file.readLine(lineToChange));
+        try {
+            oldValue = Double.parseDouble(file.readLine(lineToChange + 1).trim());
             newValue = oldValue - Double.parseDouble(data);
         } catch (Exception e) {
-            setAlert(translation.setUpLanguage(111));
+            System.out.println(newValue);
         }
 
 
-        file.changeLine(String.valueOf(newValue), lineToChange);
+
+        file.changeLine(String.valueOf(newValue).trim(), lineToChange);
 
         setBoudget();
     }
@@ -168,14 +174,17 @@ public class userExpenditiuresController extends ClassController
 
         int lineToChange = file.searchLine(accountName);
 
-        double oldValue, newValue;
+        double oldValue, newValue = 0;
 
         try{
-            oldValue = Double.parseDouble(file.readLine(lineToChange));
+            oldValue = Double.parseDouble(file.readLine(lineToChange + 1).trim());
+            newValue = oldValue - Double.parseDouble(value);
         } catch(Exception e) {
             setAlert(translation.setUpLanguage(111));
+            System.out.println("nowa Wartpsc blad przy konwersji");
         }
-        //TODO Zapis do pliku profil
+
+        file.changeLine(String.valueOf(newValue).trim(), lineToChange);
     }
 
     /**
