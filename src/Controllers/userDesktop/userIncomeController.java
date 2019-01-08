@@ -135,7 +135,7 @@ public class userIncomeController extends ClassController
 
         return isValidDate;
     }
-git 
+
     public void initialize()
     {
         setLanguage();

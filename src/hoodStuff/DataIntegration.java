@@ -84,7 +84,9 @@ public class DataIntegration
             }
             else if(month > Integer.parseInt(dateTab[1])) isThisValidDate = true;
         }
-        else if(actualYear > Integer.parseInt(dateTab[0])) isThisValidDate = true;
+        else if(actualYear > Integer.parseInt(dateTab[0])){
+            if(Integer.parseInt(dateTab[1]) <= 12 && Integer.parseInt(dateTab[2]) <= 32)isThisValidDate = true;
+        }
 
         return isThisValidDate;
     }
