@@ -135,7 +135,7 @@ public class userIncomeController extends ClassController
 
         return isValidDate;
     }
-
+git 
     public void initialize()
     {
         setLanguage();
@@ -146,9 +146,16 @@ public class userIncomeController extends ClassController
         {
             choiceBoxAccount.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setCondition(newValue.toString()) );
             setMenuAccount();
-            choiceBoxAccount.getSelectionModel().selectFirst();
-            setDisableSectionOfIncome(false);
-            setCondition(choiceBoxAccount.getValue().toString());
+            if(!choiceBoxAccount.getItems().isEmpty())
+            {
+                choiceBoxAccount.getSelectionModel().selectFirst();
+                setDisableSectionOfIncome(false);
+                setCondition(choiceBoxAccount.getValue().toString());
+            }
+            else
+            {
+                labelAlert.setText(translation.setUpLanguage(104));
+            }
         }
 
         choiceBoxCategoryOfIncome.setDisable(true);
