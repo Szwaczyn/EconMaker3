@@ -85,6 +85,8 @@ public class userExpenditiuresController extends ClassController
         checkBoxBoudgetOfExpenditiure.setSelected(false);
         setBoudget();
         clearAlert();
+        datePickerOfExpenditiure.getEditor().clear();
+        datePickerOfExpenditiure.setValue(null);
     }
 
     @FXML
@@ -94,7 +96,6 @@ public class userExpenditiuresController extends ClassController
 
         if(integration.isItValidCurrency() && integration.isValidDate(datePickerOfExpenditiure.getValue().toString()))
         {
-            System.out.println("to jestem");
             String name = textNameOfExpenditiure.getText();
             String value = textValuieOfExpenditiure.getText();
             String date = datePickerOfExpenditiure.getValue().toString();
@@ -114,6 +115,8 @@ public class userExpenditiuresController extends ClassController
             setNewValueAccount(value, choiceBoxAccount.getValue().toString());
 
             cleatTextField();
+            setAlert(translation.setUpLanguage(112));
+            refreshCondition(name.trim(), choiceBoxSetBoudgetOfExpenditiure.getValue().toString().trim());
         }
         else
         {
@@ -135,10 +138,10 @@ public class userExpenditiuresController extends ClassController
         file.writeDown(data);
     }
 
-    private void saveToBoudgetOperation(String data)
-    {
-        //TODO make file with boudger operation log
-    }
+//    private void saveToBoudgetOperation(String data)
+//    {
+//        //ON HOLD
+//    }
 
     private void changeLineInBoudget(String data)
     {
@@ -146,6 +149,8 @@ public class userExpenditiuresController extends ClassController
                 .addPath(this.userSession.getProfilPath())
                 .addFileName(this.userSession.getFileNameBoudget())
                 .build();
+
+        if(!file.isExist()) file.createFile();
 
         int lineToChange = file.searchLine(choiceBoxSetBoudgetOfExpenditiure.getValue().toString());
 
@@ -155,12 +160,12 @@ public class userExpenditiuresController extends ClassController
             oldValue = Double.parseDouble(file.readLine(lineToChange + 1).trim());
             newValue = oldValue - Double.parseDouble(data);
         } catch (Exception e) {
-            System.out.println(newValue);
+            setAlert(translation.setUpLanguage(100));
         }
 
+        DataIntegration integration = new DataIntegration();
 
-
-        file.changeLine(String.valueOf(newValue).trim(), lineToChange);
+        file.changeLine(integration.getValidCurrency(String.valueOf(newValue).trim()), lineToChange);
 
         setBoudget();
     }
@@ -171,6 +176,8 @@ public class userExpenditiuresController extends ClassController
                 .addFileName(this.userSession.getFileNameProfile())
                 .addPath(this.userSession.getProfilPath())
                 .build();
+
+        if(!file.isExist()) file.createFile();
 
         int lineToChange = file.searchLine(accountName);
 
@@ -184,7 +191,9 @@ public class userExpenditiuresController extends ClassController
             System.out.println("nowa Wartpsc blad przy konwersji");
         }
 
-        file.changeLine(String.valueOf(newValue).trim(), lineToChange);
+        DataIntegration integration = new DataIntegration();
+
+        file.changeLine(integration.getValidCurrency(String.valueOf(newValue).trim()), lineToChange);
     }
 
     /**
@@ -408,6 +417,24 @@ public class userExpenditiuresController extends ClassController
         }
 
         return positionInMenu;
+    }
+
+    private void refreshCondition(String nameOfAccount, String nameOfBoudget)
+    {
+        refreshConditionOfAccount(nameOfAccount);
+        refreshConditionOfBoudget(nameOfBoudget);
+    }
+
+    private void refreshConditionOfAccount(String nameOfAccount)
+    {
+        tab = lookForExistAccount();
+        setCondition(choiceBoxAccount.getValue().toString());
+    }
+
+    private void refreshConditionOfBoudget(String nameOfBoudget)
+    {
+        tabBoudget = lookForExistBoudget();
+        setConditionOfBoudget(choiceBoxSetBoudgetOfExpenditiure.getValue().toString());
     }
 
     String[] tab = null;

@@ -49,15 +49,13 @@ public class DataIntegration
             result /= 100;
         }
 
-
-
         return String.valueOf(result);
     }
 
     public String getValidCurrency(String valueOf)
     {
         double result = 0;
-        if(isItValidCurrency())
+        if(isItValidCurrency(valueOf))
         {
             result = Double.parseDouble(valueOf);
             result *= 100;

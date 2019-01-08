@@ -55,6 +55,8 @@ public class userIncomeController extends ClassController
         textNameOfIncome.setText("");
         textValuieOdIncome.setText("");
         checkBoxCategory.setSelected(false);
+        datePickerOfIncome.getEditor().clear();
+        datePickerOfIncome.setValue(null);
     }
 
     @FXML
@@ -107,6 +109,8 @@ public class userIncomeController extends ClassController
 
             tab = lookForExistAccount();
             setCondition(choiceBoxAccount.getValue().toString());
+            clearField();
+            checkCategory();
         }
     }
 
