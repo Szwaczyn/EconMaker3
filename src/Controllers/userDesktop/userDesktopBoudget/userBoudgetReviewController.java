@@ -3,8 +3,10 @@ package Controllers.userDesktop.userDesktopBoudget;
 import Controllers.ClassController;
 import Controllers.userDesktop.userBoudgetController;
 import builder.ChangeWindowBuilder;
+import builder.UserFileBuilder;
 import hoodStuff.ChangeWindow;
 import hoodStuff.LanguageEngine;
+import hoodStuff.UserFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -33,11 +35,6 @@ public class userBoudgetReviewController extends ClassController
         win.changeWindow();
     }
 
-    public void actionShowBoudget()
-    {
-        System.out.println(this);
-    }
-
     /**
      *  Initialize controllers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -48,11 +45,86 @@ public class userBoudgetReviewController extends ClassController
     {
         setUpLanguage();
         clearAlert();
+
+        if(this.userSession != null)
+        {
+            fillChoiceBoxBoudgetOfExpenditiure();
+            if(!choiceBoxBoudget.getItems().isEmpty()){
+                choiceBoxBoudget.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setConditionOfBoudget(newValue.toString()));
+                setConditionOfBoudget(choiceBoxBoudget.getValue().toString());
+            }
+            else
+            {
+                setAlert(translation.setUpLanguage(113));
+                labelNameOfBoudget.setVisible(false);
+            }
+        }
     }
 
-    public void setBoudget(String[] boudget)
+    private void setConditionOfBoudget(String setBoudget)
     {
-        this.boudget = boudget;
+        idOfBoudget = getIdOfPosition(setBoudget, tabBoudget);
+        if(!choiceBoxBoudget.getItems().isEmpty()) labelValueOfBoudget.setText(translation.setUpLanguage(99) + tabBoudget[idOfBoudget + 1] +
+                " zł");
+        labelNameOfBoudget.setText(choiceBoxBoudget.getValue().toString());
+    }
+
+    private int getIdOfPosition(String position, String[] tab)
+    {
+        int size = tab.length;
+        int result = -1;
+
+        for(int i = 0; i <= size - 1; i++)
+        {
+            if(tab[i].trim().equals(position.trim()))
+            {
+                result = i;
+            }
+        }
+
+        return result;
+    }
+
+    private void fillChoiceBoxBoudgetOfExpenditiure()
+    {
+        choiceBoxBoudget.getItems().clear();
+        String[] items = lookForExistBoudget();
+        int sizeOfItem = items.length;
+
+        for(int i = 0; i <= sizeOfItem - 1; i += 2)
+        {
+            choiceBoxBoudget.getItems().add(items[i]);
+        }
+
+        choiceBoxBoudget.getSelectionModel().selectFirst();
+    }
+
+    private String[] lookForExistBoudget()
+    {
+        UserFile file = new UserFileBuilder()
+                .addFileName(userSession.getFileNameBoudget())
+                .addPath(userSession.getProfilePath())
+                .build();
+
+        if(!file.isExist())
+        {
+            file.createFile();
+        }
+
+        int size = file.size();
+
+        String[] positionInMenu = new String[size];
+        int iterator = 0;
+
+        tabBoudget = positionInMenu;
+
+        for(int i = 1; i <= size; i ++)
+        {
+            positionInMenu[iterator] = file.readLine(i);
+            iterator += 1;
+        }
+
+        return positionInMenu;
     }
 
     private void setUpLanguage()
@@ -76,6 +148,9 @@ public class userBoudgetReviewController extends ClassController
         labelAlert.setText("");
         labelAlert.setVisible(false);
     }
+
+    String[] tabBoudget;
+    int idOfBoudget;
 
     @FXML
     Button buttonReturn = new Button();

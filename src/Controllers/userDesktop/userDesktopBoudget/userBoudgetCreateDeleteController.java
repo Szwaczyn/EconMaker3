@@ -71,7 +71,11 @@ public class userBoudgetCreateDeleteController extends ClassController
         if(radioDeleteBoudget.isSelected())
         {
             setMenuDeleteBoudget();
-            choiceBoxNameOfDeleteBoudget.getSelectionModel().selectFirst();
+            if(!choiceBoxNameOfDeleteBoudget.getItems().isEmpty())choiceBoxNameOfDeleteBoudget.getSelectionModel().selectFirst();
+            else{
+                setDisableSectionOfDeleteBoudget(true);
+                setAlert(translation.setUpLanguage(113));
+            }
         }
     }
 
@@ -101,6 +105,14 @@ public class userBoudgetCreateDeleteController extends ClassController
     /**
      *  Private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private void setDisableSectionOfDeleteBoudget(boolean disable)
+    {
+        choiceBoxNameOfDeleteBoudget.setDisable(disable);
+        textPasswordDeleteBoudget.setDisable(disable);
+        buttonDeleteBoudget.setDisable(disable);
+        buttonClearDeleteBoudget.setDisable(disable);
+    }
 
     private void addBoudget(String nameOfBudget, String amountOfBoudget)
     {
@@ -167,7 +179,12 @@ public class userBoudgetCreateDeleteController extends ClassController
     private void setMenuDeleteBoudget()
     {
         String[] items = lookForExistBoudget();
-        int sizeOfItem = items.length;
+        int sizeOfItem;
+        try{
+            sizeOfItem = items.length;
+        } catch(Exception e) {
+            sizeOfItem = -1;
+        }
 
         for(int i = 0; i <= sizeOfItem - 1; i++)
         {

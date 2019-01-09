@@ -2,6 +2,7 @@ package hoodStuff;
 
 import Controllers.ClassController;
 import Controllers.MainController;
+import Controllers.userDesktop.userDesktopBoudget.userBoudgetReviewController;
 import Controllers.userDesktop.userExpenditiuresController;
 import Controllers.userDesktop.userIncomeController;
 import builder.ChangeWindowBuilder;
@@ -38,6 +39,10 @@ public class ChangeWindow
             {
                 procedureInitializeExpenditiureController();
             }
+            else if(this.target instanceof userBoudgetReviewController)
+            {
+                procedureInitialaizeReviewBoudget();
+            }
             // TODO Przekazywanie tablicy budzetu this.target.
         } catch(Exception e) {
             //TODO Make System Error
@@ -62,6 +67,12 @@ public class ChangeWindow
     private void procedureInitializeExpenditiureController()
     {
         userExpenditiuresController usr = (userExpenditiuresController) this.target;
+        usr.initialize();
+    }
+
+    private void procedureInitialaizeReviewBoudget()
+    {
+        userBoudgetReviewController usr = (userBoudgetReviewController) this.target;
         usr.initialize();
     }
 }

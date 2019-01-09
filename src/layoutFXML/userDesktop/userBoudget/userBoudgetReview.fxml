@@ -55,11 +55,6 @@
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor></ChoiceBox>
-                              <Button fx:id="buttonShowBoudget" mnemonicParsing="false" onAction="#actionShowBoudget" prefHeight="50.0" prefWidth="200.0" text="Pokaz">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Button>
                            </children>
                         </VBox>
                         <VBox prefHeight="421.0" prefWidth="500.0" spacing="20.0">
@@ -87,7 +82,7 @@
       </SplitPane>
       <Pane layoutX="199.0" layoutY="679.0" prefHeight="73.0" prefWidth="1001.0">
          <children>
-            <Label fx:id="labelAlert" layoutX="15.0" layoutY="5.0" prefHeight="50.0" prefWidth="983.0" text="Label">
+            <Label fx:id="labelAlert" alignment="CENTER" layoutX="15.0" layoutY="5.0" prefHeight="50.0" prefWidth="983.0" text="Label">
                <font>
                   <Font size="32.0" />
                </font>
