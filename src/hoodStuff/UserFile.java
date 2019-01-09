@@ -36,7 +36,7 @@ public class UserFile
     public void createFile(){
         File file = new File(path + fileName);
 
-        if(!file.exists())
+        if(!file.exists() && fileName != null)
         {
             try {
                 file.createNewFile();
@@ -47,9 +47,9 @@ public class UserFile
         }
     }
 
-    public void show()
+    public String show()
     {
-        System.out.println(fileName + "  " + path);
+        return (fileName + "  " + path);
     }
 
     public String readLine(int numberOfline)
@@ -190,6 +190,17 @@ public class UserFile
     {
         File file = new File(this.path + this.fileName);
         return file.exists();
+    }
+
+    public boolean deleteFile()
+    {
+        File file = new File(this.path + this.fileName);
+        try{
+            file.delete();
+            return true;
+        } catch(Exception e) {
+         return false;
+        }
     }
 
 

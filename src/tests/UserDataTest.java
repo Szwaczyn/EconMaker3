@@ -5,6 +5,8 @@ import builder.UserDataBuilder;
 import hoodStuff.Encrypting;
 import hoodStuff.UserData;
 import hoodStuff.UserFile;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,8 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserDataTest {
 
     UserData user = new UserDataBuilder()
-            .addUser("ms")
-            .build();
+                .addUser("ms")
+                .build();
+
 
     UserData userBag = new UserDataBuilder()
             .addUser("userBag")
