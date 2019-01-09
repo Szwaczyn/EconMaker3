@@ -15,20 +15,17 @@ import java.io.IOException;
 /**
  * Created $(DATE)
  */
-public class userBoudgetCreateDeleteController extends ClassController
-{
+public class userBoudgetCreateDeleteController extends ClassController {
     LanguageEngine translation = new LanguageEngine();
 
     @FXML
-    public void actionCreateBoudget()
-    {
+    public void actionCreateBoudget() {
         addBoudget(textNameOfNewBoudget.getText(), textConditionOfNewBoudget.getText());
         actionClearTextField();
     }
 
     @FXML
-    public void actionDeleteBoudget()
-    {
+    public void actionDeleteBoudget() {
         Encrypting password = new EncryptBuilder()
                 .addContent(textPasswordDeleteBoudget.getText().trim())
                 .build();
@@ -38,8 +35,7 @@ public class userBoudgetCreateDeleteController extends ClassController
                 .addFileName(UserFile.USERS_PATH)
                 .build();
 
-        if(password.MD5().equals(file.readLine(userSession.getLoginPosition() + 1).trim()))
-        {
+        if (password.MD5().equals(file.readLine(userSession.getLoginPosition() + 1).trim())) {
             UserFile boudget = new UserFileBuilder()
                     .addPath(userSession.getProfilPath())
                     .addFileName(userSession.getFileNameBoudget())
@@ -55,24 +51,20 @@ public class userBoudgetCreateDeleteController extends ClassController
             actionClearTextField();
 
             setAlert(translation.setUpLanguage(84));
-        }
-        else
-        {
+        } else {
             setAlert(translation.setUpLanguage(63));
         }
     }
 
     @FXML
-    public void actionSetTab()
-    {
+    public void actionSetTab() {
         changeTab(radioCreateBoudget.isSelected());
         choiceBoxNameOfDeleteBoudget.getItems().clear();
         checkFile();
-        if(radioDeleteBoudget.isSelected())
-        {
+        if (radioDeleteBoudget.isSelected()) {
             setMenuDeleteBoudget();
-            if(!choiceBoxNameOfDeleteBoudget.getItems().isEmpty())choiceBoxNameOfDeleteBoudget.getSelectionModel().selectFirst();
-            else{
+            if (!choiceBoxNameOfDeleteBoudget.getItems().isEmpty()) choiceBoxNameOfDeleteBoudget.getSelectionModel().selectFirst();
+            else {
                 setDisableSectionOfDeleteBoudget(true);
                 setAlert(translation.setUpLanguage(113));
             }
@@ -80,8 +72,7 @@ public class userBoudgetCreateDeleteController extends ClassController
     }
 
     @FXML
-    public void actionReturn()
-    {
+    public void actionReturn() {
         userBoudgetController target = new userBoudgetController();
 
         ChangeWindow win = new ChangeWindowBuilder()
@@ -95,16 +86,29 @@ public class userBoudgetCreateDeleteController extends ClassController
     }
 
     @FXML
-    public void actionClearTextField()
-    {
+    public void actionClearTextField() {
         textPasswordDeleteBoudget.setText("");
         textConditionOfNewBoudget.setText("");
         textNameOfNewBoudget.setText("");
     }
 
     /**
-     *  Private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     * Private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private void createLogFileBoudget(String nameOfNewBoudget)
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilPath())
+                .addFileName(this.userSession.getFileNameOfBoudget(nameOfNewBoudget))
+                .build();
+
+        file.createFile();
+
+        DataIntegration integration = new DataIntegration(textConditionOfNewBoudget.getText());
+
+        file.writeDown(integration.getValidCurrency());
+    }
 
     private void setDisableSectionOfDeleteBoudget(boolean disable)
     {
@@ -127,6 +131,8 @@ public class userBoudgetCreateDeleteController extends ClassController
         {
             file.writeDown(nameOfBudget);
             file.writeDown(integration.getValidCurrency());
+
+            createLogFileBoudget(textNameOfNewBoudget.getText());
 
             setAlert(translation.setUpLanguage(82));
         }

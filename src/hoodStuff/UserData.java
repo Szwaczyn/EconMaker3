@@ -66,6 +66,11 @@ public class UserData
         return file.readLine(this.positionLogin + 1);
     }
 
+    public String getFileNameOfBoudget(String nameOfBoudget)
+    {
+        return "boudget" + this.getLogin() + "log" + nameOfBoudget + ".logBoudget";
+    }
+
     /**
      *  Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
