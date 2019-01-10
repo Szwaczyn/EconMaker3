@@ -40,7 +40,7 @@ public class userBoudgetCreateDeleteController extends ClassController {
                     .addPath(userSession.getProfilPath())
                     .addFileName(userSession.getFileNameBoudget())
                     .build();
-
+            if(isExitLog(choiceBoxNameOfDeleteBoudget.getValue().toString())) deleteLogOfBoudget(choiceBoxNameOfDeleteBoudget.getValue().toString());
             int lineToRemove = boudget.searchLine(choiceBoxNameOfDeleteBoudget.getValue().toString());
             boudget.removeLine(lineToRemove);
             boudget.removeLine(lineToRemove);
@@ -95,6 +95,26 @@ public class userBoudgetCreateDeleteController extends ClassController {
     /**
      * Private methods - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private void deleteLogOfBoudget(String nameOfBoudget)
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilePath())
+                .addFileName(this.userSession.getFileNameOfBoudget(nameOfBoudget))
+                .build();
+
+        file.deleteFile();
+    }
+
+    private boolean isExitLog(String nameOfBoudget)
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilePath())
+                .addFileName(this.userSession.getFileNameOfBoudget(nameOfBoudget))
+                .build();
+
+        return file.isExist();
+    }
 
     private void createLogFileBoudget(String nameOfNewBoudget)
     {

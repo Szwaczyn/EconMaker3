@@ -61,12 +61,36 @@ public class userBoudgetReviewController extends ClassController
         }
     }
 
+    private boolean isLogFileEmpty()
+    {
+        boolean result = false;
+
+        UserFile file = new UserFileBuilder()
+                .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
+                .addPath(this.userSession.getProfilPath())
+                .build();
+
+        if(file.isExist())
+        {
+            if(file.size() == 0) file.writeDown("0");
+            result = true;
+        }
+        else
+        {
+            file.createFile();
+            file.writeDown("0");
+        }
+
+        return result;
+    }
+
     private void setConditionOfBoudget(String setBoudget)
     {
         idOfBoudget = getIdOfPosition(setBoudget, tabBoudget);
         if(!choiceBoxBoudget.getItems().isEmpty()) labelValueOfBoudget.setText(translation.setUpLanguage(99) + tabBoudget[idOfBoudget + 1] +
                 " zł");
         labelNameOfBoudget.setText(choiceBoxBoudget.getValue().toString());
+        isLogFileEmpty();
     }
 
     private int getIdOfPosition(String position, String[] tab)

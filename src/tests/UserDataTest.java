@@ -5,8 +5,6 @@ import builder.UserDataBuilder;
 import hoodStuff.Encrypting;
 import hoodStuff.UserData;
 import hoodStuff.UserFile;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
