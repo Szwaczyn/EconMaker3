@@ -40,7 +40,9 @@ public class userBoudgetCreateDeleteController extends ClassController {
                     .addPath(userSession.getProfilPath())
                     .addFileName(userSession.getFileNameBoudget())
                     .build();
+
             if(isExitLog(choiceBoxNameOfDeleteBoudget.getValue().toString())) deleteLogOfBoudget(choiceBoxNameOfDeleteBoudget.getValue().toString());
+
             int lineToRemove = boudget.searchLine(choiceBoxNameOfDeleteBoudget.getValue().toString());
             boudget.removeLine(lineToRemove);
             boudget.removeLine(lineToRemove);

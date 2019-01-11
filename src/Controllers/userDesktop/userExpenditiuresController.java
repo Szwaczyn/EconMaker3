@@ -105,6 +105,7 @@ public class userExpenditiuresController extends ClassController
             if(checkBoxBoudgetOfExpenditiure.isSelected())
             {
                 changeLineInBoudget(value);
+                addExpenditiureToLogFile(choiceBoxSetBoudgetOfExpenditiure.getValue().toString());
             }
 
             saveToOperationFile(name);
@@ -128,6 +129,27 @@ public class userExpenditiuresController extends ClassController
      *  Operation - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
 
+    private void addExpenditiureToLogFile(String nameOfBoudget)
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilPath())
+                .addFileName(this.userSession.getFileNameOfBoudget(nameOfBoudget))
+                .build();
+
+        if(!file.isExist()) {
+            file.createFile();
+            file.writeDown("0");
+        }
+
+        String nameOfExpenditiure = textNameOfExpenditiure.getText();
+        String valueOfExpenditiure = textValuieOfExpenditiure.getText();
+        String dateOfExpenditiure = datePickerOfExpenditiure.getValue().toString();
+
+        file.writeDown(nameOfExpenditiure);
+        file.writeDown(valueOfExpenditiure);
+        file.writeDown(dateOfExpenditiure);
+    }
+
     private void saveToOperationFile(String data)
     {
         UserFile file = new UserFileBuilder()
@@ -137,12 +159,7 @@ public class userExpenditiuresController extends ClassController
 
         file.writeDown(data);
     }
-
-//    private void saveToBoudgetOperation(String data)
-//    {
-//        //ON HOLD
-//    }
-
+    
     private void changeLineInBoudget(String data)
     {
         UserFile file = new UserFileBuilder()
