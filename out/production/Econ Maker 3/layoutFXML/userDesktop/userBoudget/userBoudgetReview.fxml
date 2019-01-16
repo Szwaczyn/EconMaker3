@@ -72,6 +72,53 @@
                                     <Font size="22.0" />
                                  </font>
                               </Label>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="484.0" text="^">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <VBox prefHeight="336.0" prefWidth="440.0">
+                                 <children>
+                                    <HBox prefHeight="112.0" prefWidth="440.0">
+                                       <children>
+                                          <VBox prefHeight="112.0" prefWidth="476.0" style="-fx-background-color: #e1e1e1;">
+                                             <children>
+                                                <Label fx:id="title1" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Tytuł" />
+                                                <Label fx:id="date1" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
+                                                <Label fx:id="value1" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Wartość" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="112.0" prefWidth="440.0">
+                                       <children>
+                                          <VBox prefHeight="112.0" prefWidth="476.0" style="-fx-background-color: #e1e1e1;">
+                                             <children>
+                                                <Label fx:id="title2" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Tytuł" />
+                                                <Label fx:id="date2" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
+                                                <Label fx:id="value2" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Wartość" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="112.0" prefWidth="440.0">
+                                       <children>
+                                          <VBox prefHeight="112.0" prefWidth="476.0" style="-fx-background-color: #e1e1e1;">
+                                             <children>
+                                                <Label fx:id="title3" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Tytuł" />
+                                                <Label fx:id="date3" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
+                                                <Label fx:id="value3" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Wartość" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="484.0" text="v">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                            </children>
                         </VBox>
                      </children>

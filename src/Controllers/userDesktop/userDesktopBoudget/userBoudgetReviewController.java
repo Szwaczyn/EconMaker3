@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
+import java.util.ArrayList;
+
 
 /**
  * Created $(DATE)
@@ -51,7 +53,23 @@ public class userBoudgetReviewController extends ClassController
             fillChoiceBoxBoudgetOfExpenditiure();
             if(!choiceBoxBoudget.getItems().isEmpty()){
                 choiceBoxBoudget.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setConditionOfBoudget(newValue.toString()));
+                clearPosition();
                 setConditionOfBoudget(choiceBoxBoudget.getValue().toString());
+
+                ArrayList<Label> titleList = new ArrayList<Label>();
+                titleList.add(title1);
+                titleList.add(title2);
+                titleList.add(title3);
+
+                ArrayList<Label> valueList = new ArrayList<Label>();
+                valueList.add(value1);
+                valueList.add(value2);
+                valueList.add(value3);
+
+                ArrayList<Label> dateList = new ArrayList<Label>();
+                dateList.add(date1);
+                dateList.add(date2);
+                dateList.add(date3);
             }
             else
             {
@@ -63,7 +81,7 @@ public class userBoudgetReviewController extends ClassController
 
     private boolean isLogFileEmpty()
     {
-        boolean result = false;
+        boolean result;
 
         UserFile file = new UserFileBuilder()
                 .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
@@ -72,13 +90,20 @@ public class userBoudgetReviewController extends ClassController
 
         if(file.isExist())
         {
-            if(file.size() == 0) file.writeDown("0");
-            result = true;
+            if(file.size() == 0) {
+                file.writeDown("0");
+                result = true;
+            }
+            else if(file.size() == 1) {
+                result = true;
+            }
+            else result = false;
         }
         else
         {
             file.createFile();
             file.writeDown("0");
+            result = true;
         }
 
         return result;
@@ -91,6 +116,46 @@ public class userBoudgetReviewController extends ClassController
                 " zł");
         labelNameOfBoudget.setText(choiceBoxBoudget.getValue().toString());
         isLogFileEmpty();
+
+        if(isLogFileEmpty()) {
+            clearPosition();
+            date1.setText(translation.setUpLanguage(114));
+        }
+        else{
+            clearPosition();
+            setLogOfBoudgetCondition();
+        }
+    }
+
+    private void setLogOfBoudgetCondition()
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilPath())
+                .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
+                .build();
+
+        amountOfPosition = file.size() - 1;
+
+        loadUpPosition(1);
+
+    }
+
+    private void loadUpPosition(int positionForDisplay)
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilPath())
+                .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
+                .build();
+
+        if(file.readLine(132) == "")
+        {
+            System.out.println("ok");
+            System.out.println("otroloolo");
+        }
+        else
+        {
+            System.out.println("nie ok");
+        }
     }
 
     private int getIdOfPosition(String position, String[] tab)
@@ -173,8 +238,26 @@ public class userBoudgetReviewController extends ClassController
         labelAlert.setVisible(false);
     }
 
+    private void clearPosition()
+    {
+        title1.setText("");
+        title2.setText("");
+        title3.setText("");
+
+        date1.setText("");
+        date2.setText("");
+        date3.setText("");
+
+        value1.setText("");
+        value2.setText("");
+        value3.setText("");
+
+    }
+
     String[] tabBoudget;
     int idOfBoudget;
+    int position;
+    int amountOfPosition;
 
     @FXML
     Button buttonReturn = new Button();
@@ -189,6 +272,25 @@ public class userBoudgetReviewController extends ClassController
     Label labelValueOfBoudget = new Label();
     @FXML
     Label labelAlert = new Label();
+
+    @FXML
+    Label title1 = new Label();
+    @FXML
+    Label title2 = new Label();
+    @FXML
+    Label title3 = new Label();
+    @FXML
+    Label date1 = new Label();
+    @FXML
+    Label date2 = new Label();
+    @FXML
+    Label date3 = new Label();
+    @FXML
+    Label value1 = new Label();
+    @FXML
+    Label value2 = new Label();
+    @FXML
+    Label value3 = new Label();
 
     @FXML
     ChoiceBox choiceBoxBoudget = new ChoiceBox();
