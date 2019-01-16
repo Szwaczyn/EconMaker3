@@ -84,8 +84,8 @@
                                           <VBox prefHeight="112.0" prefWidth="476.0" style="-fx-background-color: #e1e1e1;">
                                              <children>
                                                 <Label fx:id="title1" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Tytuł" />
-                                                <Label fx:id="date1" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
                                                 <Label fx:id="value1" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Wartość" />
+                                                <Label fx:id="date1" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -95,8 +95,8 @@
                                           <VBox prefHeight="112.0" prefWidth="476.0" style="-fx-background-color: #e1e1e1;">
                                              <children>
                                                 <Label fx:id="title2" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Tytuł" />
-                                                <Label fx:id="date2" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
                                                 <Label fx:id="value2" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Wartość" />
+                                                <Label fx:id="date2" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -106,8 +106,8 @@
                                           <VBox prefHeight="112.0" prefWidth="476.0" style="-fx-background-color: #e1e1e1;">
                                              <children>
                                                 <Label fx:id="title3" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Tytuł" />
-                                                <Label fx:id="date3" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
                                                 <Label fx:id="value3" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Wartość" />
+                                                <Label fx:id="date3" alignment="CENTER" prefHeight="37.0" prefWidth="440.0" text="Data" />
                                              </children>
                                           </VBox>
                                        </children>

@@ -145,8 +145,10 @@ public class userExpenditiuresController extends ClassController
         String valueOfExpenditiure = textValuieOfExpenditiure.getText();
         String dateOfExpenditiure = datePickerOfExpenditiure.getValue().toString();
 
+        DataIntegration integration = new DataIntegration(valueOfExpenditiure);
+
         file.writeDown(nameOfExpenditiure);
-        file.writeDown(valueOfExpenditiure);
+        file.writeDown(integration.getValidCurrency());
         file.writeDown(dateOfExpenditiure);
     }
 

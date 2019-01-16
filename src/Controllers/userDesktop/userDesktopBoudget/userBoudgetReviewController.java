@@ -56,20 +56,23 @@ public class userBoudgetReviewController extends ClassController
                 clearPosition();
                 setConditionOfBoudget(choiceBoxBoudget.getValue().toString());
 
-                ArrayList<Label> titleList = new ArrayList<Label>();
+                titleList = new ArrayList<Label>();
                 titleList.add(title1);
                 titleList.add(title2);
                 titleList.add(title3);
 
-                ArrayList<Label> valueList = new ArrayList<Label>();
+                valueList = new ArrayList<Label>();
                 valueList.add(value1);
                 valueList.add(value2);
                 valueList.add(value3);
 
-                ArrayList<Label> dateList = new ArrayList<Label>();
+                dateList = new ArrayList<Label>();
                 dateList.add(date1);
                 dateList.add(date2);
                 dateList.add(date3);
+
+                positionStart = 1;
+                positionStop = 3;
             }
             else
             {
@@ -134,28 +137,30 @@ public class userBoudgetReviewController extends ClassController
                 .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
                 .build();
 
-        amountOfPosition = file.size() - 1;
+        amountOfPosition = (file.size() - 1) / 3;
+        int positionOnDisplayList = 0;
 
-        loadUpPosition(1);
+        for(int i = positionStart; i <= positionStop; i++)
+        {
+            loadUpPosition(i, positionOnDisplayList);
+            positionOnDisplayList += 1;
+        }
+
 
     }
 
-    private void loadUpPosition(int positionForDisplay)
+    private void loadUpPosition(int positionForDisplay, int positionOnDisplayList)
     {
         UserFile file = new UserFileBuilder()
                 .addPath(this.userSession.getProfilPath())
                 .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
                 .build();
 
-        if(file.readLine(132) == "")
-        {
-            System.out.println("ok");
-            System.out.println("otroloolo");
-        }
-        else
-        {
-            System.out.println("nie ok");
-        }
+        int position = (positionForDisplay - 1) * 3 + 1;
+
+        titleList.get(positionOnDisplayList).setText(file.readLine(position + 1));
+        valueList.get(positionOnDisplayList).setText("-" + file.readLine(position + 2) + " zl");
+        dateList.get(positionOnDisplayList).setText(file.readLine(position + 3));
     }
 
     private int getIdOfPosition(String position, String[] tab)
@@ -256,8 +261,13 @@ public class userBoudgetReviewController extends ClassController
 
     String[] tabBoudget;
     int idOfBoudget;
-    int position;
+    int positionStart;
+    int positionStop;
     int amountOfPosition;
+
+    ArrayList<Label> titleList;
+    ArrayList<Label> valueList;
+    ArrayList<Label> dateList;
 
     @FXML
     Button buttonReturn = new Button();
