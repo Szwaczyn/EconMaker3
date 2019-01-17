@@ -178,6 +178,7 @@ public class userBoudgetReviewController extends ClassController
             clearPosition(0);
             clearPosition(1);
             clearPosition(2);
+            positionStart = 1;
             positionStop = getAmountOfLog();
             if(getAmountOfLog() > 3) positionStop = 3;
             setLogOfBoudgetCondition();
