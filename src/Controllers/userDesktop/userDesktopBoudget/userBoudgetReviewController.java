@@ -48,31 +48,37 @@ public class userBoudgetReviewController extends ClassController
         setUpLanguage();
         clearAlert();
 
+        titleList = new ArrayList<Label>();
+        titleList.add(title1);
+        titleList.add(title2);
+        titleList.add(title3);
+
+        valueList = new ArrayList<Label>();
+        valueList.add(value1);
+        valueList.add(value2);
+        valueList.add(value3);
+
+        dateList = new ArrayList<Label>();
+        dateList.add(date1);
+        dateList.add(date2);
+        dateList.add(date3);
+
+
         if(this.userSession != null)
         {
             fillChoiceBoxBoudgetOfExpenditiure();
             if(!choiceBoxBoudget.getItems().isEmpty()){
                 choiceBoxBoudget.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> setConditionOfBoudget(newValue.toString()));
-                clearPosition();
+
+                clearPosition(0);
+                clearPosition(1);
+                clearPosition(2);
+
+                positionStart = 0;
+                if(getAmountOfLog() >= 1) positionStart = 1;
+                positionStop = getAmountOfLog();
+
                 setConditionOfBoudget(choiceBoxBoudget.getValue().toString());
-
-                titleList = new ArrayList<Label>();
-                titleList.add(title1);
-                titleList.add(title2);
-                titleList.add(title3);
-
-                valueList = new ArrayList<Label>();
-                valueList.add(value1);
-                valueList.add(value2);
-                valueList.add(value3);
-
-                dateList = new ArrayList<Label>();
-                dateList.add(date1);
-                dateList.add(date2);
-                dateList.add(date3);
-
-                positionStart = 1;
-                positionStop = 3;
             }
             else
             {
@@ -80,6 +86,16 @@ public class userBoudgetReviewController extends ClassController
                 labelNameOfBoudget.setVisible(false);
             }
         }
+    }
+
+    private int getAmountOfLog()
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(this.userSession.getProfilPath())
+                .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
+                .build();
+
+        return (file.size() -1) / 3;
     }
 
     private boolean isLogFileEmpty()
@@ -121,11 +137,16 @@ public class userBoudgetReviewController extends ClassController
         isLogFileEmpty();
 
         if(isLogFileEmpty()) {
-            clearPosition();
+            clearPosition(0);
+            clearPosition(1);
+            clearPosition(2);
             date1.setText(translation.setUpLanguage(114));
         }
         else{
-            clearPosition();
+            clearPosition(0);
+            clearPosition(1);
+            clearPosition(2);
+            positionStop = getAmountOfLog();
             setLogOfBoudgetCondition();
         }
     }
@@ -243,20 +264,11 @@ public class userBoudgetReviewController extends ClassController
         labelAlert.setVisible(false);
     }
 
-    private void clearPosition()
+    private void clearPosition(int idOfPosition)
     {
-        title1.setText("");
-        title2.setText("");
-        title3.setText("");
-
-        date1.setText("");
-        date2.setText("");
-        date3.setText("");
-
-        value1.setText("");
-        value2.setText("");
-        value3.setText("");
-
+        titleList.get(idOfPosition).setText("");
+        dateList.get(idOfPosition).setText("");
+        valueList.get(idOfPosition).setText("");
     }
 
     String[] tabBoudget;
