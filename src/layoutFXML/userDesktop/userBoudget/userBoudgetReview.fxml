@@ -72,7 +72,7 @@
                                     <Font size="22.0" />
                                  </font>
                               </Label>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="484.0" text="^">
+                              <Button fx:id="buttonUp" mnemonicParsing="false" onAction="#actionUp" prefHeight="25.0" prefWidth="484.0" text="^">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -114,7 +114,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="484.0" text="v">
+                              <Button fx:id="buttonDown" mnemonicParsing="false" onAction="#actionDown" prefHeight="25.0" prefWidth="484.0" text="v">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>

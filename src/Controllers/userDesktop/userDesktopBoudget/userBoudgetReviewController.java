@@ -37,6 +37,37 @@ public class userBoudgetReviewController extends ClassController
         win.changeWindow();
     }
 
+    @FXML
+    public void actionUp()
+    {
+        if(1 < positionStart)
+        {
+
+            if(positionStart != 1){
+                positionStart -= 1;
+                positionStop -= 1;
+            }
+
+            setLogOfBoudgetCondition();
+        }
+    }
+
+    @FXML
+    public void actionDown()
+    {
+        int lineInFile = getAmountOfLog();
+        if(lineInFile > positionStop)
+        {
+
+            if(positionStop!= getAmountOfLog()){
+                positionStart += 1;
+                positionStop += 1;
+            }
+
+            setLogOfBoudgetCondition();
+        }
+    }
+
     /**
      *  Initialize controllers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
@@ -77,6 +108,7 @@ public class userBoudgetReviewController extends ClassController
                 positionStart = 0;
                 if(getAmountOfLog() >= 1) positionStart = 1;
                 positionStop = getAmountOfLog();
+                if(getAmountOfLog() > 3) positionStop = 3;
 
                 setConditionOfBoudget(choiceBoxBoudget.getValue().toString());
             }
@@ -147,6 +179,7 @@ public class userBoudgetReviewController extends ClassController
             clearPosition(1);
             clearPosition(2);
             positionStop = getAmountOfLog();
+            if(getAmountOfLog() > 3) positionStop = 3;
             setLogOfBoudgetCondition();
         }
     }
@@ -245,7 +278,6 @@ public class userBoudgetReviewController extends ClassController
     private void setUpLanguage()
     {
         buttonReturn.setText(translation.setUpLanguage(6));
-        buttonShowBoudget.setText(translation.setUpLanguage(85));
 
         labelChoiceBoudget.setText(translation.setUpLanguage(86));
         labelNameOfBoudget.setText(translation.setUpLanguage(87));
@@ -284,7 +316,9 @@ public class userBoudgetReviewController extends ClassController
     @FXML
     Button buttonReturn = new Button();
     @FXML
-    Button buttonShowBoudget = new Button();
+    Button buttonUp = new Button();
+    @FXML
+    Button buttonDown = new Button();
 
     @FXML
     Label labelChoiceBoudget = new Label();
