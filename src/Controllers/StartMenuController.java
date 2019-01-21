@@ -2,7 +2,10 @@ package Controllers;
 
 import Controllers.startCreateAccountUserControllers.CreateAccountUserController;
 import Controllers.startLoginUserController.LoginUserController;
+import builder.UserFileBuilder;
 import hoodStuff.LanguageEngine;
+import hoodStuff.SortingFile;
+import hoodStuff.UserFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -123,11 +126,48 @@ public class StartMenuController
         position_3.setText(translation.setUpLanguage(3));
         position_4.setText(translation.setUpLanguage(4));
         position_5.setText(translation.setUpLanguage(5));
+
+        testSorting();
     }
 
     /**
      * Private method - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      */
+
+    private void testSorting()
+    {
+        UserFile file = new UserFileBuilder()
+                .addPath(UserFile.PROFILE_PATH + "ms/")
+                .addFileName("boudgetmslogTechnologia.logBoudget")
+                .build();
+
+        String[] bufor = new String[file.size()];
+
+        for(int i = 0; i <= file.size() - 1; i++)
+        {
+            bufor[i] = file.readLine(i);
+        }
+
+        System.out.println(UserFile.USERS_PATH + "/ms/");
+
+        //Before
+        show(bufor);
+
+        try {
+            bufor = SortingFile.getSortedTab(bufor, 1, 3, 3);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    private void show(String[] bufor)
+    {
+        for(int i = 0; i <= bufor.length - 1; i++)
+        {
+            System.out.println(bufor[i]);
+        }
+    }
 
     private void econmakerShutDown(int code)
     {

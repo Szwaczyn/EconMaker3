@@ -1,5 +1,6 @@
 package startMain;
 
+import hoodStuff.SortingFile;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,8 @@ public class Main extends Application {
 
         Image icon = new Image("/resources/icons/book_XL.png");
         primaryStage.getIcons().add(icon);
+
+
 
         primaryStage.setScene(new Scene(root, 1200, 748));
         primaryStage.resizableProperty().setValue(false);
