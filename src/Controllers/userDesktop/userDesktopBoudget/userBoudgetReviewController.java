@@ -193,6 +193,8 @@ public class userBoudgetReviewController extends ClassController
                 .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxBoudget.getValue().toString()))
                 .build();
 
+        sortFile(file);
+
         amountOfPosition = (file.size() - 1) / 3;
         int positionOnDisplayList = 0;
 
@@ -203,6 +205,29 @@ public class userBoudgetReviewController extends ClassController
         }
 
 
+    }
+
+    private void sortFile(UserFile file)
+    {
+        String[] toOrderBufor = new String[file.size()];
+
+        for(int i = 0; i <= file.size() - 1; i++)
+        {
+            toOrderBufor[i] = file.readLine(i + 1);
+        }
+
+        try{
+            toOrderBufor = SortingFile.getSortedTabOfDate(toOrderBufor, 1, 3, 3);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
+        file.deleteFile();
+
+        for(int i = 0; i <= toOrderBufor.length - 1; i++)
+        {
+            file.writeDown(toOrderBufor[i]);
+        }
     }
 
     private void loadUpPosition(int positionForDisplay, int positionOnDisplayList)

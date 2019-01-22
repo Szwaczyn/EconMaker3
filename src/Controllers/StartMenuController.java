@@ -127,7 +127,7 @@ public class StartMenuController
         position_4.setText(translation.setUpLanguage(4));
         position_5.setText(translation.setUpLanguage(5));
 
-        testSorting();
+        //testSorting();
     }
 
     /**

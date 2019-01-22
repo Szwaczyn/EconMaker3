@@ -49,7 +49,7 @@ public class SortingFile
 
         }
 
-        if(wasChange)tabToSort = getSortedTabOfDate(tabToSort, startLine, sizeOfBlock, lineToSorted);
+        if(wasChange) tabToSort = getSortedTabOfDate(tabToSort, startLine, sizeOfBlock, lineToSorted);
 
         return tabToSort;
     }
