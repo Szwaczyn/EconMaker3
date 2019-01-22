@@ -145,19 +145,20 @@ public class StartMenuController
 
         for(int i = 0; i <= file.size() - 1; i++)
         {
-            bufor[i] = file.readLine(i);
+            bufor[i] = file.readLine(i + 1);
         }
-
-        System.out.println(UserFile.USERS_PATH + "/ms/");
 
         //Before
-        show(bufor);
+        //show(bufor);
 
         try {
-            bufor = SortingFile.getSortedTab(bufor, 1, 3, 3);
+            bufor = SortingFile.getSortedTabOfDate(bufor, 1, 3, 3);
         } catch (Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
+
+        show(bufor);
 
     }
 
