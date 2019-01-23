@@ -35,10 +35,35 @@ public class userReviewController extends ClassController
     }
 
     @FXML
-    public void actionUp(){}
+    public void actionUp()
+    {
+        if(1 < positionStart)
+        {
+
+            if(positionStart != 1){
+                positionStart -= 1;
+                positionStop -= 1;
+            }
+
+            setLogOfAccountCondition();
+        }
+    }
 
     @FXML
-    public void actionDown() {}
+    public void actionDown()
+    {
+        int lineInFile = getAmountOfLog();
+        if(lineInFile > positionStop)
+        {
+
+            if(positionStop!= getAmountOfLog()){
+                positionStart += 1;
+                positionStop += 1;
+            }
+
+            setLogOfAccountCondition();
+        }
+    }
 
     /**
      *  Initialize controllers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -122,7 +147,7 @@ public class userReviewController extends ClassController
                 .addFileName(this.userSession.getFileNameAccount(choiceBoxAccount.getValue().toString()))
                 .build();
 
-        //sortFile(file);
+        sortFile(file);
 
         amountOfPosition = (file.size()) / 4;
         int positionOnDisplayList = 0;
@@ -144,7 +169,7 @@ public class userReviewController extends ClassController
                 .build();
 
         int position = (positionForDisplay) * 4 + 1;
-        
+
         titleList.get(positionOnDisplayList).setText(file.readLine(position));
         valueList.get(positionOnDisplayList).setText(file.readLine(position + 1) + " zl");
         dateList.get(positionOnDisplayList).setText(file.readLine(position + 2));
@@ -160,9 +185,10 @@ public class userReviewController extends ClassController
         }
 
         try{
-            toOrderBufor = SortingFile.getSortedTabOfDate(toOrderBufor, 1, 3, 3);
+            toOrderBufor = SortingFile.getSortedTabOfDate(toOrderBufor, 0, 4, 3);
         } catch(Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
 
         file.deleteFile();

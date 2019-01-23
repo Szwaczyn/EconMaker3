@@ -37,7 +37,7 @@ public class SortingFile
                 String[] bufor = new String[sizeOfBlock + 1];
                 int iterator = 0;
 
-                for(int z = i - sizeOfBlock + 1; z <= i; z ++)
+                for(int z = i; z <= i; z ++)
                 {
                     bufor[iterator] = tabToSort[z];
                     tabToSort[z] = tabToSort[z + sizeOfBlock];
