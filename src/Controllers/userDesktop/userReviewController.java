@@ -111,20 +111,20 @@ public class userReviewController extends ClassController
             positionStart = 1;
             positionStop = getAmountOfLog();
             if(getAmountOfLog() > 3) positionStop = 3;
-            setLogOfBoudgetCondition();
+            setLogOfAccountCondition();
         }
     }
 
-    private void setLogOfBoudgetCondition()
+    private void setLogOfAccountCondition()
     {
         UserFile file = new UserFileBuilder()
                 .addPath(this.userSession.getProfilPath())
-                .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxAccount.getValue().toString()))
+                .addFileName(this.userSession.getFileNameAccount(choiceBoxAccount.getValue().toString()))
                 .build();
 
-        sortFile(file);
+        //sortFile(file);
 
-        amountOfPosition = (file.size() - 1) / 3;
+        amountOfPosition = (file.size()) / 4;
         int positionOnDisplayList = 0;
 
         for(int i = positionStart; i <= positionStop; i++)
@@ -140,14 +140,14 @@ public class userReviewController extends ClassController
     {
         UserFile file = new UserFileBuilder()
                 .addPath(this.userSession.getProfilPath())
-                .addFileName(this.userSession.getFileNameOfBoudget(choiceBoxAccount.getValue().toString()))
+                .addFileName(this.userSession.getFileNameAccount(choiceBoxAccount.getValue().toString()))
                 .build();
 
-        int position = (positionForDisplay - 1) * 3 + 1;
-
-        titleList.get(positionOnDisplayList).setText(file.readLine(position + 1));
-        valueList.get(positionOnDisplayList).setText("-" + file.readLine(position + 2) + " zl");
-        dateList.get(positionOnDisplayList).setText(file.readLine(position + 3));
+        int position = (positionForDisplay) * 4 + 1;
+        
+        titleList.get(positionOnDisplayList).setText(file.readLine(position));
+        valueList.get(positionOnDisplayList).setText(file.readLine(position + 1) + " zl");
+        dateList.get(positionOnDisplayList).setText(file.readLine(position + 2));
     }
 
     private void sortFile(UserFile file)
