@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/layoutFXML/main.fxml"));
-        primaryStage.setTitle("Econ Maker 3 v 2.3.5");
+        primaryStage.setTitle("Econ Maker 3 v 2.6.5");
 
         Image icon = new Image("/resources/icons/book_XL.png");
         primaryStage.getIcons().add(icon);

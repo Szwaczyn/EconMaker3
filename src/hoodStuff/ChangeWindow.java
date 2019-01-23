@@ -5,6 +5,7 @@ import Controllers.MainController;
 import Controllers.userDesktop.userDesktopBoudget.userBoudgetReviewController;
 import Controllers.userDesktop.userExpenditiuresController;
 import Controllers.userDesktop.userIncomeController;
+import Controllers.userDesktop.userReviewController;
 import builder.ChangeWindowBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -43,6 +44,10 @@ public class ChangeWindow
             {
                 procedureInitialaizeReviewBoudget();
             }
+            else if(this.target instanceof  userReviewController)
+            {
+                procedureInitializeReview();
+            }
             // TODO Przekazywanie tablicy budzetu this.target.
         } catch(Exception e) {
             //TODO Make System Error
@@ -73,6 +78,12 @@ public class ChangeWindow
     private void procedureInitialaizeReviewBoudget()
     {
         userBoudgetReviewController usr = (userBoudgetReviewController) this.target;
+        usr.initialize();
+    }
+
+    private void procedureInitializeReview()
+    {
+        userReviewController usr = (userReviewController) this.target;
         usr.initialize();
     }
 }
