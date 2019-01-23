@@ -39,11 +39,8 @@ public class userReviewController extends ClassController
     {
         if(1 < positionStart)
         {
-
-            if(positionStart != 1){
-                positionStart -= 1;
-                positionStop -= 1;
-            }
+            positionStart -= 1;
+            positionStop -= 1;
 
             setLogOfAccountCondition();
         }
@@ -53,10 +50,10 @@ public class userReviewController extends ClassController
     public void actionDown()
     {
         int lineInFile = getAmountOfLog();
-        if(lineInFile > positionStop)
-        {
 
-            if(positionStop!= getAmountOfLog()){
+        if(lineInFile - 1 > positionStop)
+        {
+            if(positionStop != getAmountOfLog()){
                 positionStart += 1;
                 positionStop += 1;
             }
@@ -307,7 +304,7 @@ public class userReviewController extends ClassController
                 .addFileName(this.userSession.getFileNameAccount(choiceBoxAccount.getValue().toString()))
                 .build();
 
-        return (file.size() -1) / 3;
+        return (file.size()) / 4;
     }
 
     LanguageEngine translation = new LanguageEngine();
