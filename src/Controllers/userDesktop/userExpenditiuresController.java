@@ -10,7 +10,6 @@ import hoodStuff.UserFile;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
 
 /**
  * Created $(DATE)
